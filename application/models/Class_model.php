@@ -9,16 +9,35 @@ class Class_model extends CI_Model {
 	}
 
 	public function getAll() {
-		$query = $this->db->get($table);
+		$query = $this->db->get($this->table);
 		return $query->result_array();
 	}
 
-	public function insert($params) {
-		$this->db->insert($table, $params);
+	public function add($params) {
+		$this->db->insert($this->table, $params);
 	}
 
 	public function edit($params, $id) {
-		$this->db->where($id_name, $id);
-		$this->db->update($table, $params);
+		$this->db->where($this->id_name, $id);
+		$this->db->update($this->table, $params);
+	}
+
+	public function getClassBy($major_id, $course_id) {
+		$this->db->where('major_id', $major_id);
+		$this->db->where('course_id', $course_id);
+		$query = $this->db->get($this->table);
+		return $query->result_array();
+	}
+
+	public function getClassByMajor($major_id) {
+		$this->db->where('major_id', $major_id);
+		$query = $this->db->get($this->table);
+		return $query->result_array();
+	}
+
+	public function getClassByCourse($course_id) {
+		$this->db->where('course_id', $course_id);
+		$query = $this->db->get($this->table);
+		return $query->result_array();
 	}
 }

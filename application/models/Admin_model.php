@@ -9,8 +9,8 @@ class Admin_model extends CI_Model {
 		parent::__construct();
 	}
 
-	public function getAdminAccount($email, $password) {
-		$sql = "select * from admin where email = '$email' and password=md5('$password')";
+	public function checkAccount($email, $password) {
+		$sql = "select * from admin where email = '$email' and password='$password'";
 		$result = $this->db->query($sql);
 		if ($result->num_rows() > 0) {
 			return $result->result_array()[0];
@@ -19,20 +19,66 @@ class Admin_model extends CI_Model {
 		}
 	}
 
+	public function checkAccountRegister($email, $password) {
+		$sql = "select * from admin where email = '$email'";
+		$result = $this->db->query($sql);
+		if ($result->num_rows() > 0) {
+			return $result->result_array()[0];
+		} else {
+			return null;
+		}
+	}
+
+
+	public function register($params) {
+		$this->db->insert($this->table, $params);
+	}
+
 	public function getInfo($id) {
-		$this->db->where($id_name, $id);
-		$query = $this->db->get($table);
+		$this->db->where($this->id_name, $id);
+		$query = $this->db->get($this->table);
 		return $query->result_array();
 	}
 
 	public function getManagers() {
-		$this->db->where('group_id', 2);
-		$query = $this->db->get($table);
+		$this->db->select('a.*, p.name as position_name, b.name as building_name');
+		$this->db->from('admin a');
+		$this->db->join('position p', 'a.position_id = p.position_id','left');
+		$this->db->join('assignment as', 'a.admin_id = as.admin_id', 'left');
+		$this->db->join('building b', 'as.building_id = b.building_id', 'left');
+		$this->db->where('group_id', '2');
+		$query = $this->db->get();
 		return $query->result_array();
+	}
+
+	public function getManagerOthers() {
+		$this->db->where(array('group_id' => 2, 'status' => 1, 'assigned' => 0));
+		$query = $this->db->get($this->table);
+		return $query->result_array();
+	}
+
+	public function addManager($params) {
+		$this->db->insert($this->table, $params);
+	}
+
+	public function checkAssigned($admin_id) {
+		$this->db->where('admin_id', $admin_id);
+		$query = $this->db->get('assignment');
+		if($query->num_rows() > 0)
+		{
+			return $query->result_array();
+		}else {
+			return null;
+		}
 	}
 
 	public function assignManager($params) {
 		$this->db->insert('assignment', $params);
+	}
+
+	public function updateAssigned($admin_id, $param) {
+		$this->db->where('admin_id', $admin_id);
+		$this->db->update($this->table, $param);
 	}
 
 	public function editAssignManager($admin_id, $params) {
@@ -42,13 +88,19 @@ class Admin_model extends CI_Model {
 
 	public function disableManager($id, $params) {
 		$this->db->where($id_name, $id);
-		$this->db->update($table, $params);
+		$this->db->update($this->table, $params);
 	}
 
 	public function enableManager($id, $params) {
 		$this->db->where($id_name, $id);
-		$this->db->update($table, $params);
+		$this->db->update($this->table, $params);
 	}
 
-	// public function 
+	public function getGroupByPosition($position_id) {
+		if ($position_id == 1 || $position_id == 2) {
+			return 1;
+		}else {
+			return 2;
+		}
+	}
 }

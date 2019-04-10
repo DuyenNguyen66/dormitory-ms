@@ -10,16 +10,16 @@ class Position_model extends CI_Model {
 	}
 
 	public function getAll() {
-		$query = $this->db->get($table);
+		$query = $this->db->get($this->table);
 		return $query->result_array();
 	}
 
 	public function add($params) {
-		$this->db->insert($table, $params);
+		$this->db->insert($this->table, $params);
 	}
 
 	public function edit($params, $id) {
-		$this->db->where($id_name, $id);
-		$this->db->update($table, $params);
+		$this->db->where($this->id_name, $id);
+		$this->db->update($this->table, $params);
 	}
 } 

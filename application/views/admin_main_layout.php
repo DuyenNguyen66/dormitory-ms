@@ -8,7 +8,7 @@
 
 	<link rel="shortcut icon" href="<?php echo base_url('assets/images/favicon_1.ico'); ?>">
 
-	<title>Second Screen cPanel</title>
+	<title>DMS</title>
 
 	<link href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>" rel="stylesheet" type="text/css"/>
 	<link href="<?php echo base_url('assets/css/core.css'); ?>" rel="stylesheet" type="text/css"/>
@@ -18,12 +18,6 @@
 	<link href="<?php echo base_url('assets/css/responsive.css'); ?>" rel="stylesheet" type="text/css"/>
 	<link href="<?php echo base_url('assets/plugins/datatables/dataTables.bootstrap.min.css'); ?>" rel="stylesheet" type="text/css"/>
 
-	<!-- HTML5 Shiv and Respond.js IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
-	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-	<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-	<![endif]-->
 	<?php
 	if (isset($customCss) && is_array($customCss)) {
 		foreach ($customCss as $style) {
@@ -38,10 +32,6 @@
 
 <body class="fixed-left">
 
-<div class="animationload">
-	<div class="loader"></div>
-</div>
-
 <!-- Begin page -->
 <div id="wrapper">
 
@@ -51,7 +41,7 @@
 		<!-- LOGO -->
 		<div class="topbar-left">
 			<div class="text-center">
-				<a href="<?php echo base_url('') ?>" class="logo"><i class="icon-magnet icon-c-logo"></i><span>Second Screen</span></a>
+				<a href="<?php echo base_url('') ?>" class="logo"><i class="icon-magnet icon-c-logo"></i><span>DMS</span></a>
 			</div>
 		</div>
 
@@ -72,31 +62,12 @@
 									<i class="fa fa-cog"></i>
 								</a>
 								<ul class="dropdown-menu">
-									<li><a href="<?php echo base_url('lockscreen'); ?>"><i class="ti-lock m-r-5"></i> Lock screen</a></li>
+									
 									<li><a href="<?php echo base_url('logout'); ?>"><i class="ti-power-off m-r-5"></i> Logout</a></li>
 								</ul>
 							</li>
 							
 						</ul>
-						<?php if(isset($sub_id) && $sub_id == 21):?>
-							<li class="btn-export">
-								<button type="button" class="btn">
-									<a href="<?php echo base_url('user/exportUsers')?>">Export</a>
-								</button>
-							</li>
-						<?php elseif(isset($sub_id) && $sub_id == 32):?>
-							<li class="btn-export">
-								<button type="button" class="btn">
-									<a href="<?php echo base_url('product/exportFilms')?>">Export</a>
-								</button>
-							</li>
-							<li class="btn-export">
-								<button type="button" class="btn">
-									<a href="<?php echo base_url('product/add')?>">Add Film</a>
-								</button>
-							</li>
-						<?php else:?>
-						<?php endif;?>
 					</ul>
 				</div>
 				<!--/.nav-collapse -->
@@ -117,37 +88,34 @@
 						<a href="<?php echo base_url(''); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 1 ? ' active' : ''; ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
 					</li>
 					<li class="has_sub">
-						<a href="#" class="waves-effect<?php echo isset($parent_id) && $parent_id == 2 ? ' active' : ''; ?>"> <i class="fa fa-users"></i> <span>Users</span> </a>
+						<a href="#" class="waves-effect<?php echo isset($parent_id) && $parent_id == 2 ? ' active' : ''; ?>"> <i class="fa fa-leaf"></i> <span>Dormitory Facility</span> </a>
 						<ul class="list-unstyled">
 							<li <?php echo($sub_id == 21 ? 'class="active"' : ''); ?>>
-								<a href="<?php echo base_url('user'); ?>"><span>Active Users</span></a>
+								<a href="<?php echo base_url('building'); ?>"><span>Buildings</span></a>
 							</li>
-							<li <?php echo($sub_id == 23 ? 'class="active"' : ''); ?>>
-								<a href="<?php echo base_url('user/reports'); ?>">Reported Users</a>
+							<li <?php echo($sub_id == 22 ? 'class="active"' : ''); ?>>
+								<a href="<?php echo base_url('room'); ?>">Rooms</a>
 							</li>
-							<li <?php echo($sub_id == 24 ? 'class="active"' : ''); ?>>
-								<a href="<?php echo base_url('featured'); ?>">Featured Users</a>
+						</ul>
+					</li>
+					<li class="has_sub">
+						<a href="#" class="waves-effect<?php echo isset($parent_id) && $parent_id == 3 ? ' active' : ''; ?>"> <i class="fa fa-leaf"></i> <span>University</span> </a>
+						<ul class="list-unstyled">
+							<li <?php echo($sub_id == 31 ? 'class="active"' : ''); ?>>
+								<a href="<?php echo base_url('major'); ?>"><span>Majors</span></a>
 							</li>
-							<li <?php echo($sub_id == 25 ? 'class="active"' : ''); ?>>
-								<a href="<?php echo base_url('user/signups'); ?>">Newsletter Signups</a>
+							<li <?php echo($sub_id == 32 ? 'class="active"' : ''); ?>>
+								<a href="<?php echo base_url('course'); ?>">Courses</a>
 							</li>
-
+							<li <?php echo($sub_id == 33 ? 'class="active"' : ''); ?>>
+								<a href="<?php echo base_url('classes'); ?>">Classes</a>
+							</li>
 						</ul>
 					</li>
 					<li>
-						<a href="<?php echo base_url('product'); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 3 ? ' active' : ''; ?>"><i class="fa fa-leaf"></i> <span>Series</span></a>
+						<a href="<?php echo base_url('manager'); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 4 ? ' active' : ''; ?>"><i class="fa fa-industry"></i> <span>Officers Management</span></a>
 					</li>
-					<li>
-						<a href="<?php echo base_url('season'); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 7 ? ' active' : ''; ?>"><i class="fa fa-ship"></i> <span>Seasons</span></a>
-					</li>
-					<li>
-						<a href="<?php echo base_url('preview'); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 10 ? ' active' : ''; ?>"><i class="fa fa-industry"></i>
-							<span>Explore Previews</span></a>
-					</li>
-					<li>
-						<a href="<?php echo base_url('collection'); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 4 ? ' active' : ''; ?>"><i class="fa fa-industry"></i>
-							<span>Collections</span></a>
-					</li>
+					
 					<li>
 						<a href="<?php echo base_url('actor'); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 5 ? ' active' : ''; ?>"><i class="fa fa-male"></i> <span>Actors</span></a>
 					</li>
@@ -165,6 +133,7 @@
 							</li>
 						</ul>
 					</li>
+
 				</ul>
 				<div class="clearfix"></div>
 			</div>
@@ -201,7 +170,7 @@
 </script>
 
 <!-- jQuery  -->
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="<?php echo base_url('assets/js/jquery.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/detect.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/fastclick.js'); ?>"></script>
@@ -229,26 +198,9 @@ if (isset($customJs) && is_array($customJs)) {
 }
 ?>
 <script>
-// line chart data
-    var buyerData = {
-    labels: ["Ruby", "jQuery", "Java", "ASP.Net", "PHP"],
-    datasets: [{
-        fillColor: "rgba(151,249,190,0.5)",
-        // strokeColor: "rgba(255,255,255,1)",
-        // pointColor: "rgba(220,220,220,1)",
-        // pointStrokeColor: "#fff",
-        data: [10, 20, 30, 40, 50]
-    }, {
-        fillColor: "rgba(252,147,65,0.5)",
-        // strokeColor: "rgba(255,255,255,1)",
-        // pointColor: "rgba(173,173,173,1)",
-        // pointStrokeColor: "#fff",
-        data: [28, 68, 40, 19, 50]
-    }]
-
-}
-    var buyers = document.getElementById('buyers').getContext('2d');
-    new Chart(buyers).Line(buyerData);
+	$('#example3').DataTable({
+		'ordering': false,
+	});
 </script>
 </body>
 </html>

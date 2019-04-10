@@ -94,15 +94,6 @@
     border: 0;
     border-top: 1.5px solid #dbdbdb;
 }
-#example3_info {
-    padding-top: 20px;
-}
-#example3_paginate{
-    margin-right: 17em;
-}
-#example3_length {
-    float: right;
-}
 .search-container i {
     position: absolute;
     font-size: 1.5em;
@@ -120,9 +111,9 @@
     float: right;
     margin-bottom: 1em;
 }
-.card-box {
+/*.card-box {
     margin-top: 10px;
-}
+}*/
 
 .modal-dialog {
     margin-top: 15em;

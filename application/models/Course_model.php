@@ -8,11 +8,11 @@ class Course_model extends CI_Model {
 	}
 
 	public function getAll() {
-		$query = $this->db->get($table);
+		$query = $this->db->get($this->table);
 		return $query->result_array();
 	}
 
-	public function insert($params) {
-		$this->db->insert($table, $params);
+	public function add($params) {
+		$this->db->insert($this->table, $params);
 	}
 }
