@@ -36,7 +36,7 @@ class Index extends Base_Controller {
 				$this->session->set_userdata('admin', array('email'=>$account['email'], 'group_id'=>$account['group_id']));
 				$this->redirect('dashboard');
 			} else {
-				$this->load->view('admin/login', array('error'=>'Sai thông tin đăng nhập'));
+				$this->load->view('admin/login', array('error'=>'Account does not exist.'));
 			}
 		} else {
 			$this->load->view('admin/login');

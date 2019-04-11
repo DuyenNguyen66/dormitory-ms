@@ -8,5 +8,8 @@ $route['register'] = 'index/register';
 
 $route['building'] = 'building/index';
 $route['room'] = 'room/index';
+
 $route['manager'] = 'index/getManagersList';
+
 $route['student'] = 'student/index';
+$route['student/profile/(:num)'] = 'student/profile/$1';

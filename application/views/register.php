@@ -24,83 +24,89 @@
                     <div style='color: red; margin: 0 0 20px 0; border: solid 1px #f0a8b5; background: rgba(230,117,136,0.15); padding: 10px; border-radius: 5px'>
                     	<?php echo $this->session->flashdata("error");?>
                     </div>
-                
                 <?php endif;?>
                 <div class="row">
 	                <div class="col-md-6 form-group">
 	                	<label>Fullname</label>
-	                    <input class="form-control" type="text" name="name" placeholder="Type fullname">
-	                </div>
-	                <div class="col-md-6 form-group">
-	                	<label>Email</label>
-	                    <input class="form-control" type="text" name="email" placeholder="Type email">
-	                </div>
-                </div>
-                <div class="row">
-	                <div class="col-md-6 form-group">
-	                	<label>Password</label>
-	                    <input class="form-control" type="password" name="password" placeholder="Type password">
+	                    <input class="form-control" type="text" name="name" placeholder="Type fullname" required>
 	                </div>
 	                <div class="col-md-6 form-group">
 	                	<label>Student Code</label>
-	                    <input class="form-control" type="text" name="code" placeholder="Type Code">
+	                    <input class="form-control" type="text" name="code" placeholder="Type Code" required>
+	                </div>
+                </div>
+                <div class="row">
+                	<div class="col-md-6 form-group">
+	                	<label>Email</label>
+	                    <input class="form-control" type="text" name="email" placeholder="Type email" required>
+	                </div>
+	                <div class="col-md-6 form-group">
+	                	<label>Password</label>
+	                    <input class="form-control" type="password" name="password" placeholder="Type password" required>
 	                </div>
 	            </div>
 	            <div class="row">
 	                <div class="col-md-6 form-group">
 	                	<label>Phone number</label>
-	                    <input class="form-control" type="text" name="phone" placeholder="Type phone">
+	                    <input class="form-control" type="text" name="phone" placeholder="Type phone" required>
 	                </div>
 	                <div class="col-md-6 form-group">
 	                	<label>Address</label>
-	                    <input class="form-control" type="text" name="address" placeholder="Type address">
+	                    <input class="form-control" type="text" name="address" placeholder="Type address" required>
 	                </div>
 	            </div>
                 <div class="row">
-	                <div class="col-md-6 form-group">
-	                	<label>Birthday</label>
-	                    <input class="form-control" type="date" name="birthday" >
+                	<div class="col-md-4 form-group">
+	                	<label>Gender</label>
+	                	<div class="col-md-12">
+	                		<input type="radio" name="gender" value="1" checked >&nbsp;Male</label>&nbsp;&nbsp;&nbsp;
+	                		<input type="radio" name="gender" value="0">&nbsp;Female</label>
+	                	</div>
 	                </div>
+	                <div class="col-md-4 form-group">
+	                	<label>Birthday</label>
+	                    <input class="form-control" type="date" name="birthday" required>
+	                </div>
+	                <div class="col-md-4 form-group">
+	                	<label>Class</label>
+	                	<select class="form-control" name="class_id" required="">
+	                		<option value="">Select Class</option>
+	                		<?php foreach($classes as $class):?>
+	                		<option value="<?php echo $class['class_id'] ?>"><?php echo $class['name'] ?></option>
+	                		<?php endforeach;?>
+	                	</select>
+	                </div>
+	            </div>
+                <div class="row">
 	                <div class="col-md-6 form-group">
 	                	<label>Nation</label>
-	                	<select class="form-control" name="position_id" required="">
+	                	<select class="form-control" name="nation_id" required="">
 	                		<option value="">Select Nation</option>
-	                		<?php foreach($positions as $position):?>
-	                		<option value="<?php echo $position['position_id'] ?>"><?php echo $position['name'] ?></option>
-	                		<?php endforeach;?>
-	                	</select>
-	                </div>
-	            </div>
-                <div class="row">
-	                <div class="col-md-6 form-group">
-	                	<label>Religion</label>
-	                	<select class="form-control" name="position_id" required="">
-	                		<option value="">Select Religion</option>
-	                		<?php foreach($positions as $position):?>
-	                		<option value="<?php echo $position['position_id'] ?>"><?php echo $position['name'] ?></option>
+	                		<?php foreach($nations as $nation):?>
+	                		<option value="<?php echo $nation['nation_id'] ?>"><?php echo $nation['name'] ?></option>
 	                		<?php endforeach;?>
 	                	</select>
 	                </div>
 	                <div class="col-md-6 form-group">
-	                	<label>Class</label>
-	                	<select class="form-control" name="position_id" required="">
-	                		<option value="">Select Class</option>
-	                		<?php foreach($positions as $position):?>
-	                		<option value="<?php echo $position['position_id'] ?>"><?php echo $position['name'] ?></option>
+	                	<label>Ethnic</label>
+	                	<select class="form-control" name="ethnic_id" required="">
+	                		<option value="">Select Ethnic</option>
+	                		<?php foreach($ethnics as $ethnic):?>
+	                		<option value="<?php echo $ethnic['ethnic_id'] ?>"><?php echo $ethnic['name'] ?></option>
 	                		<?php endforeach;?>
 	                	</select>
 	                </div>
 	            </div>
-                <div class="row">
-	                	<label>Student Card</label>
-	                	<div class="col-md-6">
-	                		<img id='image' width='300' height='200' style='border: 4px solid #c6c6c6; border-radius: 4px'/>
-	                	</div>
-	                	<div class="col-md-6">
-	                		<div class="" onclick="$('#imagePhoto').click()">
-	                			<input type="file" accept="image/*" name="image" id="imagePhoto" required />
-	                		</div>
-	                	</div>
+                <div class=" form-group">
+                	<label class="col-md-12">Student Card</label>
+                	<div class="col-md-6">
+                		<div class="" onclick="$('#imagePhoto').click()">
+                			<input type="file" accept="image/*" name="image" id="imagePhoto" required />
+                		</div>
+                	</div>
+                	<div class="col-md-6">
+                		<img id='image' width='300' height='200' style='border: 4px solid #c6c6c6; border-radius: 4px'/>
+                	</div>
 	            </div>
                 <div class="container-login100-form-btn">
                     <button class="login100-form-btn" name='cmd' value="submit">

@@ -117,7 +117,7 @@
 					</li>
 					
 					<li>
-						<a href="<?php echo base_url('actor'); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 5 ? ' active' : ''; ?>"><i class="fa fa-male"></i> <span>Actors</span></a>
+						<a href="<?php echo base_url('student'); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 5 ? ' active' : ''; ?>"><i class="fa fa-male"></i> <span>Students Management</span></a>
 					</li>
 					<li>
 						<a href="<?php echo base_url('music'); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 6 ? ' active' : ''; ?>"><i class="fa fa-music"></i> <span>Musics</span></a>
@@ -156,7 +156,6 @@
 			</div> <!-- container -->
 		</div> <!-- content -->
 		<footer class="footer text-right">
-			2018 © <a href="http://secondscreentv.us">www.secondscreentv.us</a>
 		</footer>
 
 	</div>

@@ -249,6 +249,7 @@ iframe {
 }
 
 .login100-form-btn, .login100-form-btn:hover {
+  margin-top: 40px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;

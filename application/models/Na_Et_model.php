@@ -1,6 +1,6 @@
 <?php
 
-class Na_Re_model extends CI_Model {
+class Na_Et_model extends CI_Model {
 
 	public function __construct() {
 		parent::__construct();
@@ -11,8 +11,8 @@ class Na_Re_model extends CI_Model {
 		return $query->result_array();
 	}
 
-	public function getAllReligions() {
-		$query = $this->db->get('religion');
+	public function getAllEthnic() {
+		$query = $this->db->get('ethnic');
 		return $query->result_array();
 	}
 } 

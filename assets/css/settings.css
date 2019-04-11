@@ -173,3 +173,16 @@ hr {
     text-transform: uppercase;
     font-size: 13px;
 }
+#example3_length {
+    float: right;
+    margin-left: 4em;
+    margin-top: 2em;
+}
+#example3_paginate {
+    margin-top: 2em;
+}
+.statusSelect {
+    width: 15%;
+    margin-bottom: -30px;
+    z-index: 100;
+}

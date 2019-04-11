@@ -7,7 +7,7 @@ Email: coderthemes@gmail.com
 File: Common
 */
 body {
-  background: #e9f4ec;
+  background: #e8e8e8;
   font-family: 'Noto Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   margin: 0;
   overflow-x: hidden;
@@ -355,7 +355,7 @@ File: Helper clasess
   background-clip: padding-box;
 }
 .icon-list-demo .col-md-4:hover {
-  background-color: #5fbeaa;
+  background-color: #68be5f;
 }
 .icon-list-demo .col-md-4:hover i {
   -o-transform: scale(2);
@@ -460,7 +460,7 @@ File: Bootstrap-custom
 }
 /* Background colors */
 .bg-custom {
-  background-color: #5fbeaa !important;
+  background-color: #68be5f !important;
 }
 .bg-primary {
   background-color: #5d9cec !important;
@@ -497,7 +497,7 @@ File: Bootstrap-custom
 }
 /* Text colors */
 .text-custom {
-  color: #5fbeaa;
+  color: #68be5f;
 }
 .text-white {
   color: #ffffff;
@@ -597,7 +597,7 @@ textarea.form-control {
   padding: .3em .6em .3em;
 }
 .label-default {
-  background-color: #5fbeaa;
+  background-color: #68be5f;
 }
 .label-primary {
   background-color: #5d9cec;
@@ -630,7 +630,7 @@ textarea.form-control {
   padding: 3px 5px;
   font-size: 12px;
   margin-top: 1px;
-  background-color: #5fbeaa;
+  background-color: #68be5f;
 }
 .badge-xs {
   font-size: 9px;
@@ -706,8 +706,8 @@ textarea.form-control {
 .pagination > .active > span:hover,
 .pagination > .active > a:focus,
 .pagination > .active > span:focus {
-  background-color: #5fbeaa;
-  border-color: #5fbeaa;
+  background-color: #68be5f;
+  border-color: #68be5f;
 }
 .pager li > a,
 .pager li > span {
@@ -746,10 +746,10 @@ textarea.form-control {
   width: 100%;
 }
 .tabs li.tab a.active {
-  color: #5fbeaa !important;
+  color: #68be5f !important;
 }
 .tabs .indicator {
-  background-color: #5fbeaa;
+  background-color: #68be5f;
   bottom: 0;
   height: 2px;
   position: absolute;
@@ -762,13 +762,13 @@ textarea.form-control {
   line-height: 36px !important;
 }
 .nav-pills li.active a {
-  background-color: #5fbeaa !important;
+  background-color: #68be5f !important;
 }
 .nav-pills li.active a:hover {
-  background-color: #5fbeaa !important;
+  background-color: #68be5f !important;
 }
 .nav-pills li.active a:focus {
-  background-color: #5fbeaa !important;
+  background-color: #68be5f !important;
 }
 .nav.nav-tabs + .tab-content {
   background: #ffffff;
@@ -821,7 +821,7 @@ textarea.form-control {
 }
 .nav.nav-tabs > li > a:hover,
 .nav.tabs-vertical > li > a:hover {
-  color: #5fbeaa !important;
+  color: #68be5f !important;
 }
 .tab-content {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
@@ -849,7 +849,7 @@ textarea.form-control {
 .tabs-vertical > li.active > a,
 .tabs-vertical > li.active > a:focus,
 .tabs-vertical > li.active > a:hover {
-  color: #5fbeaa !important;
+  color: #68be5f !important;
 }
 /* List group */
 .list-group-item {
@@ -876,7 +876,7 @@ textarea.form-control {
 .alert-success {
   background-color: rgba(95, 190, 170, 0.3);
   border-color: rgba(95, 190, 170, 0.4);
-  color: #5fbeaa;
+  color: #68be5f;
 }
 .alert-info {
   background-color: rgba(52, 211, 235, 0.2);
@@ -975,11 +975,11 @@ textarea.form-control {
 .list-group-item.active,
 .list-group-item.active:hover,
 .list-group-item.active:focus {
-  background-color: #5fbeaa;
-  border-color: #5fbeaa;
+  background-color: #68be5f;
+  border-color: #68be5f;
 }
 .nav-pills > .active > a > .badge {
-  color: #5fbeaa;
+  color: #68be5f;
 }
 .has-success .form-control {
   border-color: #81c868;
@@ -1020,7 +1020,7 @@ textarea.form-control {
 }
 .popover .popover-title {
   background-color: transparent;
-  color: #5fbeaa;
+  color: #68be5f;
   font-weight: 600;
 }
 /* Code */
@@ -1095,7 +1095,7 @@ File: Topbar,Left-sidebar,Right-sidebar
   text-align: center;
 }
 .logo i {
-  color: #5fbeaa;
+  color: #68be5f;
 }
 .logo .icon-c-logo {
   display: none;
@@ -1260,7 +1260,7 @@ body.fixed-left .side-menu.left {
   border-top: 0;
 }
 #sidebar-menu ul ul li.active a {
-  color: #5fbeaa;
+  color: #68be5f;
 }
 #sidebar-menu ul ul a {
   color: #75798B;
@@ -1268,7 +1268,7 @@ body.fixed-left .side-menu.left {
   padding: 10px 20px 10px 65px;
 }
 #sidebar-menu ul ul a:hover {
-  color: #5fbeaa;
+  color: #68be5f;
 }
 #sidebar-menu ul ul a i {
   margin-right: 5px;
@@ -1281,8 +1281,8 @@ body.fixed-left .side-menu.left {
 }
 #sidebar-menu .subdrop {
   background: #f4f8fb !important;
-  border-left: 3px solid #5fbeaa;
-  color: #5fbeaa !important;
+  border-left: 3px solid #68be5f;
+  color: #68be5f !important;
 }
 #sidebar-menu > ul > li > a {
   color: #36404a;
@@ -1292,7 +1292,7 @@ body.fixed-left .side-menu.left {
   border-left: 3px solid #ffffff;
 }
 #sidebar-menu > ul > li > a:hover {
-  color: #5fbeaa;
+  color: #68be5f;
   text-decoration: none;
 }
 #sidebar-menu > ul > li > a > span {
@@ -1317,8 +1317,8 @@ body.fixed-left .side-menu.left {
 }
 #sidebar-menu > ul > li > a.active {
   background: #f4f8fb !important;
-  border-left: 3px solid #5fbeaa;
-  color: #5fbeaa !important;
+  border-left: 3px solid #68be5f;
+  color: #68be5f !important;
 }
 .menu-title {
   padding: 12px 20px !important;
@@ -1429,13 +1429,13 @@ body.fixed-left .side-menu.left {
   z-index: 6;
 }
 #wrapper.enlarged .left.side-menu #sidebar-menu ul > li:hover > ul a:hover {
-  color: #5fbeaa;
+  color: #68be5f;
 }
 #wrapper.enlarged .left.side-menu #sidebar-menu ul > li:hover a span {
   display: inline;
 }
 #wrapper.enlarged .left.side-menu #sidebar-menu a.subdrop {
-  color: #5fbeaa !important;
+  color: #68be5f !important;
 }
 #wrapper.enlarged .left.side-menu #sidebar-menu ul > li > ul {
   display: none;
@@ -1456,7 +1456,7 @@ body.fixed-left .side-menu.left {
   transform: rotate(270deg);
 }
 #wrapper.enlarged .left.side-menu #sidebar-menu ul ul li.active a {
-  color: #5fbeaa;
+  color: #68be5f;
 }
 #wrapper.enlarged .left.side-menu #sidebar-menu ul > li > a span {
   display: none;

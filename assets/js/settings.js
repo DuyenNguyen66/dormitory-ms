@@ -34,7 +34,20 @@ $('.major_id').change(function(){
 		});
 	});
 });
-	
+
+var stt = $('select option:selected').val();
+function loadData(stt){
+    $.get("student/getStudentsByStatus", {status:stt}, function(data){
+        $('#student_table').html(data);
+    });
+}
+loadData(stt);
+$('.status').change(function(){
+	stt = $(this).val();
+	$.get('student/getStudentsByStatus',{status:stt}, function(data){
+		$('#student_table').html(data);
+	});
+});
 	
 
 
