@@ -8,10 +8,20 @@ class Index extends CI_Controller {
 		$this->load->model('student_model');
 		$this->load->model('class_model');
 		$this->load->model('Na_Et_model');
+		$this->load->model('floor_model');
+		$this->load->model('building_model');
 	}
 
 	public function index() {
-
+		$account = $this->session->userdata('student');
+		if($account == null) {
+			redirect('login');
+		}
+		$data = array();
+		$data['parent_id'] = 10;
+		$data['group'] = $account['group'];
+		$data['content'] = $this->load->view('dashboard', array(), true);
+		$this->load->view('admin_main_layout', $data);
 	}
 
 	public function login () {
@@ -21,7 +31,7 @@ class Index extends CI_Controller {
 			$params['password'] = md5($this->input->post('password'));
 			$account = $this->student_model->checkAccount($params['email'], $params['password']);
 			if($account != null) {
-				$this->session->set_userdata('student', array('email' => $account['email'], 'password' => $account['password']));
+				$this->session->set_userdata('student', array('email' => $account['email'], 'group' => 3));
 				redirect('dashboard');
 			}else {
 				$this->session->set_flashdata('error', 'ERROR. Account does not exist.');
@@ -70,4 +80,5 @@ class Index extends CI_Controller {
 		} 
 		$this->load->view('register', $data);
 	}
+
 }

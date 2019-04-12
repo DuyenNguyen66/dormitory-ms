@@ -7,9 +7,15 @@ class Room extends CI_Controller {
 		$this->load->model('room_model');
 		$this->load->model('floor_model');
 		$this->load->model('building_model');
+		$this->load->model('student_model');
 	}
 
 	public function index() {
+		$account = $this->session->userdata('admin');
+		if($account == null)
+		{
+			redirect('login');
+		}
 		$rooms = $this->room_model->getAll();
 		$floors = $this->floor_model->getAll();
 		$buildings = $this->building_model->getAll();
@@ -31,7 +37,7 @@ class Room extends CI_Controller {
 
 		$data = array();
 		$data['customCss'] = array('assets/css/settings.css');
-		$data['customJs'] = array('assets/js/settings.js', 'assets/app/search.js');
+		$data['customJs'] = array('assets/js/settings.js');
 		$data['parent_id'] = 2;
 		$data['sub_id'] = 22;
 		$data['content'] = $content;
@@ -45,5 +51,23 @@ class Room extends CI_Controller {
 			'rooms' => $rooms
 		);
 		echo $this->load->view('admin/room_table', $params, true);
+	}
+
+	public function assignStudent($room_id) {
+		$room = $this->room_model->getRoomById($room_id);
+		$students = $this->student_model->getAll();
+		$layoutParams = array(
+			'room' => $room,
+			'students' => $students
+		);
+		$content = $this->load->view('admin/assign_room', $layoutParams, true);
+
+		$data = array();
+		$data['customCss'] = array('assets/css/settings.css');
+		$data['customJs'] = array('assets/js/settings.js');
+		$data['parent_id'] = 2;
+		$data['sub_id'] = 22;
+		$data['content'] = $content;
+		$this->load->view('admin_main_layout', $data);
 	}
 }

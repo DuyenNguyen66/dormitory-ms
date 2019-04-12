@@ -7,6 +7,7 @@ class Index extends Base_Controller {
 		$this->load->model('admin_model');		
 		$this->load->model('position_model');		
 		$this->load->model('building_model');
+		$this->load->model('term_model');
 	}
 	
 	public function index() {
@@ -14,11 +15,35 @@ class Index extends Base_Controller {
 		if ($admin == null) {
 			redirect(base_url('login'));
 		}
+		$this->getTerm();
 		$data = array();
 		$data['parent_id'] = 1;
-		$data['sub_id'] = 10;
+		$data['sub_id'] = 22;
 		$data['content'] = $this->load->view('admin/dashboard', array(), true);
 		$this->load->view('admin_main_layout', $data);
+	}
+
+	public function getTerm() {
+		$currentDate = date('d/n/Y');
+		$arr = explode('/', $currentDate);
+		$date = $arr[0];
+		$month = $arr[1];
+		$year = $arr[2]; 
+		if($date == 1 && ($month == 2 || $month == 9)) {
+			if($month >= 9 && $month <= 12 || $month == 1)
+			{
+				$term = implode('', array($arr[2], 1));
+				// print_r($term);die();
+			}else
+			{
+				$term = implode('', array($arr[2] - 1 , 2));
+			}
+			$term = $this->term_model->checkTerm($term);
+			if($term == null)
+			{
+				$this->term_model->add($term);
+			}
+		}
 	}
 	
 	public function login() {
@@ -115,7 +140,7 @@ class Index extends Base_Controller {
 		$data['customCss'] = array('assets/css/settings.css');
 		$data['customJs'] = array('assets/js/settings.js', 'assets/app/search.js');
 		$data['parent_id'] = 4;
-		$data['sub_id'] = 10;
+		$data['sub_id'] = 22;
 		$data['content'] = $content;
 		$this->load->view('admin_main_layout', $data);
 	}

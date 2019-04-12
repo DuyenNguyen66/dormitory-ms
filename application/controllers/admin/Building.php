@@ -9,6 +9,11 @@ class Building extends CI_Controller {
 	}
 
 	public function index() {
+		$account = $this->session->userdata('admin');
+		if($account == null)
+		{
+			redirect('login');
+		}
 		$buildings = $this->building_model->getAll();
 		$cmd1 = $this->input->post('cmd1');
 		$cmd2 = $this->input->post('cmd2');

@@ -27,8 +27,6 @@
 							<th style="width:50%">Code</th>
 							<td><?php echo $student['student_code']; ?></td>
 						</tr>
-						
-
 						<tr>
 							<th>Class</th>
 							<td><?php echo $student['class'] ?></td>

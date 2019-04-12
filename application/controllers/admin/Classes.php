@@ -10,6 +10,11 @@ class Classes extends CI_Controller {
 	}
 
 	public function index() {
+		$account = $this->session->userdata('admin');
+		if($account == null)
+		{
+			redirect('login');
+		}
 		$courses = $this->course_model->getAll();
 		$majors = $this->major_model->getAll();
 		$cmd = $this->input->post('cmd');

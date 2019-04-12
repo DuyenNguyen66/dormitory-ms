@@ -18,7 +18,7 @@ class Student_model extends CI_Model {
 		return $query->result_array();
 	}
 
-	public function getByStatus($status) {
+	public function getByStatus($status = 1) {
 		$this->db->select('s.*, c.name as class');
 		$this->db->from('student s');
 		$this->db->join('class c', 's.class_id = c.class_id');

@@ -3,7 +3,6 @@
 </div>
 <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#list">List Students</a></li>
-    <li><a data-toggle="tab" href="#add">Add Student</a></li>
 </ul>
 <div class="row card-box"> 
     <div class="tab-content">
@@ -19,6 +18,9 @@
             <div class="col-xs-12">
                 <div class="table-responsive" id="student_table"></div>
             </div>
+        </div>
+        <div id="add" class="tab-pane fade in active">
+            
         </div>
     </div>
 </div>

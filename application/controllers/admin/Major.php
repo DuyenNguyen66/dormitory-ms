@@ -8,6 +8,11 @@ class Major extends CI_Controller {
 	}
 
 	public function index() {
+		$account = $this->session->userdata('admin');
+		if($account == null)
+		{
+			redirect('login');
+		}
 		$majors = $this->major_model->getAll();
 		$cmd = $this->input->post('cmd');
 		if($cmd != '') {

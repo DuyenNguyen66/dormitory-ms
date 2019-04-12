@@ -8,6 +8,11 @@ class Student extends CI_Controller {
 	}
 
 	public function index() {
+		$account = $this->session->userdata('admin');
+		if($account == null)
+		{
+			redirect('login');
+		}
 		$content = $this->load->view('admin/student_list', '',true);
 
 		$data = array();

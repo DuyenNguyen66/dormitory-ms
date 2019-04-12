@@ -8,12 +8,26 @@ class Term_model extends CI_Model {
 		parent::__construct();
 	}
 
-	public function getAll() {
-		$query = $this->db->get($table);
-		return $query->result_array();
+	public function getCurrentTerm() {
+		
+		$this->db->order_by('term_id', 'desc');
+		$query = $this->db->get($this->table);
+		return $query->first_row('array');
 	}
 
 	public function add($params) {
-		$this->db->insert($table, $params);
+		$this->db->insert($this->table, $params);
+	}
+
+	public function checkTerm($term) {
+		$this->db->where('name', $term);
+		$query = $this->db->get($this->table);
+		if($query->num_rows() == 0)
+		{
+			return null;
+		}else
+		{
+			return $query->result_array()[0];
+		}
 	}
 } 

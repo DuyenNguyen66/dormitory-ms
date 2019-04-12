@@ -8,6 +8,11 @@ class Course extends CI_Controller {
 	}
 
 	public function index() {
+		$account = $this->session->userdata('admin');
+		if($account == null)
+		{
+			redirect('login');
+		}
 		$courses = $this->course_model->getAll();
 		$cmd = $this->input->post('cmd');
 		if($cmd != '') {

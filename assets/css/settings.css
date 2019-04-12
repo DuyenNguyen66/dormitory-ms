@@ -186,3 +186,22 @@ hr {
     margin-bottom: -30px;
     z-index: 100;
 }
+
+.room, .room1, .room2 {
+    width: 8%;
+    float: left;
+    background: #60c74f;
+    border-radius: 20px;
+    margin-right: 93px;
+    margin-top: 50px;
+}
+.room h4, .room1 h4, .room2 h4 {
+    text-align: center;
+    color: #FFFFFF;
+}
+.room1 {
+    background: #ffbc5d;
+}
+.room2 {
+    background: #ff6565;
+}

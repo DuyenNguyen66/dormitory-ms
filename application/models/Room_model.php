@@ -32,4 +32,10 @@ class Room_model extends CI_Model {
 		$query = $this->db->get($this->table);
 		return $query->result_array();
 	}
+
+	public function getRoomById($id) {
+		$this->db->where($this->id_name, $id);
+		$query = $this->db->get($this->table);
+		return $query->first_row('array');
+	}
 } 

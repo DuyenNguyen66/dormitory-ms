@@ -16,6 +16,7 @@
                 				<th>ID</th>
                 				<th>Abbreviations Name</th>
                 				<th>Full Name</th>
+                                <th>Total Class</th>
                 				<th>Actions</th>
                 			</tr>
                 		</thead>
@@ -29,6 +30,7 @@
                 						<td><?php echo $row['course_id'] ?></td>
                 						<td><?php echo $row['abb_name'] ?></td>
                 						<td><?php echo $row['full_name']?></td>
+                                        <td><?php echo $row['total_class']?></td>
                 						<td>
                 							<div class="dropdown">
                 								<span class="btnAction dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-ellipsis-v"></i></span>

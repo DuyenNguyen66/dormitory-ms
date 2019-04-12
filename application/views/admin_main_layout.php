@@ -84,56 +84,49 @@
 			<!--- Divider -->
 			<div id="sidebar-menu">
 				<ul>
-					<li>
-						<a href="<?php echo base_url(''); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 1 ? ' active' : ''; ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
-					</li>
-					<li class="has_sub">
-						<a href="#" class="waves-effect<?php echo isset($parent_id) && $parent_id == 2 ? ' active' : ''; ?>"> <i class="fa fa-leaf"></i> <span>Dormitory Facility</span> </a>
-						<ul class="list-unstyled">
-							<li <?php echo($sub_id == 21 ? 'class="active"' : ''); ?>>
-								<a href="<?php echo base_url('building'); ?>"><span>Buildings</span></a>
-							</li>
-							<li <?php echo($sub_id == 22 ? 'class="active"' : ''); ?>>
-								<a href="<?php echo base_url('room'); ?>">Rooms</a>
-							</li>
-						</ul>
-					</li>
-					<li class="has_sub">
-						<a href="#" class="waves-effect<?php echo isset($parent_id) && $parent_id == 3 ? ' active' : ''; ?>"> <i class="fa fa-leaf"></i> <span>University</span> </a>
-						<ul class="list-unstyled">
-							<li <?php echo($sub_id == 31 ? 'class="active"' : ''); ?>>
-								<a href="<?php echo base_url('major'); ?>"><span>Majors</span></a>
-							</li>
-							<li <?php echo($sub_id == 32 ? 'class="active"' : ''); ?>>
-								<a href="<?php echo base_url('course'); ?>">Courses</a>
-							</li>
-							<li <?php echo($sub_id == 33 ? 'class="active"' : ''); ?>>
-								<a href="<?php echo base_url('classes'); ?>">Classes</a>
-							</li>
-						</ul>
-					</li>
-					<li>
-						<a href="<?php echo base_url('manager'); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 4 ? ' active' : ''; ?>"><i class="fa fa-industry"></i> <span>Officers Management</span></a>
-					</li>
-					
-					<li>
-						<a href="<?php echo base_url('student'); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 5 ? ' active' : ''; ?>"><i class="fa fa-male"></i> <span>Students Management</span></a>
-					</li>
-					<li>
-						<a href="<?php echo base_url('music'); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 6 ? ' active' : ''; ?>"><i class="fa fa-music"></i> <span>Musics</span></a>
-					</li>
-					<li class="has_sub">
-						<a href="#" class="waves-effect<?php echo isset($parent_id) && $parent_id == 9 ? ' active' : ''; ?>"> <i class="ti-comment"></i> <span>Comments</span> </a>
-						<ul class="list-unstyled">
-							<li <?php echo($sub_id == 91 ? 'class="active"' : ''); ?>>
-								<a href="<?php echo base_url('comment'); ?>"><span>Comments</span></a>
-							</li>
-							<li <?php echo($sub_id == 92 ? 'class="active"' : ''); ?>>
-								<a href="<?php echo base_url('comment/reports'); ?>">Reported Comments</a>
-							</li>
-						</ul>
-					</li>
-
+					<?php if(isset($group) && $group == 3):?>
+						<li>
+							<a href="<?php echo base_url(''); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 10 ? ' active' : ''; ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+						</li>
+						<li>
+							<a href="<?php echo base_url('registration'); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 11 ? ' active' : ''; ?>"><i class="fa fa-book"></i> <span>Registration</span></a>
+						</li>
+					<?php else:?>
+						<li>
+							<a href="<?php echo base_url(''); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 1 ? ' active' : ''; ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+						</li>
+						<li class="has_sub">
+							<a href="#" class="waves-effect<?php echo isset($parent_id) && $parent_id == 2 ? ' active' : ''; ?>"> <i class="fa fa-leaf"></i> <span>Dormitory Facility</span> </a>
+							<ul class="list-unstyled">
+								<li <?php echo($sub_id == 21 ? 'class="active"' : ''); ?>>
+									<a href="<?php echo base_url('building'); ?>"><span>Buildings</span></a>
+								</li>
+								<li <?php echo($sub_id == 22 ? 'class="active"' : ''); ?>>
+									<a href="<?php echo base_url('room'); ?>">Rooms</a>
+								</li>
+							</ul>
+						</li>
+						<li class="has_sub">
+							<a href="#" class="waves-effect<?php echo isset($parent_id) && $parent_id == 3 ? ' active' : ''; ?>"> <i class="fa fa-leaf"></i> <span>University</span> </a>
+							<ul class="list-unstyled">
+								<li <?php echo($sub_id == 31 ? 'class="active"' : ''); ?>>
+									<a href="<?php echo base_url('major'); ?>"><span>Majors</span></a>
+								</li>
+								<li <?php echo($sub_id == 32 ? 'class="active"' : ''); ?>>
+									<a href="<?php echo base_url('course'); ?>">Courses</a>
+								</li>
+								<li <?php echo($sub_id == 33 ? 'class="active"' : ''); ?>>
+									<a href="<?php echo base_url('classes'); ?>">Classes</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="<?php echo base_url('manager'); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 4 ? ' active' : ''; ?>"><i class="fa fa-industry"></i> <span>Officers Management</span></a>
+						</li>
+						<li>
+							<a href="<?php echo base_url('student'); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 5 ? ' active' : ''; ?>"><i class="fa fa-male"></i> <span>Students Management</span></a>
+						</li>
+					<?php endif;?>
 				</ul>
 				<div class="clearfix"></div>
 			</div>
@@ -184,7 +177,7 @@
 <script src="<?php echo base_url('assets/plugins/datatables/dataTables.bootstrap.min.js'); ?>"></script>
 
 
-<script src="https://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
+<!-- <script src="https://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script> -->
 
 <script src="<?php echo base_url('assets/js/jquery.core.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/jquery.app.js'); ?>"></script>
@@ -199,6 +192,7 @@ if (isset($customJs) && is_array($customJs)) {
 <script>
 	$('#example3').DataTable({
 		'ordering': false,
+        'dom' : 'frtlp'
 	});
 </script>
 </body>
