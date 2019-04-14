@@ -88,8 +88,19 @@
 						<li>
 							<a href="<?php echo base_url(''); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 10 ? ' active' : ''; ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
 						</li>
-						<li>
-							<a href="<?php echo base_url('registration'); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 11 ? ' active' : ''; ?>"><i class="fa fa-book"></i> <span>Registration</span></a>
+						<li class="has_sub">
+							<a href="#" class="waves-effect<?php echo isset($parent_id) && $parent_id == 11 ? ' active' : ''; ?>"> <i class="fa fa-leaf"></i> <span>Registration</span> </a>
+							<ul class="list-unstyled">
+								<li <?php echo($sub_id == 12 ? 'class="active"' : ''); ?>>
+									<a href="<?php echo base_url('registration'); ?>">Register</a>
+								</li>
+								<li <?php echo($sub_id == 13 ? 'class="active"' : ''); ?>>
+									<a href="<?php echo base_url('register-list'); ?>">History</a>
+								</li>
+								<li <?php echo($sub_id == 14 ? 'class="active"' : ''); ?>>
+									<a href="<?php echo base_url('roommate-list'); ?>">View Roommates</a>
+								</li>
+							</ul>
 						</li>
 					<?php else:?>
 						<li>
@@ -99,7 +110,7 @@
 							<a href="#" class="waves-effect<?php echo isset($parent_id) && $parent_id == 2 ? ' active' : ''; ?>"> <i class="fa fa-leaf"></i> <span>Dormitory Facility</span> </a>
 							<ul class="list-unstyled">
 								<li <?php echo($sub_id == 21 ? 'class="active"' : ''); ?>>
-									<a href="<?php echo base_url('building'); ?>"><span>Buildings</span></a>
+									<a href="<?php echo base_url('building'); ?>">Buildings</a>
 								</li>
 								<li <?php echo($sub_id == 22 ? 'class="active"' : ''); ?>>
 									<a href="<?php echo base_url('room'); ?>">Rooms</a>

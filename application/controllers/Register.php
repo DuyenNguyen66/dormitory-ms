@@ -9,6 +9,8 @@ class Register extends CI_Controller {
 		$this->load->model('building_model');
 		$this->load->model('room_model');
 		$this->load->model('term_model');
+		$this->load->model('student_model');
+		$this->load->model('registration_model');
 	}
 
 	public function index() {
@@ -30,6 +32,7 @@ class Register extends CI_Controller {
 		$data['customCss'] = array('assets/css/settings.css');
 		$data['customJs'] = array('assets/js/student.js');
 		$data['parent_id'] = 11;
+		$data['sub_id'] = 12;
 		$data['group'] = 3;
 		$data['content'] = $content;
 		$this->load->view('admin_main_layout', $data);
@@ -45,11 +48,76 @@ class Register extends CI_Controller {
 	}
 
 	public function getRoomByFloor() {
+		$building_id = $this->input->get('building_id');
 		$floor_id = $this->input->get('floor_id');
-		$rooms = $this->room_model->getByFloor($floor_id);
+		$rooms = $this->room_model->getByFloor($building_id, $floor_id);
 		$params = array(
 			'rooms' => $rooms
 		);
 		echo $this->load->view('room_table', $params, true);
+	}
+
+	public function chooseRoom() {
+		$account = $this->session->userdata('student');
+		$student = $this->student_model->getStudentByEmail($account['email']);
+		$term = $this->term_model->getCurrentTerm();
+		$params['room_id'] = $this->input->get('room_id');
+		// print_r($params['room_id']);die();
+		$params['student_id'] = $student['student_id'];
+		$params['term_id'] = $term['term_id'];
+		$params['registed'] =  time();
+		$check = $this->registration_model->checkStudent($params['student_id'], $params['term_id']);
+		// print_r($check);die();
+		if($check == null) {
+			$this->registration_model->add($params);
+			return redirect('registration');
+		}else {
+			return redirect('dashboard');
+		}
+	}
+
+	public function registerList() {
+		$account = $this->session->userdata('student');
+		if($account == null) {
+			redirect('login');
+		}
+		$student = $this->student_model->getStudentByEmail($account['email']);
+		$histories = $this->registration_model->getRegisterList($student['student_id']);
+		$layoutParams = array(
+			'histories' => $histories,
+		);
+		$content = $this->load->view('register_list', $layoutParams, true);
+
+		$data = array();
+		$data['customCss'] = array('assets/css/settings.css');
+		$data['customJs'] = array('assets/js/student.js');
+		$data['parent_id'] = 11;
+		$data['sub_id'] = 13;
+		$data['group'] = 3;
+		$data['content'] = $content;
+		$this->load->view('admin_main_layout', $data);
+	}
+
+	public function roommateList() {
+		$account = $this->session->userdata('student');
+		$student = $this->student_model->getStudentByEmail($account['email']);
+		$term = $this->term_model->getCurrentTerm();
+		$room = $this->registration_model->getRoom($student['student_id'], $term['term_id']);
+		$roommates = $this->registration_model->getRoommates($term['term_id'], $room['room_id']);
+		$layoutParams = array(
+			'term_name' => $term['name'],
+			'room_name' => $room['name'],
+			'roommates' => $roommates
+		);
+		$content = $this->load->view('roommate_list', $layoutParams, true);
+
+		$data = array();
+		$data['customCss'] = array('assets/css/settings.css');
+		$data['customJs'] = array('assets/js/student.js');
+		$data['parent_id'] = 11;
+		$data['sub_id'] = 14;
+		$data['group'] = 3;
+		$data['content'] = $content;
+		$this->load->view('admin_main_layout', $data);
 	}
 }

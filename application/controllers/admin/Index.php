@@ -18,7 +18,7 @@ class Index extends Base_Controller {
 		$this->getTerm();
 		$data = array();
 		$data['parent_id'] = 1;
-		$data['sub_id'] = 22;
+		$data['sub_id'] = 0;
 		$data['content'] = $this->load->view('admin/dashboard', array(), true);
 		$this->load->view('admin_main_layout', $data);
 	}

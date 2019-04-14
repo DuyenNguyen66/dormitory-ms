@@ -46,7 +46,7 @@ class Room extends CI_Controller {
 
 	public function getRoomByFloor() {
 		$floor_id = $this->input->get('floor_id');
-		$rooms = $this->room_model->getByFloor($floor_id);
+		$rooms = $this->room_model->getRoomByFloorForAdmin($floor_id);
 		$params = array(
 			'rooms' => $rooms
 		);

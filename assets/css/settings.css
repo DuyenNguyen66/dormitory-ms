@@ -194,6 +194,7 @@ hr {
     border-radius: 20px;
     margin-right: 93px;
     margin-top: 50px;
+    opacity: unset;
 }
 .room h4, .room1 h4, .room2 h4 {
     text-align: center;
@@ -204,4 +205,47 @@ hr {
 }
 .room2 {
     background: #ff6565;
+    margin-left: 20px;
+}
+.room2 a {
+    cursor: not-allowed;
+}
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+.text {
+    display: none;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
 }

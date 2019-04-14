@@ -11,7 +11,6 @@ function handleImage(e) {
     reader.readAsDataURL(e.target.files[0]);
 }
 
-
 $('.building_id').change(function(){
 	var building_id = $(this).val();
 	$.get('building/getFloorByBuilding', {building_id:building_id},function(data){

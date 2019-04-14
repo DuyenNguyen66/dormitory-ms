@@ -5,10 +5,12 @@ $route['default_controller'] = 'index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['dashboard'] = 'index/roomList';
+$route['dashboard'] = 'index/index';
 $route['login'] = 'index/login';
 $route['register'] = 'index/register';
 
 $route['registration'] = 'register/index';
-$route['registerRoom'] = 'register/chooseRoom';
+$route['chooseRoom'] = 'register/chooseRoom';
+$route['register-list'] = 'register/registerList';
+$route['roommate-list'] = 'register/roommateList';
 

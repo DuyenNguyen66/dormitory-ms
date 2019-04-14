@@ -80,4 +80,10 @@ class Student_model extends CI_Model {
 		$this->db->where($id_name, $id);
 		$this->db->update($table, $params);
 	}
+
+	public function getStudentByEmail($email) {
+		$this->db->where('email', $email);
+		$query = $this->db->get($this->table);
+		return $query->first_row('array');
+	}
 }

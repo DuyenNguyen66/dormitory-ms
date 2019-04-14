@@ -19,6 +19,7 @@ class Index extends CI_Controller {
 		}
 		$data = array();
 		$data['parent_id'] = 10;
+		$data['sub_id'] = 0;
 		$data['group'] = $account['group'];
 		$data['content'] = $this->load->view('dashboard', array(), true);
 		$this->load->view('admin_main_layout', $data);
