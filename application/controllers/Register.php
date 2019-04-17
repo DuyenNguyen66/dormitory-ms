@@ -62,17 +62,17 @@ class Register extends CI_Controller {
 		$student = $this->student_model->getStudentByEmail($account['email']);
 		$term = $this->term_model->getCurrentTerm();
 		$params['room_id'] = $this->input->get('room_id');
-		// print_r($params['room_id']);die();
 		$params['student_id'] = $student['student_id'];
 		$params['term_id'] = $term['term_id'];
 		$params['registed'] =  time();
 		$check = $this->registration_model->checkStudent($params['student_id'], $params['term_id']);
-		// print_r($check);die();
 		if($check == null) {
+			$this->session->set_flashdata('success', 'Register successful.');
 			$this->registration_model->add($params);
-			return redirect('registration');
+			redirect('registration');
 		}else {
-			return redirect('dashboard');
+			$this->session->set_flashdata('error', 'You registed room in this term.');
+			redirect('registration');
 		}
 	}
 

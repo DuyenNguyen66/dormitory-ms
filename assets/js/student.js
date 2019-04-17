@@ -14,9 +14,8 @@ $('.building_id').change(function(){
 function loadRoom(building_id, floor_id) {
 	$.get('register/getFloorByBuilding', {building_id:building_id},function(data){
 		$('.floor_id').html(data);
-		$.get('register/getRoomByFloor', {building_id:building_id,floor_id:floor_id}, function(data){
-			$('#room_table').html(data);
-		});
+			$.get('register/getRoomByFloor', {building_id:building_id,floor_id:floor_id}, function(data){
+				$('#room_table').html(data);
+			});
 	});
 }
-loadRoom(building_id, floor_id);

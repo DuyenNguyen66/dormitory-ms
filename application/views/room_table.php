@@ -1,3 +1,5 @@
+
+
 <table id="example3" class="table">
     <?php
     if (isset($rooms) && is_array($rooms)):
