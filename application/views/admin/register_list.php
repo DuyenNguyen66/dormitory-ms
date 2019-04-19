@@ -38,9 +38,9 @@
                 		</thead>
                 		<tbody>
                 			<?php
-                			if (isset($histories) && is_array($histories))
+                			if (isset($forms) && is_array($forms))
                 			{
-                				foreach ($histories as $key => $row):
+                				foreach ($forms as $key => $row):
                 					?>
                 					<tr>
                                         <td><?php echo $row['id'] ?></td>

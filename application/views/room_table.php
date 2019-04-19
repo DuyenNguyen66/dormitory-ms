@@ -60,7 +60,7 @@
             var floor_id = $(this).attr('data-floor');
             var room_id = $(this).attr('data-room');
             $('.chz-confirm').click(function(){
-                $.get('chooseRoom', {room_id:room_id}, function(data){
+                $.get('register/chooseRoom', {room_id:room_id}, function(data){
                     loadRoom(building_id, floor_id);
                 });
                 $(this).attr('data-dismiss', 'modal');

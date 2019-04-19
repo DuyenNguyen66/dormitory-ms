@@ -6,9 +6,9 @@
 				<table class="table">
 					<tbody>
 						<tr>
-							<th width="40%" class="p-t-b-10" style="vertical-align: bottom;border-top: 0px;">Profile Image:</th>
+							<th width="40%" class="p-t-b-10" style="vertical-align: bottom;border-top: 0px;">Student Card:</th>
 							<td width="60%" class="p-t-b-10" style="border-top: 0px;">
-								<img src="<?php echo base_url($student['student_card'])?>" class="img-circle" width="120" height="120">
+								<img src="<?php echo base_url($student['student_card'])?>" class="img-thumbnail" width="500" height="420">
 							</td>
 						</tr>
 						<tr>
@@ -41,7 +41,7 @@
 		</div>
 		<div class="col-md-6">
 			<div class="table-responsive">
-				<table class="table" style="margin-top: 135px;">
+				<table class="table" style="margin-top: 180px;">
 					<tbody>
 						<tr>
 							<th>Address</th>

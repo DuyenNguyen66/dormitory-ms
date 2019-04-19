@@ -10,7 +10,6 @@ $route['login'] = 'index/login';
 $route['register'] = 'index/register';
 
 $route['registration'] = 'register/index';
-$route['chooseRoom'] = 'register/chooseRoom';
 $route['register-list'] = 'register/registerList';
 $route['roommate-list'] = 'register/roommateList';
 

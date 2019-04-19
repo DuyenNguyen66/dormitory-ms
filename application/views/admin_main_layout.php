@@ -132,10 +132,13 @@
 							</ul>
 						</li>
 						<li>
-							<a href="<?php echo base_url('manager'); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 4 ? ' active' : ''; ?>"><i class="fa fa-industry"></i> <span>Officers Management</span></a>
+							<a href="<?php echo base_url('manager'); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 4 ? ' active' : ''; ?>"><i class="fa fa-industry"></i> <span>Officers</span></a>
 						</li>
 						<li>
-							<a href="<?php echo base_url('student'); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 5 ? ' active' : ''; ?>"><i class="fa fa-male"></i> <span>Students Management</span></a>
+							<a href="<?php echo base_url('student'); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 5 ? ' active' : ''; ?>"><i class="fa fa-male"></i> <span>Students</span></a>
+						</li>
+						<li>
+							<a href="<?php echo base_url('form'); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 6 ? ' active' : ''; ?>"><i class="fa fa-male"></i> <span>Registration Form</span></a>
 						</li>
 					<?php endif;?>
 				</ul>

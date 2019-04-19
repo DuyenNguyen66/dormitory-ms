@@ -1,19 +1,7 @@
 <div class="col-xs-12" style="margin: 20px 0">
     <h3 class="header-title">Registration</h3>
     <button class="btn btn-success" style="margin: 20px 0 20px 20px">Term <?php echo $term['name']?></button>
-        <?php if($this->session->flashdata('success')): ?>
-    <div class="col-md-6">
-        <div class="alert alert-success">
-            <?php echo $this->session->flashdata('success') ?>
-        </div>
-    </div>
-    <?php elseif($this->session->flashdata('error')): ?>
-    <div class="col-md-6">
-        <div class="alert alert-danger">
-            <?php echo $this->session->flashdata('error') ?>
-        </div>
-    </div>
-<?php endif; ?>
+    
 </div>
 
 <div class="row card-box"> 

@@ -58,22 +58,21 @@ class Register extends CI_Controller {
 	}
 
 	public function chooseRoom() {
+		$params['room_id'] = $this->input->get('room_id');
 		$account = $this->session->userdata('student');
 		$student = $this->student_model->getStudentByEmail($account['email']);
 		$term = $this->term_model->getCurrentTerm();
-		$params['room_id'] = $this->input->get('room_id');
 		$params['student_id'] = $student['student_id'];
 		$params['term_id'] = $term['term_id'];
 		$params['registed'] =  time();
 		$check = $this->registration_model->checkStudent($params['student_id'], $params['term_id']);
 		if($check == null) {
-			$this->session->set_flashdata('success', 'Register successful.');
 			$this->registration_model->add($params);
-			redirect('registration');
+			$this->session->set_flashdata('success', 'Register successful.');
 		}else {
-			$this->session->set_flashdata('error', 'You registed room in this term.');
-			redirect('registration');
+			$this->session->set_flashdata('error', 'Error. You registed room in this term.');
 		}
+		redirect('registration');
 	}
 
 	public function registerList() {
