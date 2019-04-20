@@ -13,6 +13,6 @@ $route['room/assignment/(:num)'] = 'room/assignStudent/$1';
 $route['manager'] = 'index/getManagersList';
 
 $route['student'] = 'student/index';
-$route['student/profile/(:num)'] = 'student/profile/$1';
+$route['profile/(:num)'] = 'student/profile/$1';
 
 $route['form'] = 'register/index';

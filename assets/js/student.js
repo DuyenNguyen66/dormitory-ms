@@ -19,3 +19,48 @@ function loadRoom(building_id, floor_id) {
 			});
 	});
 }
+
+var date = new Date();
+var d = date.getDate();
+var m = date.getMonth();
+var y = date.getFullYear();
+
+var calendar =  $('#calendar').fullCalendar({
+	header: {
+		left: 'title',
+		center: 'agendaDay,agendaWeek,month',
+		right: 'prev,next today'
+	},
+	firstDay: 1, 
+	defaultView: 'month',
+
+	axisFormat: 'h:mm',
+	columnFormat: {
+		month: 'ddd',   
+		week: 'ddd d', 
+		day: 'dddd M/d',  
+		agendaDay: 'dddd d'
+	},
+	titleFormat: {
+		month: 'MMMM yyyy', 
+		week: "MMMM yyyy", 
+		day: 'MMMM yyyy'  
+	},
+	allDaySlot: false,
+	selectHelper: true,
+	select: function(start, end, allDay) {
+		var title = prompt('Event Title:');
+		if (title) {
+			calendar.fullCalendar('renderEvent',
+			{
+				title: title,
+				start: start,
+				end: end,
+				allDay: allDay
+			},
+			true
+			);
+		}
+		calendar.fullCalendar('unselect');
+	}
+});

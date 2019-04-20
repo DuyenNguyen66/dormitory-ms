@@ -163,8 +163,8 @@ File: Components
 .btn-inverse:focus,
 .btn-inverse:hover,
 .open > .dropdown-toggle.btn-inverse {
-  background-color: #4c5667 !important;
-  border: 1px solid #4c5667 !important;
+  background-color: #456841  !important;
+  border: 1px solid #456841  !important;
   color: #ffffff;
 }
 .btn-purple,
@@ -214,7 +214,7 @@ File: Components
   color: #f05050 !important;
 }
 .btn-custom.btn-inverse {
-  color: #4c5667 !important;
+  color: #456841  !important;
 }
 .btn-custom.btn-purple {
   color: #7266ba !important;

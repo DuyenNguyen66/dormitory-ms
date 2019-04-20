@@ -86,4 +86,31 @@ class Student_model extends CI_Model {
 		$query = $this->db->get($this->table);
 		return $query->first_row('array');
 	}
+
+	public function getClass($id) {
+		$this->db->select('c.name');
+		$this->db->from('student s');
+		$this->db->join('class c', 's.class_id = c.class_id');
+		$this->db->where('student_id', $id);
+		$query = $this->db->get();
+		return $query->first_row('array');
+	}
+
+	public function getReligion($id) {
+		$this->db->select('r.name');
+		$this->db->from('student s');
+		$this->db->join('religion r', 's.religion_id = r.religion_id');
+		$this->db->where('student_id', $id);
+		$query = $this->db->get();
+		return $query->first_row('array');
+	}
+
+	public function getEthnic($id) {
+		$this->db->select('e.name');
+		$this->db->from('student s');
+		$this->db->join('ethnic e', 's.ethnic_id = e.ethnic_id');
+		$this->db->where('student_id', $id);
+		$query = $this->db->get();
+		return $query->first_row('array');
+	}
 }

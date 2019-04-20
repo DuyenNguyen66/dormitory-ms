@@ -78,21 +78,21 @@
 	                </div>
 	            </div>
                 <div class="row">
-	                <div class="col-md-6 form-group">
-	                	<label>Nation</label>
-	                	<select class="form-control" name="nation_id" required="">
-	                		<option value="">Select Nation</option>
-	                		<?php foreach($nations as $nation):?>
-	                		<option value="<?php echo $nation['nation_id'] ?>"><?php echo $nation['name'] ?></option>
-	                		<?php endforeach;?>
-	                	</select>
-	                </div>
-	                <div class="col-md-6 form-group">
+                	<div class="col-md-6 form-group">
 	                	<label>Ethnic</label>
 	                	<select class="form-control" name="ethnic_id" required="">
 	                		<option value="">Select Ethnic</option>
 	                		<?php foreach($ethnics as $ethnic):?>
 	                		<option value="<?php echo $ethnic['ethnic_id'] ?>"><?php echo $ethnic['name'] ?></option>
+	                		<?php endforeach;?>
+	                	</select>
+	                </div>
+	                <div class="col-md-6 form-group">
+	                	<label>Religion</label>
+	                	<select class="form-control" name="nation_id" required="">
+	                		<option value="">Select Religion</option>
+	                		<?php foreach($religions as $religion):?>
+	                		<option value="<?php echo $religion['religion_id'] ?>"><?php echo $religion['name'] ?></option>
 	                		<?php endforeach;?>
 	                	</select>
 	                </div>

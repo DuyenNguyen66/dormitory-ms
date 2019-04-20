@@ -70,4 +70,6 @@ class Room extends CI_Controller {
 		$data['content'] = $content;
 		$this->load->view('admin_main_layout', $data);
 	}
+
+	
 }

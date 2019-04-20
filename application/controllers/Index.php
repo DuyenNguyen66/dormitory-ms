@@ -7,9 +7,10 @@ class Index extends CI_Controller {
 		parent::__construct();
 		$this->load->model('student_model');
 		$this->load->model('class_model');
-		$this->load->model('Na_Et_model');
+		$this->load->model('Re_Et_model');
 		$this->load->model('floor_model');
 		$this->load->model('building_model');
+		$this->load->model('term_model');
 	}
 
 	public function index() {
@@ -17,11 +18,31 @@ class Index extends CI_Controller {
 		if($account == null) {
 			redirect('login');
 		}
+		$student = $this->student_model->getStudentByEmail($account['email']);
+		$class = $this->student_model->getClass($student['student_id']);
+		$student['class'] = $class['name'];
+		$religion = $this->student_model->getReligion($student['student_id']);
+		$student['religion'] = $religion['name'];
+		$ethnic = $this->student_model->getEthnic($student['student_id']);
+		$student['ethnic'] = $ethnic['name'];
+		$term = $this->term_model->getCurrentTerm();
+
+		if($student['status'] == 0) {
+			$this->session->set_flashdata('mess', 'Your account has not been verified.');
+		}
+		$params = array(
+			'student' => $student, 
+			'term' => $term
+		);
+		$content = $this->load->view('dashboard', $params, true);
+
 		$data = array();
+		$data['customCss'] = array('assets/css/settings.css', 'assets/css/fullcalendar.css', 'assets/css/fullcalendar.print.css');
+		$data['customJs'] = array('assets/js/jquery-ui.custom.min.js', 'assets/js/fullcalendar.js', 'assets/js/student.js');
 		$data['parent_id'] = 10;
 		$data['sub_id'] = 0;
 		$data['group'] = $account['group'];
-		$data['content'] = $this->load->view('dashboard', array(), true);
+		$data['content'] = $content;
 		$this->load->view('admin_main_layout', $data);
 	}
 
@@ -42,10 +63,15 @@ class Index extends CI_Controller {
 		$this->load->view('login');
 	}
 
+	public function logout() {
+		$this->session->unset_userdata('student');
+		redirect('login');
+	}
+
 	public function register () {
 		$data['classes'] = $this->class_model->getAll();
-		$data['nations'] = $this->Na_Et_model->getAllNations();
-		$data['ethnics'] = $this->Na_Et_model->getAllEthnic();
+		$data['religions'] = $this->Re_Et_model->getAllReligions();
+		$data['ethnics'] = $this->Re_Et_model->getAllEthnic();
 		$cmd = $this->input->post("cmd");
 		if ($cmd != '') {
 			$params['full_name'] = $this->input->post('name');

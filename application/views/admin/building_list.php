@@ -9,15 +9,36 @@
 <div class="row card-box"> 
     <div class="tab-content">
         <div id="list" class="tab-pane fade in active">
+            <?php if($this->session->flashdata('error')): ?>
+            <div class="col-md-6">
+                <div class="alert alert-danger">
+                    <?php echo $this->session->flashdata('error') ?>
+                </div>
+            </div>
+            <?php elseif($this->session->flashdata('error1')):?>
+            <div class="col-md-6">
+                <div class="alert alert-danger">
+                    <?php echo $this->session->flashdata('error1') ?>
+                </div>
+            </div>
+            <?php elseif($this->session->flashdata('success')):?>
+            <div class="col-md-6">
+                <div class="alert alert-success">
+                    <?php echo $this->session->flashdata('success') ?>
+                </div>
+            </div>
+            <?php endif;?>
             <div class="col-xs-12">
                 <div class="table-responsive">
-                	<table id="example3" class="table table-bordered table-hover">
+                	<table id="example3" class="table table-hover">
                 		<thead>
                 			<tr>
                 				<th>Image</th>
                                 <th>ID</th>
                                 <th>Building Name</th>
-                				<th>Number of Floors</th>
+                                <th># of Floors</th>
+                				<th># of Rooms</th>
+                                <th>Address</th>
                 				<th>Actions</th>
                 			</tr>
                 		</thead>
@@ -31,12 +52,14 @@
                 						<td><img style="max-width: 70px;max-height:70px;border-radius:5px" src="<?= $row['image']?>"/></td>
                                         <td><?php echo $row['building_id'] ?></td>
                                         <td><?php echo $row['name']?></td>
-                						<td><?php echo $row['total_floors'] ?></td>
+                                        <td><?php echo $row['total_floor'] ?></td>
+                						<td><?php echo $row['total_room'] ?></td>
+                                        <td><?php echo $row['address']?></td>
                 						<td>
                 							<div class="dropdown">
                 								<span class="btnAction dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-ellipsis-v"></i></span>
                 								<ul class="dropdown-menu" id="customDropdown">
-                									<li><a href="<?php echo base_url('building/edit/' . $row['building_id'])?>">Edit</a></li>
+                                                    <li><a href="<?php echo base_url('building/edit/' . $row['building_id'])?>">Edit</a></li>
                 								</ul>
                 							</div>
                 						</td>
@@ -54,27 +77,35 @@
             <form action='' method='POST' enctype="multipart/form-data">
                 <div class="row">
                     <!-- left column -->
-                    <div class="col-md-6 card-box">
+                    <div class="card-box">
                         <!-- general form elements -->
-                        <div class="box-body">
-                            <div class="form-group">                       
-                                <label>Name</label>                        
-                                <input type="text" name='name_building' required class="form-control" placeholder="Type building name" />
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-12">Image</label>
-                                <div class="col-md-4">
-                                    <img id='image' width='120' height='120' style='border: 4px solid #c6c6c6; border-radius: 4px'/>
+                        <div class="row box-body">
+                            <div class="col-md-7">
+                                <div class="form-group">                       
+                                    <label>Name</label>                        
+                                    <input type="text" name='name_building' required class="form-control" placeholder="Type building name" />
                                 </div>
-                                <div class="col-md-8">
-                                    <div class="" onclick="$('#imagePhoto').click()">
-                                        <input type="file" accept="image/*" name="image" id="imagePhoto"/>
+                                <div class="form-group">                       
+                                    <label>Address</label>                        
+                                    <input type="text" name='address' required class="form-control" placeholder="Type address" />
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group row">
+                                    <label class="col-md-12">Image</label>
+                                    <div class="col-md-4">
+                                        <img id='image' width='120' height='120' style='border: 4px solid #c6c6c6; border-radius: 4px'/>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="" onclick="$('#imagePhoto').click()">
+                                            <input type="file" accept="image/*" name="image" id="imagePhoto"/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group m-b-0">
-                                <button type="submit" class="btn btn-inverse btn-custom" name='cmd1' value='Save'>Save</button>
-                            </div>
+                        </div>
+                        <div class="form-group m-b-0">
+                            <button type="submit" class="btn btn-inverse btn-custom" name='cmd1' value='Save'>Save</button>
                         </div>
                     </div>
                 </div>

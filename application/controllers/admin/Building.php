@@ -19,6 +19,7 @@ class Building extends CI_Controller {
 		$cmd2 = $this->input->post('cmd2');
 		if ($cmd1 != null) {
 			$params['name'] = $this->input->post('name_building');
+			$params['address'] = $this->input->post('address');
 			$image = isset($_FILES['image']) ? $_FILES['image'] : null;
 			$this->load->model('file_model');
 			if ($image != null && $image['error'] == 0) {
@@ -27,7 +28,7 @@ class Building extends CI_Controller {
 				$params['image'] = $path;
 			}
 			$this->building_model->add($params);
-			$this->redirect('building');
+			redirect('building');
 		} 
 		if($cmd2 != null) {
 			$params['name'] = $this->input->post('name_floor');
@@ -57,4 +58,51 @@ class Building extends CI_Controller {
 		);
 		echo $this->load->view('admin/floor_select', $params, true);
 	}
+
+	public function edit($building_id) {
+		$data['building'] = $this->building_model->getById($building_id);
+		$cmd = $this->input->post('cmd');
+		if($cmd != null)
+		{
+			$params['name'] = $this->input->post('name_building');
+			$params['address'] = $this->input->post('address');
+			$image = isset($_FILES['image']) ? $_FILES['image'] : null;
+			$this->load->model('file_model');
+			if ($image != null && $image['error'] == 0) {
+				$path = $this->file_model->createFileName($image, 'media/building/', 'building');
+				$this->file_model->saveFile($image, $path);
+				$params['image'] = $path;
+			}
+			$this->building_model->edit($building_id, $params);
+			redirect('building');
+		}
+		$content = $this->load->view('admin/building_edit', $data, true);
+
+		$data = array();
+		$data['customCss'] = array('assets/css/settings.css');
+		$data['customJs'] = array('assets/js/settings.js');
+		$data['parent_id'] = 2;
+		$data['sub_id'] = 21;
+		$data['content'] = $content;
+		$this->load->view('admin_main_layout', $data);
+	}
+
+	// public function delete($building_id) {
+	// 	$building = $this->building_model->getById($building_id);
+	// 	$num_rooms = $this->building_model->countRoom($building_id);
+	// 	if($building == null) 
+	// 	{
+	// 		$this->session->set_flashdata('error', 'Building is not exist.');
+	// 		redirect('building');
+	// 	}else if($num_rooms != 0) 
+	// 	{
+	// 		$this->session->set_flashdata('error1', 'Building is in use.');
+	// 		redirect('building');
+	// 	}else
+	// 	{
+	// 		$this->building_model->delete($building_id);
+	// 		$this->session->set_flashdata('success', 'Delete successful.');
+	// 		redirect('building');
+	// 	}
+	// }
 }

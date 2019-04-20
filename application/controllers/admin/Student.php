@@ -19,7 +19,7 @@ class Student extends CI_Controller {
 		$data['customCss'] = array('assets/css/settings.css');
 		$data['customJs'] = array('assets/js/settings.js');
 		$data['parent_id'] = 5;
-		$data['sub_id'] = 0;
+		$data['sub_id'] = 51;
 		$data['content'] = $content;
 		$this->load->view('admin_main_layout', $data);
 	}

@@ -1,13 +1,13 @@
 <?php
 
-class Na_Et_model extends CI_Model {
+class Re_Et_model extends CI_Model {
 
 	public function __construct() {
 		parent::__construct();
 	}
 
-	public function getAllNations() {
-		$query = $this->db->get('nation');
+	public function getAllReligions() {
+		$query = $this->db->get('religion');
 		return $query->result_array();
 	}
 

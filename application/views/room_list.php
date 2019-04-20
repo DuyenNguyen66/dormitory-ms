@@ -1,7 +1,6 @@
 <div class="col-xs-12" style="margin: 20px 0">
     <h3 class="header-title">Registration</h3>
     <button class="btn btn-success" style="margin: 20px 0 20px 20px">Term <?php echo $term['name']?></button>
-    
 </div>
 
 <div class="row card-box"> 

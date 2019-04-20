@@ -27,7 +27,7 @@
             <div class="dropdown">
                 <span class="btnAction dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-ellipsis-v"></i></span>
                 <ul class="dropdown-menu" id="customDropdown">
-                    <li><a href="<?php echo base_url('student/profile/'. $row['student_id'])?>">View Profile</a></li>
+                    <li><a href="<?php echo base_url('profile/'. $row['student_id'])?>">View Profile</a></li>
                     <?php if($row['status'] == 0 ): ?>
                     <li><a href="">Verify</a></li>
                     <?php else:?>

@@ -62,7 +62,6 @@
 									<i class="fa fa-cog"></i>
 								</a>
 								<ul class="dropdown-menu">
-									
 									<li><a href="<?php echo base_url('logout'); ?>"><i class="ti-power-off m-r-5"></i> Logout</a></li>
 								</ul>
 							</li>
@@ -134,11 +133,17 @@
 						<li>
 							<a href="<?php echo base_url('manager'); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 4 ? ' active' : ''; ?>"><i class="fa fa-industry"></i> <span>Officers</span></a>
 						</li>
-						<li>
-							<a href="<?php echo base_url('student'); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 5 ? ' active' : ''; ?>"><i class="fa fa-male"></i> <span>Students</span></a>
-						</li>
-						<li>
-							<a href="<?php echo base_url('form'); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 6 ? ' active' : ''; ?>"><i class="fa fa-male"></i> <span>Registration Form</span></a>
+						<li class="has_sub">
+							<a href="#" class="waves-effect<?php echo isset($parent_id) && $parent_id == 5 ? ' active' : ''; ?>"> <i class="fa fa-leaf"></i> <span>Students</span> </a>
+							<ul class="list-unstyled">
+								<li <?php echo($sub_id == 51 ? 'class="active"' : ''); ?>>
+									<a href="<?php echo base_url('student'); ?>"><span>Students List</span></a>
+								</li>
+								<li <?php echo($sub_id == 52 ? 'class="active"' : ''); ?>>
+									<a href="<?php echo base_url('form'); ?>">Registration Form</a>
+								</li>
+								
+							</ul>
 						</li>
 					<?php endif;?>
 				</ul>

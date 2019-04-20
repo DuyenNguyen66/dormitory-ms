@@ -20,10 +20,23 @@ class Register extends CI_Controller {
 
 		$data = array();
 		$data['customCss'] = array('assets/css/settings.css');
-		$data['customJs'] = array('assets/js/student.js');
-		$data['parent_id'] = 6;
-		$data['sub_id'] = 0;
+		$data['customJs'] = array('assets/js/settings.js');
+		$data['parent_id'] = 5;
+		$data['sub_id'] = 52;
 		$data['content'] = $content;
 		$this->load->view('admin_main_layout', $data);
+	}
+
+	public function confirm($form_id) {
+		$params['confirmed'] = time();
+		$params['status'] = 1;
+		$this->registration_model->update($form_id, $params);
+		return redirect('form');
+	}
+
+	public function disable($form_id) {
+		$params['status'] = 0;
+		$this->registration_model->update($form_id, $params);
+		return redirect('form');
 	}
 }

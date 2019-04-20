@@ -65,4 +65,9 @@ class Registration_model extends CI_Model {
 		$query = $this->db->get();
 		return $query->result_array();
 	}
+
+	public function update($id, $params) {
+		$this->db->where('id', $id);
+		$this->db->update($this->table, $params);
+	}
 }	

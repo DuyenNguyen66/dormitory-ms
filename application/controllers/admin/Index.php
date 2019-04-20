@@ -33,15 +33,15 @@ class Index extends Base_Controller {
 			if($month >= 9 && $month <= 12 || $month == 1)
 			{
 				$term = implode('', array($arr[2], 1));
-				// print_r($term);die();
 			}else
 			{
 				$term = implode('', array($arr[2] - 1 , 2));
 			}
-			$term = $this->term_model->checkTerm($term);
-			if($term == null)
+			$check = $this->term_model->checkTerm($term);
+			if($check == null)
 			{
-				$this->term_model->add($term);
+				$params['name'] = $term;
+				$this->term_model->add($params);
 			}
 		}
 	}
@@ -70,7 +70,6 @@ class Index extends Base_Controller {
 	
 	public function logout() {
 		$this->session->unset_userdata('admin');
-		$this->session->unset_userdata('lockdata');
 		redirect(base_url('login'));
 	}
 

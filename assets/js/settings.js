@@ -48,6 +48,14 @@ $('.status').change(function(){
 	});
 });
 	
+$('#confirm_btn').click(function(){
+	var form_id = $(this).attr('data-id');
+	console.log(form_id);
+	$.get('confirm', {form_id:form_id}, function(data){
+
+	});
+})
+
 
 
 
