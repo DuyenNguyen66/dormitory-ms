@@ -12,6 +12,12 @@
 .btn-export button a {
     color: #FFFFFF;
 }
+button a {
+    color: #456841;
+}
+.btn-custom:hover a {
+    color: #FFFFFF;
+}
 #upload-img {
     margin-left: 60px; 
 }
@@ -173,12 +179,12 @@ hr {
     text-transform: uppercase;
     font-size: 13px;
 }
-#example3_length {
+#example3_length, #example4_length {
     float: right;
     margin-left: 4em;
     margin-top: 2em;
 }
-#example3_paginate {
+#example3_paginate, #example4_paginate {
     margin-top: 2em;
 }
 .statusSelect {
@@ -192,8 +198,7 @@ hr {
     float: left;
     background: #60c74f;
     border-radius: 20px;
-    margin-right: 93px;
-    margin-top: 50px;
+    margin: 50px 93px 20px;
     opacity: unset;
 }
 .room h4, .room1 h4, .room2 h4 {
@@ -211,25 +216,26 @@ hr {
     cursor: not-allowed;
 }
 .tooltip {
-  position: relative;
-  display: inline-block;
+    position: relative;
+    display: inline-block;
 }
 
 .tooltip .tooltiptext {
-  visibility: hidden;
-  width: 120px;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-  position: absolute;
-  z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -60px;
-  opacity: 0;
-  transition: opacity 0.3s;
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    margin-bottom: -13px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
 }
 
 .tooltip .tooltiptext::after {
@@ -252,5 +258,5 @@ hr {
 
 .card-box label {
     padding-bottom: 10px;
-    margin-left: 10px;
+    /*margin-left: 10px;*/
 }

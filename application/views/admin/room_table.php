@@ -69,9 +69,4 @@
             'dom' : 'frtlp'
         });
     });
-    $('#editBtn').click(function(){
-        var room_id = $(this).attr('data-id');
-        var name = $(this).attr('data-name');
-        $('#name').append(name);
-    });
 </script>

@@ -57,10 +57,9 @@ class Registration_model extends CI_Model {
 	}
 
 	public function getRoommates($term_id, $room_id) {
-		$this->db->select('s.full_name, s.email, s.phone, c.name as class');
+		$this->db->select('s.full_name, s.email, s.phone');
 		$this->db->from('registration rg');
 		$this->db->join('student s', 'rg.student_id = s.student_id');
-		$this->db->join('class c', 's.class_id = c.class_id');
 		$this->db->where(array('term_id' => $term_id, 'room_id' => $room_id));
 		$query = $this->db->get();
 		return $query->result_array();

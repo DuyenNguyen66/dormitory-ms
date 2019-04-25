@@ -56,12 +56,9 @@
                 						<td><?php echo $row['total_room'] ?></td>
                                         <td><?php echo $row['address']?></td>
                 						<td>
-                							<div class="dropdown">
-                								<span class="btnAction dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-ellipsis-v"></i></span>
-                								<ul class="dropdown-menu" id="customDropdown">
-                                                    <li><a href="<?php echo base_url('building/edit/' . $row['building_id'])?>">Edit</a></li>
-                								</ul>
-                							</div>
+                                            <button type="button" class="btn btn-inverse btn-custom btn-xs">
+                                                <a href="<?php echo base_url('building/edit/' . $row['building_id'])?>">Edit</a>
+                                            </button>
                 						</td>
                 					</tr>
                 					<?php 

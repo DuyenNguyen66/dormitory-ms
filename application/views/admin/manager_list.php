@@ -15,7 +15,7 @@
 	                    	<?php echo $this->session->flashdata('error')?>
 	                    </div>
 	                <?php endif;?>
-                	<table id="example3" class="table table-bordered table-hover">
+                	<table id="example3" class="table table-hover">
                 		<thead>
                 			<tr>
                 				<th>Image</th>
@@ -24,8 +24,8 @@
                 				<th>Email</th>
                 				<th>Position</th>
                 				<th>Assigned to #</th>
-                				<th>Status</th>
                 				<th>Created</th>
+                                <th>Status</th>
                 				<th>Actions</th>
                 			</tr>
                 		</thead>
@@ -41,15 +41,19 @@
                 						<td><?php echo $row['full_name']?></td>
                 						<td><?php echo $row['email']?></td>
                 						<td><?php echo $row['position_name']?></td>
-                						<td><?php echo ($row['building_name'] != null) ? $row['building_name'] : 'N/A' ?></td>
-                						<td><?php echo $row['status'] == 0 ? '' : 'Verified'?></td>
+                                        <td><?php echo ($row['building_name'] != null) ? $row['building_name'] : 'N/A' ?></td>
                 						<td><?php echo date('d/m/Y h:iA', $row['created'])?></td>
+                                        <td><?php echo $row['status'] == 0 ? '<a class="btn btn-warning btn-xs">Inactive</a>' : '<a class="btn btn-success btn-xs">Active</a>'?></td>
                 						<td>
                 							<div class="dropdown">
                 								<span class="btnAction dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-ellipsis-v"></i></span>
                 								<ul class="dropdown-menu" id="customDropdown">
                 									<li><a href="">Edit</a></li>
-                									<li><a href="">Verify</a></li>
+                                                    <?php if($row['status'] == 0):?>
+                									<li><a href="<?php echo base_url('index/enable/' . $row['admin_id'])?>">Activate</a></li>
+                                                    <?php else:?>
+                                                    <li><a href="<?php echo base_url('index/disable/' . $row['admin_id'])?>">Deactive</a></li>
+                                                    <?php endif;?>
                 									<li><a href="">Delete</a></li>
                 								</ul>
                 							</div>
@@ -76,7 +80,7 @@
                         		<select class="major_id form-control" name="manager_id" required="">
                         			<option value="">Select Manager</option>
                         			<?php foreach($managerOthers as $manager):?>
-                        				<option value="<?php echo $manager['admin_id']?>"><?php echo $manager['full_name']?></option>
+                        				<option value="<?php echo $manager['admin_id']?>"><?php echo $manager['full_name']?> - <?php echo $manager['position']?></option>
                         			<?php endforeach; ?>
                         		</select>                    
                         	</div>

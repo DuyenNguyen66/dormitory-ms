@@ -35,6 +35,7 @@ $('.major_id').change(function(){
 });
 
 var stt = $('select option:selected').val();
+console.log(stt);
 function loadData(stt){
     $.get("student/getStudentsByStatus", {status:stt}, function(data){
         $('#student_table').html(data);

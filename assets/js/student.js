@@ -4,7 +4,7 @@ $('.building_id').change(function(){
 		$('.floor_id').html(data);
 		$('.floor_id').change(function(){
 			var floor_id = $(this).val();
-			$.get('register/getRoomByFloor', {building_id:building_id,floor_id:floor_id}, function(data){
+			$.get('register/getRoomByFloor', {floor_id:floor_id}, function(data){
 				$('#room_table').html(data);
 			});
 		});
@@ -14,7 +14,7 @@ $('.building_id').change(function(){
 function loadRoom(building_id, floor_id) {
 	$.get('register/getFloorByBuilding', {building_id:building_id},function(data){
 		$('.floor_id').html(data);
-			$.get('register/getRoomByFloor', {building_id:building_id,floor_id:floor_id}, function(data){
+			$.get('register/getRoomByFloor', {floor_id:floor_id}, function(data){
 				$('#room_table').html(data);
 			});
 	});
@@ -42,7 +42,7 @@ var calendar =  $('#calendar').fullCalendar({
 		agendaDay: 'dddd d'
 	},
 	titleFormat: {
-		month: 'MMMM yyyy', 
+		month: 'MMM yyyy', 
 		week: "MMMM yyyy", 
 		day: 'MMMM yyyy'  
 	},
@@ -64,3 +64,5 @@ var calendar =  $('#calendar').fullCalendar({
 		calendar.fullCalendar('unselect');
 	}
 });
+
+$('.tooltiptext').tooltip({placement: "bottom"});

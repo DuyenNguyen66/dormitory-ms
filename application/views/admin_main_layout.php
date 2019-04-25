@@ -25,7 +25,6 @@
 		}
 	}
 	?>
-	<script src="<?php echo base_url('assets/js/modernizr.min.js'); ?>"></script>
 
 </head>
 
@@ -83,7 +82,84 @@
 			<!--- Divider -->
 			<div id="sidebar-menu">
 				<ul>
-					<?php if(isset($group) && $group == 3):?>
+					<!-- Admin -->
+					<?php if(isset($group) && $group == 1):?>
+						<li>
+							<a href="<?php echo base_url(''); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 1 ? ' active' : ''; ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+						</li>
+						<li class="has_sub">
+							<a href="#" class="waves-effect<?php echo isset($parent_id) && $parent_id == 5 ? ' active' : ''; ?>"> <i class="fa fa-leaf"></i> <span>Students</span> </a>
+							<ul class="list-unstyled">
+								<li <?php echo($sub_id == 51 ? 'class="active"' : ''); ?>>
+									<a href="<?php echo base_url('student'); ?>"><span>Students List</span></a>
+								</li>
+								<li <?php echo($sub_id == 52 ? 'class="active"' : ''); ?>>
+									<a href="<?php echo base_url('form'); ?>">Registration Form</a>
+								</li>
+								
+							</ul>
+						</li>
+						<li class="has_sub">
+							<a href="#" class="waves-effect<?php echo isset($parent_id) && $parent_id == 6 ? ' active' : ''; ?>"> <i class="fa fa-leaf"></i> <span>Price List</span> </a>
+							<ul class="list-unstyled">
+								<li <?php echo($sub_id == 61 ? 'class="active"' : ''); ?>>
+									<a href="<?php echo base_url('electricity-price'); ?>"><span>Electricity</span></a>
+								</li>
+								<li <?php echo($sub_id == 62 ? 'class="active"' : ''); ?>>
+									<a href="<?php echo base_url('water-price'); ?>">Water</a>
+								</li>
+								
+							</ul>
+						</li>
+						<li class="has_sub">
+							<a href="#" class="waves-effect<?php echo isset($parent_id) && $parent_id == 2 ? ' active' : ''; ?>"> <i class="fa fa-leaf"></i> <span>Dormitory Facility</span> </a>
+							<ul class="list-unstyled">
+								<li <?php echo($sub_id == 21 ? 'class="active"' : ''); ?>>
+									<a href="<?php echo base_url('building'); ?>">Buildings</a>
+								</li>
+								<li <?php echo($sub_id == 22 ? 'class="active"' : ''); ?>>
+									<a href="<?php echo base_url('room'); ?>">Rooms</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="<?php echo base_url('manager'); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 4 ? ' active' : ''; ?>"><i class="fa fa-industry"></i> <span>Officers</span></a>
+						</li>
+						<!--  -->
+						
+					<!-- Manager -->
+					<?php elseif(isset($group) && $group == 2):?>
+						<li>
+							<a href="<?php echo base_url('dashboard-m'); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 7 ? ' active' : ''; ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+						</li>
+						<li class="has_sub">
+							<a href="#" class="waves-effect<?php echo isset($parent_id) && $parent_id == 5 ? ' active' : ''; ?>"> <i class="fa fa-leaf"></i> <span>Students</span> </a>
+							<ul class="list-unstyled">
+								<li <?php echo($sub_id == 51 ? 'class="active"' : ''); ?>>
+									<a href="<?php echo base_url('student'); ?>"><span>Students List</span></a>
+								</li>
+								<li <?php echo($sub_id == 52 ? 'class="active"' : ''); ?>>
+									<a href="<?php echo base_url('form'); ?>">Registration Form</a>
+								</li>
+								
+							</ul>
+						</li>
+						<li class="has_sub">
+							<a href="#" class="waves-effect<?php echo isset($parent_id) && $parent_id == 8 ? ' active' : ''; ?>"> <i class="fa fa-leaf"></i> <span>Payment</span> </a>
+							<ul class="list-unstyled">
+								<li <?php echo($sub_id == 81 ? 'class="active"' : ''); ?>>
+									<a href="<?php echo base_url('electricity-bill'); ?>"><span>Electricity Bills</span></a>
+								</li>
+								<li <?php echo($sub_id == 82 ? 'class="active"' : ''); ?>>
+									<a href="<?php echo base_url('water-bill'); ?>"><span>Water Bills</span></a>
+								</li>
+								<li <?php echo($sub_id == 83 ? 'class="active"' : ''); ?>>
+									<a href="<?php echo base_url('room-bill'); ?>"><span>Room Bills</span></a>
+								</li>
+							</ul>
+						</li>
+					<!-- Student -->
+					<?php elseif(isset($group) && $group == 3):?>
 						<li>
 							<a href="<?php echo base_url(''); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 10 ? ' active' : ''; ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
 						</li>
@@ -99,50 +175,6 @@
 								<li <?php echo($sub_id == 14 ? 'class="active"' : ''); ?>>
 									<a href="<?php echo base_url('roommate-list'); ?>">View Roommates</a>
 								</li>
-							</ul>
-						</li>
-					<?php else:?>
-						<li>
-							<a href="<?php echo base_url(''); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 1 ? ' active' : ''; ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
-						</li>
-						<li class="has_sub">
-							<a href="#" class="waves-effect<?php echo isset($parent_id) && $parent_id == 2 ? ' active' : ''; ?>"> <i class="fa fa-leaf"></i> <span>Dormitory Facility</span> </a>
-							<ul class="list-unstyled">
-								<li <?php echo($sub_id == 21 ? 'class="active"' : ''); ?>>
-									<a href="<?php echo base_url('building'); ?>">Buildings</a>
-								</li>
-								<li <?php echo($sub_id == 22 ? 'class="active"' : ''); ?>>
-									<a href="<?php echo base_url('room'); ?>">Rooms</a>
-								</li>
-							</ul>
-						</li>
-						<li class="has_sub">
-							<a href="#" class="waves-effect<?php echo isset($parent_id) && $parent_id == 3 ? ' active' : ''; ?>"> <i class="fa fa-leaf"></i> <span>University</span> </a>
-							<ul class="list-unstyled">
-								<li <?php echo($sub_id == 31 ? 'class="active"' : ''); ?>>
-									<a href="<?php echo base_url('major'); ?>"><span>Majors</span></a>
-								</li>
-								<li <?php echo($sub_id == 32 ? 'class="active"' : ''); ?>>
-									<a href="<?php echo base_url('course'); ?>">Courses</a>
-								</li>
-								<li <?php echo($sub_id == 33 ? 'class="active"' : ''); ?>>
-									<a href="<?php echo base_url('classes'); ?>">Classes</a>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<a href="<?php echo base_url('manager'); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 4 ? ' active' : ''; ?>"><i class="fa fa-industry"></i> <span>Officers</span></a>
-						</li>
-						<li class="has_sub">
-							<a href="#" class="waves-effect<?php echo isset($parent_id) && $parent_id == 5 ? ' active' : ''; ?>"> <i class="fa fa-leaf"></i> <span>Students</span> </a>
-							<ul class="list-unstyled">
-								<li <?php echo($sub_id == 51 ? 'class="active"' : ''); ?>>
-									<a href="<?php echo base_url('student'); ?>"><span>Students List</span></a>
-								</li>
-								<li <?php echo($sub_id == 52 ? 'class="active"' : ''); ?>>
-									<a href="<?php echo base_url('form'); ?>">Registration Form</a>
-								</li>
-								
 							</ul>
 						</li>
 					<?php endif;?>
@@ -211,6 +243,10 @@ if (isset($customJs) && is_array($customJs)) {
 <script>
 	$('#example3').DataTable({
 		'ordering': false,
+        'dom' : 'frtlp'
+	});
+	$('#example4').DataTable({
+		'ordering': true,
         'dom' : 'frtlp'
 	});
 </script>

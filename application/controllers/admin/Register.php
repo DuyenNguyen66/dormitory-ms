@@ -5,6 +5,7 @@ class Register extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('registration_model');
+		$this->load->model('admin_model');
 	}
 
 	public function index() {
@@ -12,6 +13,7 @@ class Register extends CI_Controller {
 		if($account == null) {
 			redirect('login');
 		}
+		$admin = $this->admin_model->getAccountByEmail($account['email']);
 		$forms = $this->registration_model->getAll();
 		$layoutParams = array(
 			'forms' => $forms,
@@ -23,6 +25,7 @@ class Register extends CI_Controller {
 		$data['customJs'] = array('assets/js/settings.js');
 		$data['parent_id'] = 5;
 		$data['sub_id'] = 52;
+		$data['group'] = $admin['position_id'] == 1 || $admin['position_id'] == 2 ? 1 : 2;
 		$data['content'] = $content;
 		$this->load->view('admin_main_layout', $data);
 	}

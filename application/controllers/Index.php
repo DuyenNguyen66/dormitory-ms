@@ -6,7 +6,6 @@ class Index extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('student_model');
-		$this->load->model('class_model');
 		$this->load->model('Re_Et_model');
 		$this->load->model('floor_model');
 		$this->load->model('building_model');
@@ -19,8 +18,6 @@ class Index extends CI_Controller {
 			redirect('login');
 		}
 		$student = $this->student_model->getStudentByEmail($account['email']);
-		$class = $this->student_model->getClass($student['student_id']);
-		$student['class'] = $class['name'];
 		$religion = $this->student_model->getReligion($student['student_id']);
 		$student['religion'] = $religion['name'];
 		$ethnic = $this->student_model->getEthnic($student['student_id']);
@@ -54,7 +51,7 @@ class Index extends CI_Controller {
 			$account = $this->student_model->checkAccount($params['email'], $params['password']);
 			if($account != null) {
 				$this->session->set_userdata('student', array('email' => $account['email'], 'group' => 3));
-				redirect('dashboard');
+				redirect('dashboard-a');
 			}else {
 				$this->session->set_flashdata('error', 'ERROR. Account does not exist.');
 				$this->load->view('login');
@@ -82,7 +79,6 @@ class Index extends CI_Controller {
 			$params['address'] = $this->input->post('address');
 			$params['gender'] = $this->input->post('gender');
 			$params['birthday'] = strtotime($this->input->post('birthday'));
-			$params['class_id'] = $this->input->post('class_id');
 			$params['nation_id'] = $this->input->post('nation_id');
 			$params['ethnic_id'] = $this->input->post('ethnic_id');
 

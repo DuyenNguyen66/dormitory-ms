@@ -49,8 +49,8 @@
                                         <td><?php echo $row['floor_name']?></td>
                                         <td><?php echo $row['build_name']?></td>
                 						<td><?php echo date('d/m/Y h:iA', $row['registed']) ?></td>
-                						<td><?php echo $row['confirmed'] == null ? '<button class="btn btn-warning">Not confirmed yet</button>' : date('d/m/Y h:iA', $row['confirmed']) ?></td>
-                						<td><?php echo $row['status'] == 0 ? '<button class="btn btn-warning">Inactive</button>' : '<button class="btn btn-success">Active</button>' ?></td>
+                						<td><?php echo $row['confirmed'] == null ? '<button class="btn btn-warning btn-xs">Not confirmed yet</button>' : date('d/m/Y h:iA', $row['confirmed']) ?></td>
+                						<td><?php echo $row['status'] == 0 ? '<button class="btn btn-warning btn-xs">Inactive</button>' : '<button class="btn btn-success btn-xs">Active</button>' ?></td>
                 					</tr>
                 					<?php 
                 				endforeach;

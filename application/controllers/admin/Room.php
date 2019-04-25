@@ -8,6 +8,7 @@ class Room extends CI_Controller {
 		$this->load->model('floor_model');
 		$this->load->model('building_model');
 		$this->load->model('student_model');
+		$this->load->model('admin_model');
 	}
 
 	public function index() {
@@ -16,6 +17,7 @@ class Room extends CI_Controller {
 		{
 			redirect('login');
 		}
+		$admin = $this->admin_model->getAccountByEmail($account['email']);
 		$rooms = $this->room_model->getAll();
 		$floors = $this->floor_model->getAll();
 		$buildings = $this->building_model->getAll();
@@ -40,6 +42,7 @@ class Room extends CI_Controller {
 		$data['customJs'] = array('assets/js/settings.js');
 		$data['parent_id'] = 2;
 		$data['sub_id'] = 22;
+		$data['group'] = $admin['position_id'] == 1 || $admin['position_id'] == 2 ? 1 : 2;
 		$data['content'] = $content;
 		$this->load->view('admin_main_layout', $data);
 	}
@@ -54,6 +57,12 @@ class Room extends CI_Controller {
 	}
 
 	public function assignStudent($room_id) {
+		$account = $this->session->userdata('admin');
+		if($account == null)
+		{
+			redirect('login');
+		}
+		$admin = $this->admin_model->getAccountByEmail($account['email']);
 		$room = $this->room_model->getRoomById($room_id);
 		$students = $this->student_model->getAll();
 		$layoutParams = array(
@@ -67,6 +76,7 @@ class Room extends CI_Controller {
 		$data['customJs'] = array('assets/js/settings.js');
 		$data['parent_id'] = 2;
 		$data['sub_id'] = 22;
+		$data['group'] = $admin['position_id'] == 1 || $admin['position_id'] == 2 ? 1 : 2;
 		$data['content'] = $content;
 		$this->load->view('admin_main_layout', $data);
 	}

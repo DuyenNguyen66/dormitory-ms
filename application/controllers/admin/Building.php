@@ -46,6 +46,7 @@ class Building extends CI_Controller {
 		$data['customJs'] = array('assets/js/settings.js', 'assets/app/search.js');
 		$data['parent_id'] = 2;
 		$data['sub_id'] = 21;
+		$data['group'] = 1;
 		$data['content'] = $content;
 		$this->load->view('admin_main_layout', $data);
 	}
@@ -83,6 +84,7 @@ class Building extends CI_Controller {
 		$data['customJs'] = array('assets/js/settings.js');
 		$data['parent_id'] = 2;
 		$data['sub_id'] = 21;
+		$data['group'] = 1;
 		$data['content'] = $content;
 		$this->load->view('admin_main_layout', $data);
 	}

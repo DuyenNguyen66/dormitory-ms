@@ -13,7 +13,6 @@
                 		<thead>
                 			<tr>
                                 <th>Name</th>
-                				<th>Class</th>
                 				<th>Email</th>
                 				<th>Phone Number</th>
                 			</tr>
@@ -26,7 +25,6 @@
                 					?>
                 					<tr>
                                         <td><?php echo $row['full_name'] ?></td>
-                                        <td><?php echo $row['class']?></td>
                                         <td><?php echo $row['email']?></td>
                                         <td><?php echo $row['phone']?></td>
                 					</tr>

@@ -4,9 +4,9 @@
             <th>ID</th>
             <th>Student Name</th>
             <th>Student code</th>
-            <th>Class</th>
             <th>Email</th>
             <th>Phone</th>
+            <th>Status</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -20,9 +20,9 @@
             <td><?php echo $row['student_id'] ?></td>
             <td><?php echo $row['full_name']?></td>
             <td><?php echo $row['student_code']?></td>
-            <td><?php echo $row['class']?></td>
             <td><?php echo $row['email']?></td>
             <td><?php echo $row['phone']?></td>
+            <td><?php echo $row['status'] == 0 ? '<a class="btn btn-warning btn-xs">Disabled</a>' : '<a class="btn btn-success btn-xs">Enabled</a>' ?></td>
             <td>
             <div class="dropdown">
                 <span class="btnAction dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-ellipsis-v"></i></span>

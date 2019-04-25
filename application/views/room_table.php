@@ -4,30 +4,60 @@
     <?php
     if (isset($rooms) && is_array($rooms)):
         foreach ($rooms as $key => $row):
-            if($row['total_student'] < 5):
-        ?>
-            <div class="room">
-                <a href="" class="button" data-toggle="modal" data-target="#chz-confirm" data-room="<?php echo $row['room_id']?>" data-floor="<?php echo $row['floor_id']?>" data-build="<?php echo $row['building_id']?>">
-                    <h4><?php echo $row['name']?></h4>
-                    <h4><?php echo $row['total_student']?>/10</h4>
-                </a>
-            </div>
-        <?php elseif($row['total_student'] >= 5 && $row['total_student'] < 10): ?>
-            <div class="room1">
-                <a href="" class="button" data-toggle="modal" data-target="#chz-confirm" data-room="<?php echo $row['room_id']?>" data-floor="<?php echo $row['floor_id']?>" data-build="<?php echo $row['building_id']?>">
-                    <h4><?php echo $row['name']?></h4>
-                    <h4><?php echo $row['total_student']?>/10</h4>
-                </a>
-            </div>
-        <?php else: ?>
-            <div class="room2 tooltip">
-                <a>
-                    <h4><?php echo $row['name']?></h4>
-                    <h4><?php echo $row['total_student']?>/10</h4>
-                    <span class="tooltiptext">Room is full now</span>
-                </a>
-            </div>
-        <?php
+            if($haveRegister == 0):
+                if($row['total_student'] < 5):
+    ?>
+                <div class="room">
+                    <a href="" class="button" data-toggle="modal" data-target="#chz-confirm" data-room="<?php echo $row['room_id']?>" data-floor="<?php echo $row['floor_id']?>" data-build="<?php echo $row['building_id']?>">
+                        <h4><?php echo $row['name']?></h4>
+                        <h4><?php echo $row['total_student']?>/10</h4>
+                    </a>
+                </div>
+                <?php elseif($row['total_student'] >= 5 && $row['total_student'] < 10): ?>
+                <div class="room1">
+                    <a href="" class="button" data-toggle="modal" data-target="#chz-confirm" data-room="<?php echo $row['room_id']?>" data-floor="<?php echo $row['floor_id']?>" data-build="<?php echo $row['building_id']?>">
+                        <h4><?php echo $row['name']?></h4>
+                        <h4><?php echo $row['total_student']?>/10</h4>
+                    </a>
+                </div>
+                <?php else: ?>
+                <div class="room2 tooltip">
+                    <a>
+                        <h4><?php echo $row['name']?></h4>
+                        <h4><?php echo $row['total_student']?>/10</h4>
+                        <span class="tooltiptext">Room is full now</span>
+                    </a>
+                </div>
+    <?php
+                endif;
+            else:
+                if($row['total_student'] < 5):
+    ?>  
+                <div class="room tooltip">
+                    <a>
+                        <h4><?php echo $row['name']?></h4>
+                        <h4><?php echo $row['total_student']?>/10</h4>
+                        <span class="tooltiptext">You registed room in this term.</span>
+                    </a>
+                </div>
+                <?php elseif($row['total_student'] >= 5 && $row['total_student'] < 10): ?>
+                <div class="room1 tooltip">
+                    <a>
+                        <h4><?php echo $row['name']?></h4>
+                        <h4><?php echo $row['total_student']?>/10</h4>
+                        <span class="tooltiptext" >You registed room in this term.</span>
+                    </a>
+                </div>
+                <?php else: ?>
+                <div class="room2 tooltip">
+                    <a>
+                        <h4><?php echo $row['name']?></h4>
+                        <h4><?php echo $row['total_student']?>/10</h4>
+                        <span class="tooltiptext">Room is full now</span>
+                    </a>
+                </div>
+    <?php
+                endif;
             endif;
         endforeach;
     endif;

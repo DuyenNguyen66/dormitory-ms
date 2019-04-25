@@ -21,6 +21,7 @@ class Register extends CI_Controller {
 		$floors = $this->floor_model->getAll();
 		$buildings = $this->building_model->getAll();
 		$term = $this->term_model->getCurrentTerm();
+		
 		$layoutParams = array(
 			'floors' => $floors,
 			'buildings' => $buildings,
@@ -48,11 +49,23 @@ class Register extends CI_Controller {
 	}
 
 	public function getRoomByFloor() {
-		$building_id = $this->input->get('building_id');
+		$account = $this->session->userdata('student');
+		if($account == null) {
+			redirect('login');
+		}
 		$floor_id = $this->input->get('floor_id');
-		$rooms = $this->room_model->getByFloor($building_id, $floor_id);
+		$rooms = $this->room_model->getByFloor($floor_id);
+		$student = $this->student_model->getStudentByEmail($account['email']);
+		$term = $this->term_model->getCurrentTerm();
+		$check = $this->registration_model->checkStudent($student['student_id'], $term['term_id']);
+		if ($check != null) {
+			$haveRegister = 1;
+		}else {
+			$haveRegister = 0;
+		}
 		$params = array(
-			'rooms' => $rooms
+			'rooms' => $rooms,
+			'haveRegister' => $haveRegister
 		);
 		echo $this->load->view('room_table', $params, true);
 	}
@@ -73,6 +86,7 @@ class Register extends CI_Controller {
 			$this->session->set_flashdata('error', 'Error. You registed room in this term.');
 		}
 		redirect('registration');
+		
 	}
 
 	public function registerList() {

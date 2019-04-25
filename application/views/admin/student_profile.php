@@ -28,10 +28,6 @@
 							<td><?php echo $student['student_code']; ?></td>
 						</tr>
 						<tr>
-							<th>Class</th>
-							<td><?php echo $student['class'] ?></td>
-						</tr>
-						<tr>
 							<th>Email</th>
 							<td><?php echo $student['email']; ?></td>
 						</tr>
@@ -58,7 +54,7 @@
 						</tr>
 						<tr>
 							<th>Nation</th>
-							<td><?php echo $student['nation_name'] ?></td>
+							<td><?php echo $student['religion_name'] ?></td>
 						</tr>
 						<tr>
 							<th>Ethnic</th>

@@ -1,7 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$route['dashboard'] = 'index/index';
+//Admin
+$route['dashboard-a'] = 'index/index';
 $route['login'] = 'index/login';
 $route['logout'] = 'index/logout';
 $route['register'] = 'index/register';
@@ -16,3 +17,12 @@ $route['student'] = 'student/index';
 $route['profile/(:num)'] = 'student/profile/$1';
 
 $route['form'] = 'register/index';
+
+$route['electricity-price'] = 'price/index';
+$route['water-price'] = 'price/waterPrice';
+
+//Manager
+$route['dashboard-m'] = 'index/indexManager';
+$route['electricity-bill'] = 'bill/elecBill';
+$route['water-bill'] = 'bill/waterBill';
+$route['room-bill'] = 'bill/roomBill';

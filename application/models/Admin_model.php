@@ -52,8 +52,11 @@ class Admin_model extends CI_Model {
 	}
 
 	public function getManagerOthers() {
-		$this->db->where(array('group_id' => 2, 'status' => 1, 'assigned' => 0));
-		$query = $this->db->get($this->table);
+		$this->db->select('a.*, p.name as position');
+		$this->db->from('admin a');
+		$this->db->join('position p', 'a.position_id = p.position_id');
+		$this->db->where(array('a.group_id' => 2, 'a.status' => 1, 'a.assigned' => 0));
+		$query = $this->db->get();
 		return $query->result_array();
 	}
 
@@ -87,12 +90,12 @@ class Admin_model extends CI_Model {
 	}
 
 	public function disableManager($id, $params) {
-		$this->db->where($id_name, $id);
+		$this->db->where($this->id_name, $id);
 		$this->db->update($this->table, $params);
 	}
 
 	public function enableManager($id, $params) {
-		$this->db->where($id_name, $id);
+		$this->db->where($this->id_name, $id);
 		$this->db->update($this->table, $params);
 	}
 
@@ -102,5 +105,17 @@ class Admin_model extends CI_Model {
 		}else {
 			return 2;
 		}
+	}
+
+	public function getAccountByEmail($email) {
+		$this->db->where('email', $email);
+		$query = $this->db->get($this->table);
+		return $query->first_row('array');
+	}
+
+	public function getBuildingByManager($id) {
+		$this->db->where('admin_id', $id);
+		$query = $this->db->get('assignment');
+		return $query->first_row('array');
 	}
 }

@@ -1,3 +1,6 @@
+<div class="col-xs-12" style="margin: 20px 0">
+    <h3 class=" header-title">Registrations</h3>
+</div>
 <div class="row card-box"> 
     <div class="tab-content">
         <div id="list" class="tab-pane fade in active">
@@ -34,19 +37,19 @@
                                         <td><?php echo $row['floor_name']?></td>
                                         <td><?php echo $row['build_name']?></td>
                 						<td><?php echo date('d/m/Y h:iA', $row['registed']) ?></td>
-                						<td><?php echo $row['confirmed'] == null ? '<button class="btn btn-warning">Not confirmed yet</button>' : date('d/m/Y h:iA', $row['confirmed']) ?></td>
-                						<td><?php echo $row['status'] == 0 ? '<button class="btn btn-warning">Inactive</button>' : '<button class="btn btn-success">Active</button>' ?></td>
+                						<td><?php echo $row['confirmed'] == null ? '<a class="btn btn-warning btn-xs">Not confirmed yet</a>' : date('d/m/Y h:iA', $row['confirmed']) ?></td>
+                						<td><?php echo $row['status'] == 0 ? '<a class="btn btn-warning btn-xs">Inactive</a>' : '<a class="btn btn-success btn-xs">Active</a>' ?></td>
                 						<td>
-                							<div class="dropdown">
-                								<span class="btnAction dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-ellipsis-v"></i></span>
-                								<ul class="dropdown-menu" id="customDropdown">
-                									<?php if($row['status'] == 0 && $row['confirmed'] == null): ?>
-                									<li><a href="<?php echo base_url('register/confirm/' . $row['id'])?>">Confirm</a></li>
-                									<?php else: ?>
-                									<li><a href="<?php echo base_url('register/disable/' . $row['id'])?>">Disable</a></li>
-	                								<?php endif; ?>
-                								</ul>
-                							</div>
+        									<?php if($row['status'] == 0 && $row['confirmed'] == null): ?>
+                                            <button type="button" class="btn btn-inverse btn-custom btn-xs">
+                                                <a href="<?php echo base_url('register/confirm/' . $row['id'])?>">Confirm</a>
+                                            </button>
+        									<?php else: ?>
+                                            <button type="button" class="btn btn-inverse btn-custom btn-xs">
+                                                <a href="<?php echo base_url('register/disable/' . $row['id'])?>">Disable</a>
+                                            </button>
+            								<?php endif; ?>
+
                 						</td>
                 					</tr>
                 					<?php 

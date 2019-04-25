@@ -10,18 +10,16 @@ class Student_model extends CI_Model {
 	}
 
 	public function getAll() {
-		$this->db->select('s.*, c.name as class');
+		$this->db->select('s.*');
 		$this->db->from('student s');
-		$this->db->join('class c', 's.class_id = c.class_id');
 		$this->db->order_by('student_id', 'desc');
 		$query = $this->db->get();
 		return $query->result_array();
 	}
 
 	public function getByStatus($status = 1) {
-		$this->db->select('s.*, c.name as class');
+		$this->db->select('s.*');
 		$this->db->from('student s');
-		$this->db->join('class c', 's.class_id = c.class_id');
 		$this->db->where('s.status', $status);
 		$this->db->order_by('student_id', 'desc');
 		$query = $this->db->get();
@@ -61,10 +59,9 @@ class Student_model extends CI_Model {
 	}
 
 	public function getProfile($id) {
-		$this->db->select('s.*, c.name as class, n.name as nation_name, e.name as ethnic_name');
+		$this->db->select('s.*, r.name as religion_name, e.name as ethnic_name');
 		$this->db->from('student s');
-		$this->db->join('class c', 's.class_id = c.class_id');
-		$this->db->join('nation n', 's.nation_id = n.nation_id');
+		$this->db->join('religion r', 's.religion_id = r.religion_id');
 		$this->db->join('ethnic e', 's.ethnic_id = e.ethnic_id');
 		$this->db->where('student_id', $id);
 		$query = $this->db->get();

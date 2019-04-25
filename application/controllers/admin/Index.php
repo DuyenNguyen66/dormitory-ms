@@ -19,6 +19,7 @@ class Index extends Base_Controller {
 		$data = array();
 		$data['parent_id'] = 1;
 		$data['sub_id'] = 0;
+		$data['group'] = 1;
 		$data['content'] = $this->load->view('admin/dashboard', array(), true);
 		$this->load->view('admin_main_layout', $data);
 	}
@@ -49,17 +50,26 @@ class Index extends Base_Controller {
 	public function login() {
 		$admin = $this->session->userdata('admin');
 		if ($admin != null) {
-			redirect(base_url('dashboard'));
+			redirect(base_url('dashboard-a'));
 		}
 
 		$cmd = $this->input->post("cmd");
 		if ($cmd != '') {
 			$email = $this->input->post("email");
-			$password = $this->input->post("password");
+			$password = md5($this->input->post("password"));
 			$account = $this->admin_model->checkAccount($email, $password);
+			// print_r($account);die();
 			if ($account != null) {
-				$this->session->set_userdata('admin', array('email'=>$account['email'], 'group_id'=>$account['group_id']));
-				$this->redirect('dashboard');
+				if($account['position_id'] == 1 || $account['position_id'] == 2) { //admin 
+					$this->session->set_userdata('admin', array('email'=>$account['email'], 'group_id'=>$account['group_id']));
+					$this->redirect('dashboard-a');
+				} else if ($account['position_id'] == 3 || $account['position_id'] == 4) { //manager
+					$this->session->set_userdata('admin', array('email'=>$account['email'], 'group_id'=>$account['group_id']));
+					redirect('dashboard-m');
+				} else { //technical
+					$this->session->set_userdata('admin', array('email'=>$account['email'], 'group_id'=>$account['group_id']));
+					$this->redirect('dashboard-m');
+				}
 			} else {
 				$this->load->view('admin/login', array('error'=>'Account does not exist.'));
 			}
@@ -140,8 +150,41 @@ class Index extends Base_Controller {
 		$data['customJs'] = array('assets/js/settings.js', 'assets/app/search.js');
 		$data['parent_id'] = 4;
 		$data['sub_id'] = 22;
+		$data['group'] = 1;
 		$data['content'] = $content;
 		$this->load->view('admin_main_layout', $data);
 	}
+
+	public function enable($admin_id) {
+		$params = array(
+			'status' => 1
+		);
+		$this->admin_model->enableManager($admin_id, $params);
+		redirect('manager');
+	}
+
+	public function disable($admin_id) {
+		$params = array(
+			'status' => 0
+		);
+		$this->admin_model->disableManager($admin_id, $params);
+		redirect('manager');
+	}
+
+	public function indexManager() {
+		$admin = $this->session->userdata('admin');
+		if ($admin == null) {
+			redirect(base_url('login'));
+		}
+		$this->getTerm();
+		$data = array();
+		$data['parent_id'] = 7;
+		$data['sub_id'] = 0;
+		$data['group'] = 2;
+		$data['content'] = $this->load->view('admin/dashboard_manager', array(), true);
+		$this->load->view('admin_main_layout', $data);
+	}
+
+
 
 }

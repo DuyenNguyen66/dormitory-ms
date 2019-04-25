@@ -23,11 +23,11 @@ class Room_model extends CI_Model {
 		$this->db->update($this->table, $params);
 	}
 
-	public function getByFloor($building_id, $floor_id) {
+	public function getByFloor($floor_id) {
 		$this->db->select('r.*, count(rg.student_id) as total_student');
 		$this->db->from('room r');
 		$this->db->join('registration rg', 'r.room_id = rg.room_id', 'left');
-		$this->db->where(array('building_id' => $building_id, 'floor_id' => $floor_id, 'rg.status' => 1));
+		$this->db->where(array('floor_id' => $floor_id));
 		$this->db->group_by('r.room_id');
 		$query = $this->db->get();
 		return $query->result_array();
@@ -47,5 +47,14 @@ class Room_model extends CI_Model {
 		$this->db->where($this->id_name, $id);
 		$query = $this->db->get($this->table);
 		return $query->first_row('array');
+	}
+
+	public function getRoomsByBuilding($id) {
+		$this->db->select('r.*');
+		$this->db->from('room r');
+		$this->db->join('registration rg', 'r.room_id = rg.room_id');
+		$this->db->where('r.building_id', $id);
+		$query = $this->db->get();
+		return $query->result_array();
 	}
 } 
