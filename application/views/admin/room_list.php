@@ -53,8 +53,17 @@
                         		<label>Room Name</label>
                                 <input type="text" name='name' required class="form-control" placeholder="Type room name..." />
                         	</div>
+                            <div class="form-group">
+                                <label class="col-md-3">Room Type</label>
+                                <div class="col-md-8">
+                                    <input type="radio" name="type" value="0" checked>&nbsp;
+                                    <i style="color: cornflowerblue;font-size: 20px;" class="fa fa-mars"></i>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <input type="radio" name="type" value="1">&nbsp;
+                                    <i style="color: pink;font-size: 20px;" class="fa fa-venus"></i>
+                                </div>
+                            </div>
                             
-                            <div class="form-group m-b-0">
+                            <div class="form-group m-b-0 col-md-12">
                                 <button type="submit" class="btn btn-inverse btn-custom" name='cmd' value='Save'>Save</button>
                             </div>
                         </div>

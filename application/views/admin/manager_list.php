@@ -40,7 +40,7 @@
                 						<td><?php echo $row['admin_id'] ?></td>
                 						<td><?php echo $row['full_name']?></td>
                 						<td><?php echo $row['email']?></td>
-                						<td><?php echo $row['position_name']?></td>
+                						<td><?php echo $row['position_name'] == null ? 'N/A' : $row['position_name']?></td>
                                         <td><?php echo ($row['building_name'] != null) ? $row['building_name'] : 'N/A' ?></td>
                 						<td><?php echo date('d/m/Y h:iA', $row['created'])?></td>
                                         <td><?php echo $row['status'] == 0 ? '<a class="btn btn-warning btn-xs">Inactive</a>' : '<a class="btn btn-success btn-xs">Active</a>'?></td>

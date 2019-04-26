@@ -57,6 +57,9 @@
                                         <td><?php echo $row['address']?></td>
                 						<td>
                                             <button type="button" class="btn btn-inverse btn-custom btn-xs">
+                                                <a href="<?php echo base_url('building/view/' . $row['building_id'])?>">View</a>
+                                            </button>
+                                            <button type="button" class="btn btn-inverse btn-custom btn-xs">
                                                 <a href="<?php echo base_url('building/edit/' . $row['building_id'])?>">Edit</a>
                                             </button>
                 						</td>

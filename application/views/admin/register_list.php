@@ -6,7 +6,7 @@
         <div id="list" class="tab-pane fade in active">
             <div class="col-xs-12">
                 <div class="table-responsive">
-                	<table id="example3" class="table table-bordered table-hover">
+                	<table id="example4" class="table table-hover">
                 		<thead>
                 			<tr>
                                 <th>ID</th>
@@ -43,6 +43,10 @@
         									<?php if($row['status'] == 0 && $row['confirmed'] == null): ?>
                                             <button type="button" class="btn btn-inverse btn-custom btn-xs">
                                                 <a href="<?php echo base_url('register/confirm/' . $row['id'])?>">Confirm</a>
+                                            </button>
+                                            <?php elseif($row['status'] == 0):?>
+                                            <button type="button" class="btn btn-inverse btn-custom btn-xs disabled">
+                                                <a>Disable</a>
                                             </button>
         									<?php else: ?>
                                             <button type="button" class="btn btn-inverse btn-custom btn-xs">

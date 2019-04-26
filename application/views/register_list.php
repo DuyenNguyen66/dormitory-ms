@@ -23,7 +23,7 @@
         <div id="list" class="tab-pane fade in active">
             <div class="col-xs-12">
                 <div class="table-responsive">
-                	<table id="example3" class="table table-bordered table-hover">
+                	<table id="example3" class="table table-hover">
                 		<thead>
                 			<tr>
                                 <th>ID</th>

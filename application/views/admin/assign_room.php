@@ -10,7 +10,6 @@
 		            <th>ID</th>
 		            <th>Student Name</th>
 		            <th>Student code</th>
-		            <th>Class</th>
 		            <th>Email</th>
 		            <th>Phone</th>
 		        </tr>
@@ -25,7 +24,6 @@
 			            <td><?php echo $row['student_id'] ?></td>
 			            <td><?php echo $row['full_name']?></td>
 			            <td><?php echo $row['student_code']?></td>
-			            <td><?php echo $row['class']?></td>
 			            <td><?php echo $row['email']?></td>
 			            <td><?php echo $row['phone']?></td>
 			            

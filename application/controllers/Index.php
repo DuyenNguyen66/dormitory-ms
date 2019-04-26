@@ -50,8 +50,8 @@ class Index extends CI_Controller {
 			$params['password'] = md5($this->input->post('password'));
 			$account = $this->student_model->checkAccount($params['email'], $params['password']);
 			if($account != null) {
-				$this->session->set_userdata('student', array('email' => $account['email'], 'group' => 3));
-				redirect('dashboard-a');
+				$this->session->set_userdata('student', array('email' => $account['email'], 'group' => 3, 'gender' => $account['gender']));
+				redirect('dashboard');
 			}else {
 				$this->session->set_flashdata('error', 'ERROR. Account does not exist.');
 				$this->load->view('login');
@@ -66,7 +66,6 @@ class Index extends CI_Controller {
 	}
 
 	public function register () {
-		$data['classes'] = $this->class_model->getAll();
 		$data['religions'] = $this->Re_Et_model->getAllReligions();
 		$data['ethnics'] = $this->Re_Et_model->getAllEthnic();
 		$cmd = $this->input->post("cmd");

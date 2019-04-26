@@ -85,7 +85,7 @@
 					<!-- Admin -->
 					<?php if(isset($group) && $group == 1):?>
 						<li>
-							<a href="<?php echo base_url(''); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 1 ? ' active' : ''; ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+							<a href="<?php echo base_url('dashboard-a'); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 1 ? ' active' : ''; ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
 						</li>
 						<li class="has_sub">
 							<a href="#" class="waves-effect<?php echo isset($parent_id) && $parent_id == 5 ? ' active' : ''; ?>"> <i class="fa fa-leaf"></i> <span>Students</span> </a>

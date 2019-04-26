@@ -29,7 +29,6 @@ class Student extends CI_Controller {
 
 	public function getStudentsByStatus() {
 		$status = $this->input->get('status');
-		// print_r($status);die();
 		if ($status == 0 || $status == 1) {
 			$students = $this->student_model->getByStatus($status);
 		}else {
@@ -57,5 +56,21 @@ class Student extends CI_Controller {
 		$data['group'] = $admin['position_id'] == 1 || $admin['position_id'] == 2 ? 1 : 2;
 		$data['content'] = $content;
 		$this->load->view('admin_main_layout', $data);
+	}
+
+	public function enable($student_id) {
+		$params = array(
+			'status' => 1
+		);
+		$this->student_model->updateStatus($params, $student_id);
+		redirect('student');
+	}
+
+	public function disable($student_id) {
+		$params = array(
+			'status' => 0
+		);
+		$this->student_model->updateStatus($params, $student_id);
+		redirect('student');
 	}
 }

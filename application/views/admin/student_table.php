@@ -1,4 +1,4 @@
-<table id="example3" class="table table-bordered table-hover">
+<table id="example3" class="table table-hover">
     <thead>
         <tr>
             <th>ID</th>
@@ -29,9 +29,9 @@
                 <ul class="dropdown-menu" id="customDropdown">
                     <li><a href="<?php echo base_url('profile/'. $row['student_id'])?>">View Profile</a></li>
                     <?php if($row['status'] == 0 ): ?>
-                    <li><a href="">Verify</a></li>
+                    <li><a href="<?php echo base_url('student/enable/' . $row['student_id'])?>">Verify</a></li>
                     <?php else:?>
-                    <li><a href="">Disable</a></li>
+                    <li><a href="<?php echo base_url('student/disable/' . $row['student_id'])?>">Disable</a></li>
                     <?php endif;?>
                 </ul>
             </div>

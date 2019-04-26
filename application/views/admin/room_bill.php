@@ -6,6 +6,13 @@
     <li><a data-toggle="tab" href="#add">Add bill</a></li>
 </ul>
 <div class="row card-box"> 
+    <?php if($this->session->flashdata('error')):?>
+        <div class="col-md-12">
+            <div class="alert alert-danger">
+                <?php echo $this->session->flashdata('error') ?>
+            </div>
+        </div>
+    <?php endif; ?>
     <div class="tab-content">
         <div id="list" class="tab-pane fade in active">
             <div class="col-xs-12">
@@ -37,7 +44,7 @@
                                             <?php if($row['paid'] == 0):?>
                                             <button class="btn btn-xs btn-danger">Chưa thanh toán</button>
                                             <?php else: 
-                                                echo date('d/m/Y h:i:s', $row['paid']);
+                                                echo date('d/m/Y h:iA', $row['paid']);
                                             endif; ?>
                                         </td>
                                         <td><?php echo $row['status'] == 0 ? '<a class="btn btn-warning btn-xs">Disabled</a>' : '<a class="btn btn-success btn-xs">Enabled</a>' ?></td>
@@ -45,6 +52,10 @@
                                             <?php if($row['paid'] == 0): ?>
                                             <button type="button" class="btn btn-inverse btn-custom btn-xs">
                                                 <a href="<?php echo base_url('bill/paid2/' . $row['id'])?>">Đã thanh toán</a>
+                                            </button>
+                                            <?php elseif($row['status'] == 0):?>
+                                            <button type="button" class="btn btn-inverse btn-custom btn-xs disabled">
+                                                <a>Disable</a>
                                             </button>
                                             <?php else: ?>
                                             <button type="button" class="btn btn-inverse btn-custom btn-xs">

@@ -1,12 +1,8 @@
-
-
 <table id="example3" class="table">
-    <?php
-    if (isset($rooms) && is_array($rooms)):
+    <?php if (isset($rooms) && is_array($rooms)):
         foreach ($rooms as $key => $row):
             if($haveRegister == 0):
-                if($row['total_student'] < 5):
-    ?>
+                if($row['total_student'] < 5):?>
                 <div class="room">
                     <a href="" class="button" data-toggle="modal" data-target="#chz-confirm" data-room="<?php echo $row['room_id']?>" data-floor="<?php echo $row['floor_id']?>" data-build="<?php echo $row['building_id']?>">
                         <h4><?php echo $row['name']?></h4>
@@ -28,11 +24,9 @@
                         <span class="tooltiptext">Room is full now</span>
                     </a>
                 </div>
-    <?php
-                endif;
+    <?php endif;
             else:
-                if($row['total_student'] < 5):
-    ?>  
+                if($row['total_student'] < 5):?>  
                 <div class="room tooltip">
                     <a>
                         <h4><?php echo $row['name']?></h4>
@@ -56,12 +50,10 @@
                         <span class="tooltiptext">Room is full now</span>
                     </a>
                 </div>
-    <?php
-                endif;
+    <?php endif;
             endif;
         endforeach;
-    endif;
-    ?>
+    endif; ?>
 </table>
 
 <div class="modal fade" id="chz-confirm" tabindex="-1" role="dialog" aria-hidden="true">

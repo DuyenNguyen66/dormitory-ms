@@ -53,11 +53,6 @@ class Student_model extends CI_Model {
 		}
 	}
 
-	public function editInfo($params, $id) {
-		$this->db->where($id_name, $id);
-		$this->db->update($table, $params);
-	}
-
 	public function getProfile($id) {
 		$this->db->select('s.*, r.name as religion_name, e.name as ethnic_name');
 		$this->db->from('student s');
@@ -68,14 +63,9 @@ class Student_model extends CI_Model {
 		return $query->first_row('array');
 	}
 
-	public function disable($params, $id) {
-		$this->db->where($id_name, $id);
-		$this->db->update($table, $params);
-	}
-
-	public function enable($params, $id) {
-		$this->db->where($id_name, $id);
-		$this->db->update($table, $params);
+	public function updateStatus($params, $student_id) {
+		$this->db->where($this->id_name, $student_id);
+		$this->db->update($this->table, $params);
 	}
 
 	public function getStudentByEmail($email) {
@@ -110,4 +100,10 @@ class Student_model extends CI_Model {
 		$query = $this->db->get();
 		return $query->first_row('array');
 	}
+
+	// public function getGender($student_id) {
+	// 	$this->db->where($this->id_name, $student_id);
+	// 	$query = $this->db->get($this->table);
+	// 	return $query->first_row('array');
+	// }
 }

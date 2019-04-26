@@ -38,15 +38,6 @@
                     <input class="input100 form-control" type="password" name="password" placeholder="Password">
                     <span class="focus-input100"></span>
                 </div>
-                <div class="wrap-input100 validate-input m-b-25 ">
-                	<select class="input100 form-control" name="position_id" required="">
-                		<option value="">Select Position</option>
-                		<?php foreach($positions as $position):?>
-                		<option value="<?php echo $position['position_id'] ?>"><?php echo $position['name'] ?></option>
-                		<?php endforeach;?>
-                	</select>
-                    <span class="focus-input100"></span>
-                </div>
                 <div class="form-group row">
                 	<label class="col-md-12">Avatar</label>
                 	<div class="col-md-4">

@@ -54,8 +54,13 @@ class Register extends CI_Controller {
 			redirect('login');
 		}
 		$floor_id = $this->input->get('floor_id');
-		$rooms = $this->room_model->getByFloor($floor_id);
 		$student = $this->student_model->getStudentByEmail($account['email']);
+		if ($student['gender'] == 0) {
+			$rooms = $this->room_model->getMaleRoomByFloor($floor_id);
+		}else
+		{
+			$rooms = $this->room_model->getFeMaleRoomByFloor($floor_id);
+		}
 		$term = $this->term_model->getCurrentTerm();
 		$check = $this->registration_model->checkStudent($student['student_id'], $term['term_id']);
 		if ($check != null) {

@@ -59,23 +59,15 @@
                 	<div class="col-md-4 form-group">
 	                	<label>Gender</label>
 	                	<div class="col-md-12">
-	                		<input type="radio" name="gender" value="1" checked >&nbsp;Male</label>&nbsp;&nbsp;&nbsp;
-	                		<input type="radio" name="gender" value="0">&nbsp;Female</label>
+	                		<input type="radio" name="gender" value="1" checked >&nbsp;Male&nbsp;&nbsp;&nbsp;
+	                		<input type="radio" name="gender" value="0">&nbsp;Female
 	                	</div>
 	                </div>
 	                <div class="col-md-4 form-group">
 	                	<label>Birthday</label>
 	                    <input class="form-control" type="date" name="birthday" required>
 	                </div>
-	                <div class="col-md-4 form-group">
-	                	<label>Class</label>
-	                	<select class="form-control" name="class_id" required="">
-	                		<option value="">Select Class</option>
-	                		<?php foreach($classes as $class):?>
-	                		<option value="<?php echo $class['class_id'] ?>"><?php echo $class['name'] ?></option>
-	                		<?php endforeach;?>
-	                	</select>
-	                </div>
+	               
 	            </div>
                 <div class="row">
                 	<div class="col-md-6 form-group">

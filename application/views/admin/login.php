@@ -20,19 +20,15 @@
                 <span class="login100-form-title p-b-37">
                     LOGIN
                 </span>
-                <?php 
-                if (isset($error)) {
-                    echo "
+                <?php if (isset($error)): ?>
                     <div style='color: red; margin: 0 0 20px 0; border: solid 1px #f0a8b5; background: rgba(230,117,136,0.15); padding: 10px; border-radius: 5px'>
-                    $error
-                    </div>";
-                }else if (isset($success)) {
-                    echo "
+                        <?php echo $error?>
+                    </div>
+                <?php elseif ($this->session->flashdata('success')): ?>
                     <div style='color: #256C25; margin: 0 0 20px 0; border: solid 1px #A4E8A9; background: rgba(35, 255, 54, 0.15); padding: 10px; border-radius: 5px'>
-                    $success
-                    </div>";
-                }
-                ?>
+                    <?php echo $this->session->flashdata('success')?>
+                    </div>
+                <?php endif;?>
                 <div class="wrap-input100 validate-input m-b-20" data-validate="Enter username or email">
                     <input class="input100 form-control" type="text" name="email" placeholder="Email">
                     <span class="focus-input100"></span>

@@ -61,6 +61,11 @@ class Building extends CI_Controller {
 	}
 
 	public function edit($building_id) {
+		$account = $this->session->userdata('admin');
+		if($account == null)
+		{
+			redirect('login');
+		}
 		$data['building'] = $this->building_model->getById($building_id);
 		$cmd = $this->input->post('cmd');
 		if($cmd != null)
@@ -89,22 +94,22 @@ class Building extends CI_Controller {
 		$this->load->view('admin_main_layout', $data);
 	}
 
-	// public function delete($building_id) {
-	// 	$building = $this->building_model->getById($building_id);
-	// 	$num_rooms = $this->building_model->countRoom($building_id);
-	// 	if($building == null) 
-	// 	{
-	// 		$this->session->set_flashdata('error', 'Building is not exist.');
-	// 		redirect('building');
-	// 	}else if($num_rooms != 0) 
-	// 	{
-	// 		$this->session->set_flashdata('error1', 'Building is in use.');
-	// 		redirect('building');
-	// 	}else
-	// 	{
-	// 		$this->building_model->delete($building_id);
-	// 		$this->session->set_flashdata('success', 'Delete successful.');
-	// 		redirect('building');
-	// 	}
-	// }
+	public function view($building_id) {
+		$account = $this->session->userdata('admin');
+		if($account == null)
+		{
+			redirect('login');
+		}
+		$params['building'] = $this->building_model->getProfile($building_id);
+		$content = $this->load->view('admin/building_view', $params, true);
+
+		$data = array();
+		$data['customCss'] = array('assets/css/settings.css');
+		$data['customJs'] = array('assets/js/settings.js');
+		$data['parent_id'] = 2;
+		$data['sub_id'] = 21;
+		$data['group'] = 1;
+		$data['content'] = $content;
+		$this->load->view('admin_main_layout', $data);
+	}
 }

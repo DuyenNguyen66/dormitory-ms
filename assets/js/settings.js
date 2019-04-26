@@ -35,7 +35,6 @@ $('.major_id').change(function(){
 });
 
 var stt = $('select option:selected').val();
-console.log(stt);
 function loadData(stt){
     $.get("student/getStudentsByStatus", {status:stt}, function(data){
         $('#student_table').html(data);
@@ -51,7 +50,6 @@ $('.status').change(function(){
 	
 $('#confirm_btn').click(function(){
 	var form_id = $(this).attr('data-id');
-	console.log(form_id);
 	$.get('confirm', {form_id:form_id}, function(data){
 
 	});

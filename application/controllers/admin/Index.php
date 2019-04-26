@@ -84,7 +84,6 @@ class Index extends Base_Controller {
 	}
 
 	public function register() {
-		$data['positions'] = $this->position_model->getAll();
 		$cmd = $this->input->post("cmd");
 		if ($cmd != '') {
 			$params['full_name'] = $this->input->post('name');
@@ -112,10 +111,11 @@ class Index extends Base_Controller {
 				redirect('register');
 			}else {
 				$this->admin_model->register($params);
-				$this->load->view('admin/login', array('success' => 'Register successful.'));
+				$this->session->set_flashdata('success', 'Register successful.');
+				redirect('login');
 			}
 		} 
-		$this->load->view('admin/register', $data);
+		$this->load->view('admin/register');
 		
 	}
 
