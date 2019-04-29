@@ -64,6 +64,7 @@ class Room_model extends CI_Model {
 		$this->db->from('room r');
 		$this->db->join('registration rg', 'r.room_id = rg.room_id');
 		$this->db->where('r.building_id', $id);
+		$this->db->group_by('r.room_id');
 		$query = $this->db->get();
 		return $query->result_array();
 	}

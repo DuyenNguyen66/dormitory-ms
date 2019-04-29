@@ -1,10 +1,10 @@
-        <div class="row">
-            <?php if($this->session->flashdata('msg')){
-                echo '<div class="col-md-6"><div class="alert alert-success">';
-                echo $this->session->flashdata('msg');
-                echo '</div></div>';
-            } ?>
-        </div>
+<div class="row">
+    <?php if($this->session->flashdata('msg')){
+        echo '<div class="col-md-6"><div class="alert alert-success">';
+        echo $this->session->flashdata('msg');
+        echo '</div></div>';
+    } ?>
+</div>
 <div class="row card-box"> 
 	<div class="header-title">Edit Electricity Price</div>
     <div class="tab-content">

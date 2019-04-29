@@ -24,21 +24,22 @@
             <td><?php echo $row['phone']?></td>
             <td><?php echo $row['status'] == 0 ? '<a class="btn btn-warning btn-xs">Disabled</a>' : '<a class="btn btn-success btn-xs">Enabled</a>' ?></td>
             <td>
-            <div class="dropdown">
-                <span class="btnAction dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-ellipsis-v"></i></span>
-                <ul class="dropdown-menu" id="customDropdown">
-                    <li><a href="<?php echo base_url('profile/'. $row['student_id'])?>">View Profile</a></li>
-                    <?php if($row['status'] == 0 ): ?>
-                    <li><a href="<?php echo base_url('student/enable/' . $row['student_id'])?>">Verify</a></li>
-                    <?php else:?>
-                    <li><a href="<?php echo base_url('student/disable/' . $row['student_id'])?>">Disable</a></li>
-                    <?php endif;?>
-                </ul>
-            </div>
-        </td>
-    </tr>
-    <?php 
-    endforeach;
+                <button type="button" class="btn btn-inverse btn-custom btn-xs">
+                    <a href="<?php echo base_url('profile/'. $row['student_id'])?>">View Profile</a>
+                </button>
+                <?php if($row['status'] == 0 ): ?>
+                <button type="button" class="btn btn-inverse btn-custom btn-xs">
+                    <a href="<?php echo base_url('student/enable/' . $row['student_id'])?>">Verify</a>
+                </button>
+                <?php else:?>
+                <button type="button" class="btn btn-inverse btn-custom btn-xs">
+                    <a href="<?php echo base_url('student/disable/' . $row['student_id'])?>">Disable</a>
+                </button>
+                <?php endif;?>
+            </td>
+        </tr>
+        <?php 
+        endforeach;
     }
     ?>
     </tbody>

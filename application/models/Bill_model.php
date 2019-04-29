@@ -9,11 +9,10 @@ class Bill_model extends CI_model
 	}
 
 	public function getAll($building_id, $bill_type) {
-		$this->db->select('bi.*, r.name as room_name, t.name as term_name, p.*');
+		$this->db->select('bi.*, r.name as room_name, t.name as term_name');
 		$this->db->from('bill bi');
 		$this->db->join('room r', 'r.room_id = bi.room_id');
 		$this->db->join('term t', 'bi.term_id = t.term_id');
-		$this->db->join('bill_pay p', 'bi.bill_id = p.bill_id');
 		$this->db->where(array('r.building_id' => $building_id, 'bi.bill_type' => $bill_type));
 		$this->db->order_by('bi.bill_id', 'desc');
 		$query = $this->db->get();
@@ -57,13 +56,13 @@ class Bill_model extends CI_model
 
 	public function updatePaid($params, $bill_id) {
 		$this->db->where('bill_id', $bill_id);
-		$this->db->update('bill_pay', $params);
+		$this->db->update($this->table, $params);
 	}
 
 	public function disable($bill_id) {
 		$this->db->where('bill_id',$bill_id);
 		$this->db->set('status', 0);
-		$this->db->update('bill_pay');
+		$this->db->update($this->table);
 	}
 
 	public function getRoomBill() {

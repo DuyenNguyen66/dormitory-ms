@@ -9,25 +9,6 @@
 <div class="row card-box"> 
     <div class="tab-content">
         <div id="list" class="tab-pane fade in active">
-            <?php if($this->session->flashdata('error')): ?>
-            <div class="col-md-6">
-                <div class="alert alert-danger">
-                    <?php echo $this->session->flashdata('error') ?>
-                </div>
-            </div>
-            <?php elseif($this->session->flashdata('error1')):?>
-            <div class="col-md-6">
-                <div class="alert alert-danger">
-                    <?php echo $this->session->flashdata('error1') ?>
-                </div>
-            </div>
-            <?php elseif($this->session->flashdata('success')):?>
-            <div class="col-md-6">
-                <div class="alert alert-success">
-                    <?php echo $this->session->flashdata('success') ?>
-                </div>
-            </div>
-            <?php endif;?>
             <div class="col-xs-12">
                 <div class="table-responsive">
                 	<table id="example3" class="table table-hover">

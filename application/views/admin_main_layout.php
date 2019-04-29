@@ -125,7 +125,6 @@
 						<li>
 							<a href="<?php echo base_url('manager'); ?>" class="waves-effect<?php echo isset($parent_id) && $parent_id == 4 ? ' active' : ''; ?>"><i class="fa fa-industry"></i> <span>Officers</span></a>
 						</li>
-						<!--  -->
 						
 					<!-- Manager -->
 					<?php elseif(isset($group) && $group == 2):?>

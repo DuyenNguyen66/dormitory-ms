@@ -35,9 +35,14 @@ class Admin_model extends CI_Model {
 	}
 
 	public function getInfo($id) {
-		$this->db->where($this->id_name, $id);
-		$query = $this->db->get($this->table);
-		return $query->result_array();
+		$this->db->select('a.*, as.building_id, b.name as building_name, p.name as position_name');
+		$this->db->from('admin a');
+		$this->db->join('assignment as', 'a.admin_id = as.admin_id');
+		$this->db->join('building b', 'as.building_id = b.building_id');
+		$this->db->join('position p', 'a.position_id = p.position_id');
+		$this->db->where('a.admin_id', $id);
+		$query = $this->db->get();
+		return $query->first_row('array');
 	}
 
 	public function getManagers() {
@@ -51,10 +56,16 @@ class Admin_model extends CI_Model {
 		return $query->result_array();
 	}
 
+	public function getPosition() {
+		$this->db->where('position_id >', 2);
+		$query = $this->db->get('position');
+		return $query->result_array();
+	}
+
 	public function getManagerOthers() {
-		$this->db->select('a.*, p.name as position');
+		$this->db->select('a.*');
 		$this->db->from('admin a');
-		$this->db->join('position p', 'a.position_id = p.position_id');
+		// $this->db->join('position p', 'a.position_id = p.position_id', 'left');
 		$this->db->where(array('a.group_id' => 2, 'a.status' => 1, 'a.assigned' => 0));
 		$query = $this->db->get();
 		return $query->result_array();
@@ -84,7 +95,7 @@ class Admin_model extends CI_Model {
 		$this->db->update($this->table, $param);
 	}
 
-	public function editAssignManager($admin_id, $params) {
+	public function updateBuild($admin_id, $params) {
 		$this->db->where('admin_id', $admin_id);
 		$this->db->update('assignment', $params);
 	}
@@ -97,6 +108,11 @@ class Admin_model extends CI_Model {
 	public function enableManager($id, $params) {
 		$this->db->where($this->id_name, $id);
 		$this->db->update($this->table, $params);
+	}
+
+	public function deleteManager($id) {
+		$this->db->where($this->id_name, $id);
+		$this->db->delete($this->table);
 	}
 
 	public function getGroupByPosition($position_id) {

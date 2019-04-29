@@ -10,6 +10,7 @@ class Index extends Base_Controller {
 		$this->load->model('term_model');
 	}
 	
+//admin controller
 	public function index() {
 		$admin = $this->session->userdata('admin');
 		if ($admin == null) {
@@ -123,6 +124,7 @@ class Index extends Base_Controller {
 		$managers = $this->admin_model->getManagers();
 		$managerOthers = $this->admin_model->getManagerOthers();
 		$buildings = $this->building_model->getAll();
+		$positions = $this->admin_model->getPosition();
 		$cmd = $this->input->post('cmd');
 		if($cmd != '') {
 			$params['admin_id'] = $this->input->post('manager_id');
@@ -130,8 +132,12 @@ class Index extends Base_Controller {
 			$checkAssigned = $this->admin_model->checkAssigned($params['admin_id']);
 			if ($checkAssigned == null) {
 				$this->admin_model->assignManager($params);
-				$param['assigned'] = 1;
-				$this->admin_model->updateAssigned($params['admin_id'], $param);
+				$position_id = $this->input->post('position_id');
+				$dataUpdate = array(
+					'position_id' => $position_id,
+					'assigned' => 1
+				);
+				$this->admin_model->updateAssigned($params['admin_id'], $dataUpdate);
 				redirect('manager');
 			}else {
 				$this->session->set_flashdata('error', 'ERROR. Manager already assigns.');
@@ -141,7 +147,8 @@ class Index extends Base_Controller {
 		$layoutParams = array(
 			'managers' => $managers,
 			'managerOthers' => $managerOthers,
-			'buildings' => $buildings
+			'buildings' => $buildings,
+			'positions' => $positions
 		);
 		$content = $this->load->view('admin/manager_list', $layoutParams, true);
 
@@ -149,7 +156,37 @@ class Index extends Base_Controller {
 		$data['customCss'] = array('assets/css/settings.css');
 		$data['customJs'] = array('assets/js/settings.js', 'assets/app/search.js');
 		$data['parent_id'] = 4;
-		$data['sub_id'] = 22;
+		$data['sub_id'] = 0;
+		$data['group'] = 1;
+		$data['content'] = $content;
+		$this->load->view('admin_main_layout', $data);
+	}
+
+	public function edit($admin_id) {
+		$admin = $this->admin_model->getInfo($admin_id);
+		$buildings = $this->building_model->getAll();
+		$positions = $this->admin_model->getPosition();
+		$cmd = $this->input->post('cmd');
+		if($cmd != null) {
+			$admin_id = $this->input->post('manager_id');
+			$param1['position_id'] = $this->input->post('position_id');
+			$this->admin_model->updateAssigned($admin_id, $param1);
+			$param2['building_id'] = $this->input->post('building_id');
+			$this->admin_model->updateBuild($admin_id, $param2);
+			redirect('manager');
+		}		
+		$layoutParams = array(
+			'admin' => $admin,
+			'buildings' => $buildings,
+			'positions' => $positions
+		);
+		$content = $this->load->view('admin/manager_edit', $layoutParams, true);
+
+		$data = array();
+		$data['customCss'] = array('assets/css/settings.css');
+		$data['customJs'] = array('assets/js/settings.js', 'assets/app/search.js');
+		$data['parent_id'] = 4;
+		$data['sub_id'] = 0;
 		$data['group'] = 1;
 		$data['content'] = $content;
 		$this->load->view('admin_main_layout', $data);
@@ -171,6 +208,13 @@ class Index extends Base_Controller {
 		redirect('manager');
 	}
 
+	public function delete($admin_id) {
+		$this->admin_model->deleteManager($admin_id);
+		redirect('manager');
+	}
+
+
+//managers controller
 	public function indexManager() {
 		$admin = $this->session->userdata('admin');
 		if ($admin == null) {

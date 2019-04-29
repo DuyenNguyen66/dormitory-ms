@@ -19,11 +19,12 @@ class Bill extends CI_Controller {
 	public function elecBill() {
 		$bill_type = 2;
 		$account = $this->session->userdata('admin');
+		$admin = $this->admin_model->getAccountByEmail($account['email']);
 		if($account == null)
 		{
 			redirect('login');
 		}
-		$admin = $this->admin_model->getAccountByEmail($account['email']);
+		
 		$assignment = $this->admin_model->getBuildingByManager($admin['admin_id']);
 		if ($assignment != null) 
 		{
@@ -45,6 +46,7 @@ class Bill extends CI_Controller {
 				$priceList = $this->price_model->getPriceList($bill_type);
 				$totalPay = $this->getElecTotalPay($used, $priceList);
 				$totalPay += $totalPay * $this->elec_vat;
+				$deadline = strtotime(date("Y-m-d", strtotime($date)) . "+" . $this->interval ." days");
 				$bill_params = array(
 					'bill_type' => $bill_type,
 					'room_id' => $room_id,
@@ -52,10 +54,10 @@ class Bill extends CI_Controller {
 					'term_id' => $term['term_id'],
 					'index' => $index,
 					'used' => $used,
-					'total_pay' => ceil($totalPay)
+					'total_pay' => ceil($totalPay),
+					'deadline' => $deadline
 				);
 				$bill_id = $this->bill_model->addBill($bill_params);
-				$this->addDeadline($bill_id, $date);
 				redirect('electricity-bill');
 			}
 			$layoutParams = array(
@@ -90,7 +92,7 @@ class Bill extends CI_Controller {
 		if ($assignment != null) 
 		{
 			$building_id = $assignment['building_id'];
-			$rooms = $this->bill_model->getRooms($building_id);
+			$rooms = $this->room_model->getRoomsByBuilding($building_id);
 			$bills = $this->bill_model->getAll($building_id, $bill_type);
 			$cmd = $this->input->post('cmd');
 			if ($cmd != null) {
@@ -107,6 +109,7 @@ class Bill extends CI_Controller {
 				$priceList = $this->price_model->getPriceList($bill_type);
 				$totalPay = $this->getWatTotalPay($used, $priceList);
 				$totalPay += $totalPay * $this->wat_vat + $totalPay * $this->bvmt;
+				$deadline = strtotime(date("Y-m-d", strtotime($date)) . "+" . $this->interval ." days");
 				$bill_params = array(
 					'bill_type' => $bill_type,
 					'room_id' => $room_id,
@@ -114,10 +117,10 @@ class Bill extends CI_Controller {
 					'term_id' => $term['term_id'],
 					'index' => $index,
 					'used' => $used,
-					'total_pay' => ceil($totalPay)
+					'total_pay' => ceil($totalPay),
+					'deadline' => $deadline
 				);
 				$bill_id = $this->bill_model->addBill($bill_params);
-				$this->addDeadline($bill_id, $date);
 				redirect('water-bill');
 			}
 			$layoutParams = array(
@@ -271,17 +274,6 @@ class Bill extends CI_Controller {
 			$total += $used * $priceList[0]['price'];
 		}
 		return $total;
-	}
-
-	public function addDeadline($bill_id, $date) {
-		$deadline = strtotime(date("Y-m-d", strtotime($date)) . "+" . $this->interval ." days");
-		$pay_params = array(
-			'bill_id' => $bill_id,
-			'deadline' => $deadline,
-			'paid' => '',
-			'status' => 0
-		);
-		$this->bill_model->addBillPay($pay_params);
 	}
 
 	public function paid($bill_id) {
