@@ -68,7 +68,7 @@ class Bill extends CI_Controller {
 		}else 
 		{
 			$this->session->set_flashdata('error', 'Have no building assigned.');
-			$content = $this->load->view('admin/water_bill', '',true);
+			$content = $this->load->view('admin/elec_bill', '',true);
 		}
 
 		$data = array();

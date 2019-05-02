@@ -42,23 +42,23 @@
                                         <td><?php echo date('d/m/Y', $row['deadline'])?></td>
                                         <td>
                                             <?php if($row['paid'] == 0):?>
-                                            <button class="btn btn-xs btn-danger">Chưa thanh toán</button>
+                                            <a class="btn-xs btn-danger">Chưa thanh toán</a>
                                             <?php else: 
                                                 echo date('d/m/Y h:iA', $row['paid']);
                                             endif; ?>
                                         </td>
-                                        <td><?php echo $row['status'] == 0 ? '<a class="btn btn-warning btn-xs">Disabled</a>' : '<a class="btn btn-success btn-xs">Enabled</a>' ?></td>
+                                        <td><?php echo $row['status'] == 0 ? '<a class="btn-warning btn-xs">Disabled</a>' : '<a class="btn-success btn-xs">Enabled</a>' ?></td>
                 						<td>
                                             <?php if($row['paid'] == 0): ?>
-                                            <button type="button" class="btn btn-inverse btn-custom btn-xs">
+                                            <button type="button" class="btn-inverse btn-custom btn-xs">
                                                 <a href="<?php echo base_url('bill/paid2/' . $row['id'])?>">Đã thanh toán</a>
                                             </button>
                                             <?php elseif($row['status'] == 0):?>
-                                            <button type="button" class="btn btn-inverse btn-custom btn-xs disabled">
+                                            <button type="button" class="btn-inverse btn-custom btn-xs disabled">
                                                 <a>Disable</a>
                                             </button>
                                             <?php else: ?>
-                                            <button type="button" class="btn btn-inverse btn-custom btn-xs">
+                                            <button type="button" class="btn-inverse btn-custom btn-xs">
                                                 <a href="<?php echo base_url('bill/disable2/' . $row['id'])?>">Disable</a>
                                             </button>
                                             <?php endif;?>

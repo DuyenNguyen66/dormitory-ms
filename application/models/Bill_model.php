@@ -88,4 +88,21 @@ class Bill_model extends CI_model
 		$this->db->set('status', 0);
 		$this->db->update('room_pay');
 	}
+
+	public function getBillForStudent($term_id, $room_id, $bill_type) {
+		$this->db->where('term_id', $term_id);
+		$this->db->where('room_id', $room_id);
+		$this->db->where('bill_type', $bill_type);
+		$query = $this->db->get($this->table);
+		return $query->result_array();
+	}
+
+	public function getRoomBillForStudent($room_id) {
+		$this->db->select('rp.*, t.name as term_name');
+		$this->db->from('room_pay rp');
+		$this->db->join('term t', 'rp.term_id = t.term_id');
+		$this->db->where('room_id', $room_id);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
 }

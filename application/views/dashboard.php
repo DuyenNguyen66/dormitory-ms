@@ -51,6 +51,11 @@
 				<label class="col-md-3">Religion</label>
 				<div class="col-md-8"><?php echo $student['religion']?></div>
 			</div>
+			<div style="text-align:right;">
+				<a class="btn btn-primary" href="<?php echo base_url('profile/' . $student['student_id'])?>">
+					<i class="fa fa-pencil"></i>
+				</a>
+			</div>
 		</div>
 	</div>
 </div>

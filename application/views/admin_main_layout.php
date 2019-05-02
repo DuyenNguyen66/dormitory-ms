@@ -144,16 +144,16 @@
 							</ul>
 						</li>
 						<li class="has_sub">
-							<a href="#" class="waves-effect<?php echo isset($parent_id) && $parent_id == 8 ? ' active' : ''; ?>"> <i class="fa fa-leaf"></i> <span>Payment</span> </a>
+							<a href="#" class="waves-effect<?php echo isset($parent_id) && $parent_id == 8 ? ' active' : ''; ?>"> <i class="fa fa-leaf"></i> <span>Bills</span> </a>
 							<ul class="list-unstyled">
 								<li <?php echo($sub_id == 81 ? 'class="active"' : ''); ?>>
-									<a href="<?php echo base_url('electricity-bill'); ?>"><span>Electricity Bills</span></a>
+									<a href="<?php echo base_url('electricity-bill'); ?>"><span>Electricity</span></a>
 								</li>
 								<li <?php echo($sub_id == 82 ? 'class="active"' : ''); ?>>
-									<a href="<?php echo base_url('water-bill'); ?>"><span>Water Bills</span></a>
+									<a href="<?php echo base_url('water-bill'); ?>"><span>Water</span></a>
 								</li>
 								<li <?php echo($sub_id == 83 ? 'class="active"' : ''); ?>>
-									<a href="<?php echo base_url('room-bill'); ?>"><span>Room Bills</span></a>
+									<a href="<?php echo base_url('room-bill'); ?>"><span>Room</span></a>
 								</li>
 							</ul>
 						</li>
@@ -173,6 +173,20 @@
 								</li>
 								<li <?php echo($sub_id == 14 ? 'class="active"' : ''); ?>>
 									<a href="<?php echo base_url('roommate-list'); ?>">View Roommates</a>
+								</li>
+							</ul>
+						</li>
+						<li class="has_sub">
+							<a href="#" class="waves-effect<?php echo isset($parent_id) && $parent_id == 15 ? ' active' : ''; ?>"> <i class="fa fa-home"></i> <span>Bills</span> </a>
+							<ul class="list-unstyled">
+								<li <?php echo($sub_id == 16 ? 'class="active"' : ''); ?>>
+									<a href="<?php echo base_url('e-bill'); ?>">Electricity</a>
+								</li>
+								<li <?php echo($sub_id == 17 ? 'class="active"' : ''); ?>>
+									<a href="<?php echo base_url('w-bill'); ?>">Water</a>
+								</li>
+								<li <?php echo($sub_id == 18 ? 'class="active"' : ''); ?>>
+									<a href="<?php echo base_url('r-bill'); ?>">Room</a>
 								</li>
 							</ul>
 						</li>

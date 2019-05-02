@@ -89,4 +89,14 @@ class Room_model extends CI_Model {
 		$query = $this->db->get();
 		return $query->first_row('array');
 	}
+
+	public function getRoomByStudent($student_id, $term_id) {
+		$this->db->select('rg.room_id, r.name');
+		$this->db->from('room r');
+		$this->db->join('registration rg', 'r.room_id = rg.room_id');
+		$this->db->where('student_id', $student_id);
+		$this->db->where('term_id', $term_id);
+		$query = $this->db->get();
+		return $query->first_row('array');
+	}
 } 

@@ -103,4 +103,24 @@ class Index extends CI_Controller {
 		$this->load->view('register', $data);
 	}
 
+	public function editProfile($student_id) {
+		$account = $this->session->userdata('student');
+		if($account == null) {
+			redirect('login');
+		}
+		$student = $this->student_model->getProfile($student_id);
+		$params = array(
+			'student' => $student, 
+		);
+		$content = $this->load->view('profile_edit', $params, true);
+
+		$data = array();
+		$data['customCss'] = array('assets/css/settings.css');
+		$data['customJs'] = array('assets/js/student.js');
+		$data['parent_id'] = 10;
+		$data['sub_id'] = 0;
+		$data['group'] = $account['group'];
+		$data['content'] = $content;
+		$this->load->view('admin_main_layout', $data);
+	}
 }
