@@ -65,11 +65,12 @@ class Bill_model extends CI_model
 		$this->db->update($this->table);
 	}
 
-	public function getRoomBill() {
+	public function getRoomBill($building_id) {
 		$this->db->select('rp.*, r.name as room_name, t.name as term_name');
 		$this->db->from('room_pay rp');
 		$this->db->join('term t', 'rp.term_id = t.term_id');
 		$this->db->join('room r', 'rp.room_id = r.room_id');
+		$this->db->where('r.building_id', $building_id);
 		$query = $this->db->get();
 		return $query->result_array();
 	}
@@ -104,5 +105,16 @@ class Bill_model extends CI_model
 		$this->db->where('room_id', $room_id);
 		$query = $this->db->get();
 		return $query->result_array();
+	}
+	public function getRoomBillById($id) {
+		$this->db->select('rp.*, r.name as room_name, b.name as build_name, t.name as term_name');
+		$this->db->from('room_pay rp');
+		$this->db->join('room r', 'rp.room_id = r.room_id');
+		$this->db->join('building b', 'r.building_id = b.building_id');
+		$this->db->join('registration rg', 'rg.room_id = r.room_id');
+		$this->db->join('term t', 'rp.term_id = t.term_id');
+		$this->db->where('rp.id', $id);
+		$query = $this->db->get();
+		return $query->first_row('array');
 	}
 }

@@ -108,7 +108,9 @@
 								<li <?php echo($sub_id == 62 ? 'class="active"' : ''); ?>>
 									<a href="<?php echo base_url('water-price'); ?>">Water</a>
 								</li>
-								
+								<li <?php echo($sub_id == 63 ? 'class="active"' : ''); ?>>
+									<a href="<?php echo base_url('room-price'); ?>">Room</a>
+								</li>
 							</ul>
 						</li>
 						<li class="has_sub">

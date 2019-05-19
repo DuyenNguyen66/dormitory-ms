@@ -43,4 +43,14 @@ class Price_model extends CI_model {
 		$this->db->where('price_id', $id);
 		$this->db->update($this->table, $params);
 	}
+
+	public function getRoomPrice() {
+		$this->db->where('bill_type', 3);
+		$query = $this->db->get($this->table);
+		return $query->first_row('array');
+	}
+
+	public function addRoomPrice($params) {
+		$this->db->insert($this->table, $params);
+	}
 }

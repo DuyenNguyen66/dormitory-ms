@@ -69,4 +69,13 @@ class Registration_model extends CI_Model {
 		$this->db->where('id', $id);
 		$this->db->update($this->table, $params);
 	}
+
+	public function countStudent($room_id, $term_id) {
+		$this->db->select('count(rg.student_id) as total_student');
+		$this->db->from('registration rg');
+		$this->db->where('room_id', $room_id);
+		$this->db->where('term_id', $term_id);
+		$this->db->group_by('room_id');
+		return $this->db->get()->first_row('array');
+	}
 }	

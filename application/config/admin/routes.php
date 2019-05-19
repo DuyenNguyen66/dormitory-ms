@@ -19,6 +19,7 @@ $route['form'] = 'register/index';
 
 $route['electricity-price'] = 'price/index';
 $route['water-price'] = 'price/waterPrice';
+$route['room-price'] = 'price/roomPrice';
 
 //Manager
 $route['dashboard-m'] = 'index/indexManager';

@@ -21,8 +21,10 @@
                 		<thead>
                 			<tr>
                                 <th>ID</th>
-                                <th>Phòng</th>
                 				<th>Kỳ</th>
+                                <th>Phòng</th>
+                                <th>Số sinh viên</th>
+                                <th>Thành tiền</th>
                                 <th>Hạn thanh toán</th>
                 				<th>Ngày thanh toán</th>
                                 <th>Trạng thái</th>
@@ -37,8 +39,10 @@
                 					?>
                 					<tr>
                                         <td><?php echo $row['id'] ?></td>
-                                        <td><?php echo $row['room_name']?></td>
                                         <td><?php echo $row['term_name']?></td>
+                                        <td><?php echo $row['room_name']?></td>
+                                        <td><?php echo $row['total_student']?></td>
+                                        <td><?php echo $row['total_pay']?></td>
                                         <td><?php echo date('d/m/Y', $row['deadline'])?></td>
                                         <td>
                                             <?php if($row['paid'] == 0):?>
@@ -49,19 +53,20 @@
                                         </td>
                                         <td><?php echo $row['status'] == 0 ? '<a class="btn-warning btn-xs">Disabled</a>' : '<a class="btn-success btn-xs">Enabled</a>' ?></td>
                 						<td>
-                                            <?php if($row['paid'] == 0): ?>
+                                        <?php if($row['paid'] == 0): ?>
                                             <button type="button" class="btn-inverse btn-custom btn-xs">
                                                 <a href="<?php echo base_url('bill/paid2/' . $row['id'])?>">Đã thanh toán</a>
                                             </button>
-                                            <?php elseif($row['status'] == 0):?>
-                                            <button type="button" class="btn-inverse btn-custom btn-xs disabled">
-                                                <a>Disable</a>
-                                            </button>
-                                            <?php else: ?>
-                                            <button type="button" class="btn-inverse btn-custom btn-xs">
+                                        <?php elseif($row['paid'] != null && $row['status'] == 1):?>
+                                            <button type="button" class="btn-inverse btn-custom btn-xs ">
                                                 <a href="<?php echo base_url('bill/disable2/' . $row['id'])?>">Disable</a>
                                             </button>
-                                            <?php endif;?>
+                                            <button type="button" class="btn-inverse btn-custom ">
+                                                <a href="<?php echo base_url('bill/export/'. $row['id'])?>"><i class="fa fa-file-word-o"></i></a>
+                                            </button>
+                                        <?php elseif($row['status'] == 0): ?>
+                                            <button type="button" class="btn-inverse btn-custom btn-xs disabled">Disable</button>
+                                        <?php endif;?>
                 						</td>
                 					</tr>
                 					<?php 

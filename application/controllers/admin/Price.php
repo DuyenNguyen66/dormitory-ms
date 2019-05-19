@@ -128,4 +128,40 @@ class Price extends CI_Controller {
 		$data['content'] = $content;
 		$this->load->view('admin_main_layout', $data);
 	}
+
+	public function roomPrice() {
+		$account = $this->session->userdata('admin');
+		if($account == null)
+		{
+			redirect('login');
+		}
+		$room_price = $this->price_model->getRoomPrice();
+		$cmd = $this->input->post('cmd');
+		if($cmd != null)
+		{
+			$params['name'] = $this->input->post('name');
+			$params['description'] = $this->input->post('description');
+			$params['price'] = $this->input->post('price');
+			$params['bill_type'] = 3;
+			$currentPrice = $this->price_model->getRoomPrice();
+			if ($currentPrice != null) {
+				$this->price_model->deleteCurrentPrice($currentPrice['price_id']);
+			}
+			$this->price_model->addRoomPrice($params);
+			redirect('room-price');
+		}
+		$layoutParams = array(
+			'room_price' => $room_price
+		);
+		$content = $this->load->view('admin/room_price', $layoutParams, true);
+
+		$data = array();
+		$data['customCss'] = array('assets/css/settings.css');
+		$data['parent_id'] = 6;
+		$data['sub_id'] = 63;
+		$data['group'] = 1;
+		$data['content'] = $content;
+		$this->load->view('admin_main_layout', $data);
+	}
+
 }

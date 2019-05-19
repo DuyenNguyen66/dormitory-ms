@@ -14,6 +14,7 @@ class Bill extends CI_Controller {
 		$this->load->model('room_model');
 		$this->load->model('term_model');
 		$this->load->model('price_model');
+		$this->load->model('registration_model');
 	}
 
 	public function elecBill() {
@@ -155,15 +156,20 @@ class Bill extends CI_Controller {
 		{
 			$building_id = $assignment['building_id'];
 			$rooms = $this->room_model->getRoomsByBuilding($building_id);
-			$bills = $this->bill_model->getRoomBill();
+			$bills = $this->bill_model->getRoomBill($building_id);
+			$room_price = $this->price_model->getRoomPrice()['price'];
 			$cmd = $this->input->post('cmd');
 			if ($cmd != null) {
 				$room_id = $this->input->post('room_id');
 				$date = $this->input->post('date');
 				$term = $this->term_model->getCurrentTerm();
+				$total_student = $this->registration_model->countStudent($room_id, $term['term_id'])['total_student'];
+				$total_pay = $total_student * $room_price;
 				$params = array(
 					'term_id' => $term['term_id'],
 					'room_id' => $room_id,
+					'total_student' => $total_student,
+					'total_pay' => $total_pay,
 					'deadline' => strtotime($date),
 				);
 				$this->bill_model->addRoomBill($params);
@@ -316,5 +322,49 @@ class Bill extends CI_Controller {
 	public function disable2($id) {
 		$this->bill_model->disableRoomPay($id);
 		redirect('room-bill');
+	}
+
+	public function export($id) {
+		$bill = $this->bill_model->getRoomBillById($id);
+
+		$term = $bill['term_name'];
+		$deadline = date('d/m/Y', $bill['deadline']);
+		$room = $bill['room_name'];
+		$build = $bill['build_name'];
+		$student = $bill['total_student'];
+		$pay = $bill['total_pay'];
+		$price = $pay/$student;
+
+		$zip = new ZipArchive();
+		 
+		$filename_goc = 'files/room.docx';
+		$filename = 'files/room'.time();
+
+		// Copy một bản sao từ file gốc
+		copy($filename_goc, $filename);		 
+		// Mở file đã copy
+		if ($zip->open($filename, ZipArchive::CREATE)!==TRUE) {
+		    echo "Cannot open $filename :( "; die;
+		}
+		// Lấy nội dung text trong file
+		$xml = $zip->getFromName('word/document.xml');
+		 
+		// Dùng hàm str_replace để thay đổi text trong file
+		$xml = str_replace(['term','deadline', 'room', 'build', 'student', 'pay', 'price'], [$term, $deadline, $room, $build, $student, $pay, $price], $xml);
+
+		// Ghi lại nội dung đã được đổi vào file
+		if ($zip->addFromString('word/document.xml', $xml)) { echo 'File written!'; }
+		else { echo 'File not written.  Go back and add write permissions to this folder!'; }
+		 
+		//Đóng file
+		$zip->close();
+		//update stt of room bill to hide export btn
+		$this->bill_model->disableRoomPay($id);
+
+		header("Content-Type: application/msword");
+		header("Content-Disposition: attachment; filename=" . $filename . ".docx"); 
+		readfile($filename);
+
+		$this->roomBill();
 	}
 }
