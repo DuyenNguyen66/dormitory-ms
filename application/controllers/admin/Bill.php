@@ -39,6 +39,13 @@ class Bill extends CI_Controller {
 				$month = explode('-', $date)[1]; 
 				$term = $this->term_model->getCurrentTerm();
 				$index = $this->input->post('index');
+
+				//check if bill existed
+				$check = $this->bill_model->checkBillExist($bill_type, $room_id, $month, $term['term_id']);
+				if ($check > 0) {
+					$this->session->set_flashdata('error', 'This bill existed.');
+					$content = $this->load->view('admin/elec_bill', '',true);
+				}
 				$lastBill = $this->getLastBill($room_id, $bill_type, $month, $term);
 				if ($lastBill == null) {
 					$used = $index;
@@ -324,47 +331,61 @@ class Bill extends CI_Controller {
 		redirect('room-bill');
 	}
 
-	public function export($id) {
+	public function r_export($id) {
+		$zip = new ZipArchive();
 		$bill = $this->bill_model->getRoomBillById($id);
-
 		$term = $bill['term_name'];
-		$deadline = date('d/m/Y', $bill['deadline']);
+		$paid = date('d/m/Y', $bill['paid']);
 		$room = $bill['room_name'];
 		$build = $bill['build_name'];
 		$student = $bill['total_student'];
 		$pay = $bill['total_pay'];
 		$price = $pay/$student;
 
-		$zip = new ZipArchive();
-		 
-		$filename_goc = 'files/room.docx';
-		$filename = 'files/room'.time();
+		$filename_goc = 'files/room-bill/room-bill.docx';
+		$filename = 'files/room-bill/room'. $room . $term . time() . '.docx';
 
-		// Copy một bản sao từ file gốc
 		copy($filename_goc, $filename);		 
-		// Mở file đã copy
 		if ($zip->open($filename, ZipArchive::CREATE)!==TRUE) {
-		    echo "Cannot open $filename :( "; die;
+			echo "Cannot open $filename :( "; die;
 		}
-		// Lấy nội dung text trong file
 		$xml = $zip->getFromName('word/document.xml');
-		 
-		// Dùng hàm str_replace để thay đổi text trong file
-		$xml = str_replace(['term','deadline', 'room', 'build', 'student', 'pay', 'price'], [$term, $deadline, $room, $build, $student, $pay, $price], $xml);
-
-		// Ghi lại nội dung đã được đổi vào file
+		$xml = str_replace(['student', 'term','paid', 'room', 'build', 'pay', 'price'], [$student, $term, $paid, $room, $build, $pay, $price], $xml);
 		if ($zip->addFromString('word/document.xml', $xml)) { echo 'File written!'; }
 		else { echo 'File not written.  Go back and add write permissions to this folder!'; }
-		 
-		//Đóng file
 		$zip->close();
-		//update stt of room bill to hide export btn
-		$this->bill_model->disableRoomPay($id);
-
 		header("Content-Type: application/msword");
-		header("Content-Disposition: attachment; filename=" . $filename . ".docx"); 
+		header("Content-Disposition: attachment; filename=" . $filename); 
 		readfile($filename);
+	}
 
-		$this->roomBill();
+	public function e_export($id, $bill_type = 0) {
+		$zip = new ZipArchive();
+		$bill = $this->bill_model->getBillById($id, $bill_type);
+		$month = $bill['month'];
+		$term = $bill['term_name'];
+		$paid = date('d/m/Y', $bill['paid']);
+		$room = $bill['room_name'];
+		$build = $bill['build_name'];
+		$student = $bill['total_student'];
+		$index = $bill['index'];
+		$used = $bill['used'];
+		$lastIndex = $index - $used;
+		$pay = $bill['total_pay'];
+		$filename_goc = 'files/elec-bill/elec-bill.docx';
+		$filename = 'files/elec-bill/room'. $room . $month . time() . '.docx';
+
+		copy($filename_goc, $filename);		 
+		if ($zip->open($filename, ZipArchive::CREATE)!==TRUE) {
+			echo "Cannot open $filename :( "; die;
+		}
+		$xml = $zip->getFromName('word/document.xml');
+		$xml = str_replace(['paid', 'month', 'term', 'last', 'index', 'used', 'student', 'room', 'build', 'pay'], [$paid, $month, $term, $lastIndex, $index, $used, $student, $room, $build, $pay], $xml);
+		if ($zip->addFromString('word/document.xml', $xml)) { echo 'File written!'; }
+		else { echo 'File not written.  Go back and add write permissions to this folder!'; }
+		$zip->close();
+		header("Content-Type: application/msword");
+		header("Content-Disposition: attachment; filename=" . $filename); 
+		readfile($filename);
 	}
 }

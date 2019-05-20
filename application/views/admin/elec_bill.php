@@ -57,20 +57,21 @@
                                         </td>
                                         <td><?php echo $row['status'] == 0 ? '<a class="btn-warning btn-xs">Disabled</a>' : '<a class="btn-success btn-xs">Enabled</a>' ?></td>
                 						<td>
-                                            <?php if($row['paid'] == 0): ?>
+                                        <?php if($row['paid'] == 0): ?>
                                             <button type="button" class="btn-inverse btn-custom btn-xs">
                                                 <a href="<?php echo base_url('bill/paid/' . $row['bill_id'])?>">Đã thanh toán</a>
                                             </button>
-                                            <?php elseif($row['status'] == 0):?>
-                                            <button type="button" class="btn-inverse btn-custom btn-xs disabled">
-                                                <a>Disable</a>
-                                            </button>
-                                            <?php else: ?>
-                                            <button type="button" class="btn-inverse btn-custom btn-xs">
+                                        <?php elseif($row['paid'] != null && $row['status'] == 1):?>
+                                            <button type="button" class="btn-inverse btn-custom btn-xs ">
                                                 <a href="<?php echo base_url('bill/disable/' . $row['bill_id'])?>">Disable</a>
                                             </button>
-                                            <?php endif;?>
-                						</td>
+                                            <button type="button" class="btn-inverse btn-custom">
+                                                <a href="<?php echo base_url('bill/e_export/'. $row['bill_id'] . '/' . $row['bill_type'])?>"><i class="fa fa-file-word-o"></i></a>
+                                            </button>
+                                        <?php elseif($row['status'] == 0): ?>
+                                            <button type="button" class="btn-inverse btn-custom btn-xs disabled">Disable</button>
+                                        <?php endif;?>
+                                        </td>
                 					</tr>
                 					<?php 
                 				endforeach;

@@ -111,10 +111,31 @@ class Bill_model extends CI_model
 		$this->db->from('room_pay rp');
 		$this->db->join('room r', 'rp.room_id = r.room_id');
 		$this->db->join('building b', 'r.building_id = b.building_id');
-		$this->db->join('registration rg', 'rg.room_id = r.room_id');
+		// $this->db->join('registration rg', 'rg.room_id = r.room_id');
 		$this->db->join('term t', 'rp.term_id = t.term_id');
 		$this->db->where('rp.id', $id);
 		$query = $this->db->get();
 		return $query->first_row('array');
+	}
+
+	public function checkBillExist($bill_type, $room_id, $month, $term_id) {
+		$this->db->where('bill_type', $bill_type);
+		$this->db->where('room_id', $room_id);
+		$this->db->where('month', $month);
+		$this->db->where('term_id', $term_id);
+		return $this->db->get($this->table)->num_rows();
+	}
+
+	public function getBillById($id, $bill_type) {
+		$this->db->select('b.*, r.name as room_name, bu.name as build_name, t.name as term_name, count(rg.student_id) as total_student');
+		$this->db->from('bill b');
+		$this->db->join('room r', 'b.room_id = r.room_id');
+		$this->db->join('term t', 'b.term_id = t.term_id');
+		$this->db->join('building bu', 'r.building_id = bu.building_id');
+		$this->db->join('registration rg', 'rg.room_id = r.room_id');
+		$this->db->where('bill_id', $id);
+		$this->db->where('bill_type', $bill_type);
+		$this->db->group_by('rg.room_id');
+		return $this->db->get()->first_row('array');
 	}
 }
