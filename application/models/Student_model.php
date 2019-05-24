@@ -56,11 +56,10 @@ class Student_model extends CI_Model {
 	public function getProfile($id) {
 		$this->db->select('s.*, r.name as religion_name, e.name as ethnic_name');
 		$this->db->from('student s');
-		$this->db->join('religion r', 's.religion_id = r.religion_id');
+		$this->db->join('religion r', 's.religion_id = r.religion_id', 'left');
 		$this->db->join('ethnic e', 's.ethnic_id = e.ethnic_id');
 		$this->db->where('student_id', $id);
-		$query = $this->db->get();
-		return $query->first_row('array');
+		return $this->db->get()->first_row('array');
 	}
 
 	public function updateStatus($params, $student_id) {
@@ -106,4 +105,9 @@ class Student_model extends CI_Model {
 	// 	$query = $this->db->get($this->table);
 	// 	return $query->first_row('array');
 	// }
+
+	public function update($id, $params) {
+		$this->db->where('student_id', $id);
+		$this->db->update($this->table, $params);
+	}
 }

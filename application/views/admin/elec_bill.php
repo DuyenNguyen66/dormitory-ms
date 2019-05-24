@@ -66,7 +66,7 @@
                                                 <a href="<?php echo base_url('bill/disable/' . $row['bill_id'])?>">Disable</a>
                                             </button>
                                             <button type="button" class="btn-inverse btn-custom">
-                                                <a href="<?php echo base_url('bill/e_export/'. $row['bill_id'] . '/' . $row['bill_type'])?>"><i class="fa fa-file-word-o"></i></a>
+                                                <a href="<?php echo base_url('bill/e_export/'. $row['bill_id'])?>"><i class="fa fa-file-word-o"></i></a>
                                             </button>
                                         <?php elseif($row['status'] == 0): ?>
                                             <button type="button" class="btn-inverse btn-custom btn-xs disabled">Disable</button>

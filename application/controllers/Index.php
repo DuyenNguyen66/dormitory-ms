@@ -78,7 +78,7 @@ class Index extends CI_Controller {
 			$params['address'] = $this->input->post('address');
 			$params['gender'] = $this->input->post('gender');
 			$params['birthday'] = strtotime($this->input->post('birthday'));
-			$params['nation_id'] = $this->input->post('nation_id');
+			$params['religion_id'] = $this->input->post('religion_id') == 0 ? null : $this->input->post('religion_id');
 			$params['ethnic_id'] = $this->input->post('ethnic_id');
 
 			$this->load->model('file_model');
@@ -109,14 +109,42 @@ class Index extends CI_Controller {
 			redirect('login');
 		}
 		$student = $this->student_model->getProfile($student_id);
+		$ethnics = $this->Re_Et_model->getAllEthnic();
+		$religions = $this->Re_Et_model->getAllReligions();
+
+		$cmd = $this->input->post('cmd');
+		if (!empty($cmd)) {
+			$params['full_name'] = $this->input->post('name');
+			$params['student_code'] = $this->input->post('code');
+			$params['email'] = $this->input->post('email');
+			$params['password'] = md5($this->input->post('password'));
+			$params['phone'] = $this->input->post('phone');
+			$params['address'] = $this->input->post('address');
+			$params['gender'] = $this->input->post('gender');
+			$params['birthday'] = strtotime($this->input->post('birthday'));
+			$params['religion_id'] = $this->input->post('religion_id') == 0 ? null : $this->input->post('religion_id');
+			$params['ethnic_id'] = $this->input->post('ethnic_id');
+			$this->load->model('file_model');
+			$image = isset($_FILES['image']) ? $_FILES['image'] : null;
+			if ($image != null && $image['error'] == 0) {
+				$path = $this->file_model->createFileName($image, 'media/student/', 'card');
+				$this->file_model->saveFile($image, $path);
+				$params['student_card'] = $path;
+			}
+			$this->student_model->update($student_id, $params);
+			$this->session->set_flashdata('success', 'Update successful.');
+			redirect('dashboard');
+		}
 		$params = array(
 			'student' => $student, 
+			'ethnics' => $ethnics,
+			'religions' => $religions
 		);
 		$content = $this->load->view('profile_edit', $params, true);
 
 		$data = array();
 		$data['customCss'] = array('assets/css/settings.css');
-		$data['customJs'] = array('assets/js/student.js');
+		$data['customJs'] = array('assets/js/student.js', 'assets/js/settings.js');
 		$data['parent_id'] = 10;
 		$data['sub_id'] = 0;
 		$data['group'] = $account['group'];

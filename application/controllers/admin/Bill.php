@@ -342,8 +342,8 @@ class Bill extends CI_Controller {
 		$pay = $bill['total_pay'];
 		$price = $pay/$student;
 
-		$filename_goc = 'files/room-bill/room-bill.docx';
-		$filename = 'files/room-bill/room'. $room . $term . time() . '.docx';
+		$filename_goc = 'files/rbill/rbill.docx';
+		$filename = 'files/rbill/room'. $room . $term . time() . '.docx';
 
 		copy($filename_goc, $filename);		 
 		if ($zip->open($filename, ZipArchive::CREATE)!==TRUE) {
@@ -359,9 +359,9 @@ class Bill extends CI_Controller {
 		readfile($filename);
 	}
 
-	public function e_export($id, $bill_type = 0) {
+	public function e_export($id) {
 		$zip = new ZipArchive();
-		$bill = $this->bill_model->getBillById($id, $bill_type);
+		$bill = $this->bill_model->getBillById($id);
 		$month = $bill['month'];
 		$term = $bill['term_name'];
 		$paid = date('d/m/Y', $bill['paid']);
@@ -370,17 +370,51 @@ class Bill extends CI_Controller {
 		$student = $bill['total_student'];
 		$index = $bill['index'];
 		$used = $bill['used'];
-		$lastIndex = $index - $used;
+		$oldIndex = $index - $used;
 		$pay = $bill['total_pay'];
-		$filename_goc = 'files/elec-bill/elec-bill.docx';
-		$filename = 'files/elec-bill/room'. $room . $month . time() . '.docx';
+
+		$filename_goc = 'files/ebill/ebill.docx';
+		$filename = 'files/ebill/room'. $room . time() . '.docx';
 
 		copy($filename_goc, $filename);		 
 		if ($zip->open($filename, ZipArchive::CREATE)!==TRUE) {
 			echo "Cannot open $filename :( "; die;
 		}
 		$xml = $zip->getFromName('word/document.xml');
-		$xml = str_replace(['paid', 'month', 'term', 'last', 'index', 'used', 'student', 'room', 'build', 'pay'], [$paid, $month, $term, $lastIndex, $index, $used, $student, $room, $build, $pay], $xml);
+		$xml = str_replace(['used', 'student', 'room', 'build', 'pay', 'term', 'month', 'paid', 'index', 'oldIndex'], 
+							[ $used, $student, $room, $build, $pay, $term, $month, $paid, $index, $oldIndex], $xml);
+		if ($zip->addFromString('word/document.xml', $xml)) { echo 'File written!'; }
+		else { echo 'File not written.  Go back and add write permissions to this folder!'; }
+		$zip->close();
+		header("Content-Type: application/msword");
+		header("Content-Disposition: attachment; filename=" . $filename); 
+		readfile($filename);
+	}
+
+	public function w_export($id) {
+		$zip = new ZipArchive();
+		$bill = $this->bill_model->getBillById($id);
+		$month = $bill['month'];
+		$term = $bill['term_name'];
+		$paid = date('d/m/Y', $bill['paid']);
+		$room = $bill['room_name'];
+		$build = $bill['build_name'];
+		$student = $bill['total_student'];
+		$index = $bill['index'];
+		$used = $bill['used'];
+		$oldIndex = $index - $used;
+		$pay = $bill['total_pay'];
+
+		$filename_goc = 'files/wbill/wbill.docx';
+		$filename = 'files/wbill/room'. $room . time() . '.docx';
+
+		copy($filename_goc, $filename);		 
+		if ($zip->open($filename, ZipArchive::CREATE)!==TRUE) {
+			echo "Cannot open $filename :( "; die;
+		}
+		$xml = $zip->getFromName('word/document.xml');
+		$xml = str_replace(['used', 'student', 'room', 'build', 'pay', 'term', 'month', 'paid', 'index', 'oldIndex'], 
+							[ $used, $student, $room, $build, $pay, $term, $month, $paid, $index, $oldIndex], $xml);
 		if ($zip->addFromString('word/document.xml', $xml)) { echo 'File written!'; }
 		else { echo 'File not written.  Go back and add write permissions to this folder!'; }
 		$zip->close();

@@ -59,7 +59,6 @@ class Index extends Base_Controller {
 			$email = $this->input->post("email");
 			$password = md5($this->input->post("password"));
 			$account = $this->admin_model->checkAccount($email, $password);
-			// print_r($account);die();
 			if ($account != null) {
 				if($account['position_id'] == 1 || $account['position_id'] == 2) { //admin 
 					$this->session->set_userdata('admin', array('email'=>$account['email'], 'group_id'=>$account['group_id']));
@@ -228,7 +227,6 @@ class Index extends Base_Controller {
 		$data['content'] = $this->load->view('admin/dashboard_manager', array(), true);
 		$this->load->view('admin_main_layout', $data);
 	}
-
 
 
 }

@@ -79,11 +79,12 @@
 	                </div>
 	                <div class="col-md-6 form-group">
 	                	<label>Religion</label>
-	                	<select class="form-control" name="nation_id" required="">
+	                	<select class="form-control" name="religion_id" required="">
 	                		<option value="">Select Religion</option>
 	                		<?php foreach($religions as $religion):?>
 	                		<option value="<?php echo $religion['religion_id'] ?>"><?php echo $religion['name'] ?></option>
 	                		<?php endforeach;?>
+	                		<option value="0">None</option>
 	                	</select>
 	                </div>
 	            </div>
