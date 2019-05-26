@@ -69,7 +69,7 @@
                                                 <a href="<?php echo base_url('bill/w_export/'. $row['bill_id'])?>"><i class="fa fa-file-word-o"></i></a>
                                             </button>
                                         <?php elseif($row['status'] == 0): ?>
-                                            <button type="button" class="btn-inverse btn-custom btn-xs disabled">Disable</button>
+                                            <button type="button" class="btn btn-inverse btn-custom btn-xs disabled">Disable</button>
                                         <?php endif;?>
                                         </td>
                 					</tr>

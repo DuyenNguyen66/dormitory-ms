@@ -1,3 +1,7 @@
+ol, ul {
+    margin-top: 0;
+    margin-bottom: 0;
+}
 .btn-export {
     float: right;
     list-style-type: none;
