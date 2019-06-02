@@ -78,4 +78,8 @@ class Registration_model extends CI_Model {
 		$this->db->group_by('room_id');
 		return $this->db->get()->first_row('array');
 	}
+
+	public function getTotalForms() {
+		return $this->db->get($this->table)->num_rows();
+	}
 }	

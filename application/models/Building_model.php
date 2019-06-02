@@ -58,4 +58,8 @@ class Building_model extends CI_Model {
 		$query = $this->db->query($sql);
 		return $query->first_row('array');
 	}
+
+	public function getTotalBuilds() {
+		return $this->db->get($this->table)->num_rows();
+	}
 } 

@@ -8,6 +8,8 @@ class Index extends Base_Controller {
 		$this->load->model('position_model');		
 		$this->load->model('building_model');
 		$this->load->model('term_model');
+		$this->load->model('student_model');
+		$this->load->model('registration_model');
 	}
 	
 //admin controller
@@ -17,8 +19,19 @@ class Index extends Base_Controller {
 			redirect(base_url('login'));
 		}
 		$this->getTerm();
+		$term = $this->term_model->getCurrentTerm();
+		$admin = $this->admin_model->getAccountByEmail($admin['email']);
+		$totalStudents = $this->student_model->getTotalStudents();
+		$totalManagers = $this->admin_model->getTotalManagers();
+		$totalBuilds = $this->building_model->getTotalBuilds();
+		$totalForms = $this->registration_model->getTotalForms();
 		$params = array(
-
+			'term' => $term,
+			'admin' => $admin,
+			'totalStudents' => $totalStudents,
+			'totalManagers' => $totalManagers,
+			'totalBuilds' => $totalBuilds,
+			'totalForms' => $totalForms
 		);
 		$content = $this->load->view('admin/dashboard', $params, true);
 
@@ -123,7 +136,6 @@ class Index extends Base_Controller {
 			}
 		} 
 		$this->load->view('admin/register');
-		
 	}
 
 	public function getManagersList() {

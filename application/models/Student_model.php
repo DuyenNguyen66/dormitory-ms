@@ -100,14 +100,13 @@ class Student_model extends CI_Model {
 		return $query->first_row('array');
 	}
 
-	// public function getGender($student_id) {
-	// 	$this->db->where($this->id_name, $student_id);
-	// 	$query = $this->db->get($this->table);
-	// 	return $query->first_row('array');
-	// }
-
 	public function update($id, $params) {
 		$this->db->where('student_id', $id);
 		$this->db->update($this->table, $params);
+	}
+
+	public function getTotalStudents() {
+		$query = $this->db->get('student');
+		return $query->num_rows();
 	}
 }
