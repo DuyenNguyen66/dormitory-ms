@@ -6,7 +6,7 @@
 				<p>Students</p>
 			</div>
 			<div class="icon">
-				<i class="ion ion-bag"></i>
+				<i class="fa fa-user"></i>
 			</div>
 			<a href="#" class="small-box-footer">View list <i class="fa fa-arrow-circle-right"></i></a>
 		</div>
@@ -18,7 +18,7 @@
 				<p>Managers</p>
 			</div>
 			<div class="icon">
-				<i class="ion ion-stats-bars"></i>
+				<i class="fa fa-users"></i>
 			</div>
 			<a href="#" class="small-box-footer">View list <i class="fa fa-arrow-circle-right"></i></a>
 		</div>
@@ -30,7 +30,7 @@
 				<p>Buildings</p>
 			</div>
 			<div class="icon">
-				<i class="ion ion-person-add"></i>
+				<i class="fa fa-building"></i>
 			</div>
 			<a href="#" class="small-box-footer">View list <i class="fa fa-arrow-circle-right"></i></a>
 		</div>
@@ -42,7 +42,7 @@
 				<p>Register Forms</p>
 			</div>
 			<div class="icon">
-				<i class="ion ion-pie-graph"></i>
+				<i class="fa fa-list-alt"></i>
 			</div>
 			<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 		</div>

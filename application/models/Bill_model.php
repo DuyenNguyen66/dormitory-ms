@@ -136,4 +136,12 @@ class Bill_model extends CI_model
 		$this->db->group_by('rg.room_id');
 		return $this->db->get()->first_row('array');
 	}
+
+	public function getTotalBillNotPaid($building_id) {
+		$this->db->from('bill b');
+		$this->db->join('room r', 'b.room_id = r.room_id');
+		$this->db->where('r.building_id', $building_id);
+		$this->db->where('b.paid', null);
+		return $this->db->get()->num_rows();
+	}
 }

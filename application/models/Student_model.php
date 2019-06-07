@@ -109,4 +109,13 @@ class Student_model extends CI_Model {
 		$query = $this->db->get('student');
 		return $query->num_rows();
 	}
+
+	public function getTotalStudentsOfBuilding($building_id) {
+		$this->db->select('t.student_id');
+		$this->db->from('student t');
+		$this->db->join('registration rg', 't.student_id = rg.student_id');
+		$this->db->join('room r', 'r.room_id = rg.room_id');
+		$this->db->where('r.building_id', $building_id);
+		return $this->db->get()->num_rows();
+	}
 }

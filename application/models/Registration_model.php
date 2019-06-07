@@ -82,4 +82,19 @@ class Registration_model extends CI_Model {
 	public function getTotalForms() {
 		return $this->db->get($this->table)->num_rows();
 	}
+
+	public function getTotalFormsOfBuilding($building_id) {
+		$this->db->from('registration rg');
+		$this->db->join('room r', 'rg.room_id = r.room_id');
+		$this->db->where('r.building_id', $building_id);
+		return $this->db->get()->num_rows();
+	}
+
+	public function getTotalFormsNotConfirm($building_id) {
+		$this->db->from('registration rg');
+		$this->db->join('room r', 'rg.room_id = r.room_id');
+		$this->db->where('r.building_id', $building_id);
+		$this->db->where('rg.confirmed', null);
+		return $this->db->get()->num_rows();
+	}
 }	

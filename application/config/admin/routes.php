@@ -11,6 +11,7 @@ $route['building'] = 'building/index';
 $route['room'] = 'room/index';
 
 $route['manager'] = 'index/getManagersList';
+$route['report'] = 'report/index';
 
 $route['student'] = 'student/index';
 $route['profile/(:num)'] = 'student/profile/$1';

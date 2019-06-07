@@ -10,6 +10,7 @@ class Index extends Base_Controller {
 		$this->load->model('term_model');
 		$this->load->model('student_model');
 		$this->load->model('registration_model');
+		$this->load->model('bill_model');
 	}
 	
 //admin controller
@@ -239,11 +240,30 @@ class Index extends Base_Controller {
 			redirect(base_url('login'));
 		}
 		$this->getTerm();
+		$term = $this->term_model->getCurrentTerm();
+		$admin = $this->admin_model->getAccountByEmail($admin['email']);
+		$assignment = $this->admin_model->getBuildingByManager($admin['admin_id']);
+		$totalStudents = $this->student_model->getTotalStudentsOfBuilding($assignment['building_id']);
+		$totalForms = $this->registration_model->getTotalFormsOfBuilding($assignment['building_id']);
+		$totalFormsNotConfirm = $this->registration_model->getTotalFormsNotConfirm($assignment['building_id']);
+		$totalBillNotPaid = $this->bill_model->getTotalBillNotPaid($assignment['building_id']);
+		$params = array(
+			'term' => $term,
+			'admin' => $admin,
+			'totalStudents' => $totalStudents,
+			'totalForms' => $totalForms,
+			'totalFormsNotConfirm' => $totalFormsNotConfirm,
+			'totalBillNotPaid' => $totalBillNotPaid
+		);
+		$content = $this->load->view('admin/dashboard_manager', $params, true);
+
 		$data = array();
-		$data['parent_id'] = 7;
+		$data['customCss'] = array('assets/css/settings.css', 'assets/css/fullcalendar.css', 'assets/css/fullcalendar.print.css');
+		$data['customJs'] = array('assets/js/jquery-ui.custom.min.js', 'assets/js/fullcalendar.js', 'assets/js/student.js');
+		$data['parent_id'] = 1;
 		$data['sub_id'] = 0;
 		$data['group'] = 2;
-		$data['content'] = $this->load->view('admin/dashboard_manager', array(), true);
+		$data['content'] = $content;
 		$this->load->view('admin_main_layout', $data);
 	}
 
