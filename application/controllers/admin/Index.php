@@ -41,7 +41,7 @@ class Index extends Base_Controller {
 		$data['customJs'] = array('assets/js/jquery-ui.custom.min.js', 'assets/js/fullcalendar.js', 'assets/js/student.js');
 		$data['parent_id'] = 1;
 		$data['sub_id'] = 0;
-		$data['group'] = 1;
+		$data['group'] = $admin['position_id'] == 1 || $admin['position_id'] == 2 ? 1 : 2;
 		$data['content'] = $content;
 		$this->load->view('admin_main_layout', $data);
 	}
@@ -260,9 +260,9 @@ class Index extends Base_Controller {
 		$data = array();
 		$data['customCss'] = array('assets/css/settings.css', 'assets/css/fullcalendar.css', 'assets/css/fullcalendar.print.css');
 		$data['customJs'] = array('assets/js/jquery-ui.custom.min.js', 'assets/js/fullcalendar.js', 'assets/js/student.js');
-		$data['parent_id'] = 1;
+		$data['parent_id'] = 7;
 		$data['sub_id'] = 0;
-		$data['group'] = 2;
+		$data['group'] = $admin['position_id'] == 1 || $admin['position_id'] == 2 ? 1 : 2;
 		$data['content'] = $content;
 		$this->load->view('admin_main_layout', $data);
 	}

@@ -144,4 +144,47 @@ class Bill_model extends CI_model
 		$this->db->where('b.paid', null);
 		return $this->db->get()->num_rows();
 	}
+
+	public function getNumPaid($building_id, $month, $term_id) {
+		$this->db->select('b.bill_id');
+		$this->db->from('bill b');
+		$this->db->join('room r', 'b.room_id = r.room_id');
+		$this->db->where('r.building_id', $building_id);
+		$this->db->where('b.month', $month);
+		$this->db->where('b.term_id', $term_id);
+		$this->db->where('b.paid <>', null);
+		return $this->db->get()->num_rows();
+	}
+
+	public function getNumNotPaid($building_id, $month, $term_id) {
+		$this->db->select('b.bill_id');
+		$this->db->from('bill b');
+		$this->db->join('room r', 'b.room_id = r.room_id');
+		$this->db->where('r.building_id', $building_id);
+		$this->db->where('b.month', $month);
+		$this->db->where('b.term_id', $term_id);
+		$this->db->where('b.paid', null);
+		return $this->db->get()->num_rows();
+	}
+
+	public function getExpectedTotal($building_id, $month, $term_id) {
+		$this->db->select('sum(b.total_pay) as expected_total');
+		$this->db->from('bill b');
+		$this->db->join('room r', 'b.room_id = r.room_id');
+		$this->db->where('r.building_id', $building_id);
+		$this->db->where('b.month', $month);
+		$this->db->where('b.term_id', $term_id);
+		return $this->db->get()->first_row('array');
+	}
+
+	public function getActualTotal($building_id, $month, $term_id) {
+		$this->db->select('sum(b.total_pay) as actual_total');
+		$this->db->from('bill b');
+		$this->db->join('room r', 'b.room_id = r.room_id');
+		$this->db->where('r.building_id', $building_id);
+		$this->db->where('b.month', $month);
+		$this->db->where('b.term_id', $term_id);
+		$this->db->where('b.paid <>', null);
+		return $this->db->get()->first_row('array');
+	}
 }

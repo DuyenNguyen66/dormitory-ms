@@ -60,7 +60,7 @@
 		</div>
 	</div>
 	<div class="col-md-4" style="margin-left: 20px;">
-		<h3 class=" header-title">My Profile</h3>
+		<h3 class=" header-title" style="visibility: hidden;">My Profile</h3>
 		<div class="row card-box"> 
 			<div class="row">
 				<label class="col-md-3">Name</label>
