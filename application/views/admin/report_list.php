@@ -12,7 +12,8 @@
                                 <th>ID</th>
                                 <th>Month</th>
                                 <th>Term</th>
-                                <th>Total</th>
+                                <th>Expected Total(VND)</th>
+                                <th>Actual Total(VND)</th>
                 				<th>Actions</th>
                 			</tr>
                 		</thead>
@@ -26,7 +27,8 @@
                                         <td><?php echo $row['report_id'] ?></td>
                                         <td><?php echo $row['month']?></td>
                                         <td><?php echo $row['term_name']?></td>
-                                        <td><?php echo $row['total']?></td>
+                                        <td><?php echo number_format($row['expected_total'])?></td>
+                                        <td><?php echo number_format($row['actual_total'])?></td>
                 						<td>
                                             <button type="button" class="btn btn-inverse btn-custom btn-xs">
                                                 <a href="<?php echo base_url('report/view/' . $row['report_id'])?>">View Report</a>

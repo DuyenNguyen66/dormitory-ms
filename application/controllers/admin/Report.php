@@ -79,25 +79,39 @@ class Report extends CI_Controller {
 		$cmd = $this->input->post('cmd');
 		if (!empty($cmd)) {
 			$report_id = $this->report_model->getReportId($arr[1], $term['term_id'])['report_id'];
-			$num_paid = $this->bill_model->getNumPaid($building_id, $arr[1], $term['term_id']);
-			$num_not_paid = $this->bill_model->getNumNotPaid($building_id, $arr[1], $term['term_id']);
-			$expected_total = $this->bill_model->getExpectedTotal($building_id, $arr[1], $term['term_id'])['expected_total'];
-			$actual_total = $this->bill_model->getActualTotal($building_id, $arr[1], $term['term_id'])['actual_total'];
-			$created_at = time();
-			$created_by = $admin['admin_id'];
-			
-			$params = array(
-				'building_id' => $building_id,
-				'report_id' => $report_id,
-				'num_paid' => $num_paid,
-				'num_not_paid' => $num_not_paid,
-				'expected_total' => $expected_total,
-				'actual_total' => $actual_total,
-				'created_at' => $created_at,
-				'created_by' => $created_by
-			);
-			$this->report_model->createReportDetail($params);
-			redirect('report-m');
+			$check = $this->report_model->checkExistReport($report_id, $building_id);
+			if ($check != null) {
+				$this->session->set_flashdata('error', 'Buiding had reported.');
+				$content = $this->load->view('admin/report_list_manager', '', true);
+			}else {
+				$num_paid = $this->bill_model->getNumPaid($building_id, $arr[1], $term['term_id']);
+				$num_not_paid = $this->bill_model->getNumNotPaid($building_id, $arr[1], $term['term_id']);
+				$expected_total = $this->bill_model->getExpectedTotal($building_id, $arr[1], $term['term_id'])['expected_total'];
+				$actual_total = $this->bill_model->getActualTotal($building_id, $arr[1], $term['term_id'])['actual_total'];
+				$created_at = time();
+				$created_by = $admin['admin_id'];
+				
+				$params = array(
+					'building_id' => $building_id,
+					'report_id' => $report_id,
+					'num_paid' => $num_paid,
+					'num_not_paid' => $num_not_paid,
+					'expected_total' => $expected_total,
+					'actual_total' => $actual_total,
+					'created_at' => $created_at,
+					'created_by' => $created_by
+				);
+				$this->report_model->createReportDetail($params);
+				//update reports table
+				$exp_total = $this->report_model->getExpTotal($building_id, $report_id)['expected_total'];
+				$act_total = $this->report_model->getActTotal($building_id, $report_id)['actual_total'];
+				$updateParams = array(
+					'expected_total' => $exp_total,
+					'actual_total' => $act_total
+				);
+				$this->report_model->updateReport($updateParams, $report_id);
+				redirect('report-m');
+			}
 		}
 		//get list report
 		$reports = $this->report_model->getReportByBuilding($building_id);

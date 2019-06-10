@@ -53,4 +53,27 @@ class Report_model extends CI_Model {
 	public function createReportDetail($params) {
 		$this->db->insert('report_detail', $params);
 	}
+
+	public function checkExistReport($report_id, $building_id) {
+		$this->db->where('report_id', $report_id);
+		$this->db->where('building_id', $building_id);
+		return $this->db->get('report_detail')->result_array();
+	}
+
+	public function getExpTotal($building_id, $report_id) {
+		$this->db->select('sum(expected_total) as expected_total');
+		$this->db->where('report_id', $report_id);
+		return $this->db->get('report_detail')->first_row('array');
+	}
+
+	public function getActTotal($building_id, $report_id) {
+		$this->db->select('sum(actual_total) as actual_total');
+		$this->db->where('report_id', $report_id);
+		return $this->db->get('report_detail')->first_row('array');
+	}
+
+	public function updateReport($params, $report_id) {
+		$this->db->where('report_id', $report_id);
+		$this->db->update($this->table, $params);
+	}
 }

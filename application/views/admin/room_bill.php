@@ -42,7 +42,7 @@
                                         <td><?php echo $row['term_name']?></td>
                                         <td><?php echo $row['room_name']?></td>
                                         <td><?php echo $row['total_student']?></td>
-                                        <td><?php echo $row['total_pay']?></td>
+                                        <td><?php echo number_format($row['total_pay'])?></td>
                                         <td><?php echo date('d/m/Y', $row['deadline'])?></td>
                                         <td>
                                             <?php if($row['paid'] == 0):?>

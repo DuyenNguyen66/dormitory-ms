@@ -7,6 +7,13 @@
     </div>
 </div>
 <div class="row card-box"> 
+    <?php if($this->session->flashdata('error')):?>
+        <div class="col-md-12">
+            <div class="alert alert-danger">
+                <?php echo $this->session->flashdata('error') ?>
+            </div>
+        </div>
+    <?php endif; ?>
     <div class="tab-content">
         <div id="list" class="tab-pane fade in active">
             <div class="col-xs-12">
@@ -15,12 +22,12 @@
                 		<thead>
                 			<tr>
                                 <th>ID</th>
-                                <th>Tháng</th>
-                                <th>Kỳ</th>
-                                <th>Số hóa đơn đã thanh toán</th>
-                                <th>Số hóa đơn chưa thanh toán</th>
-                                <th>Tổng thu dự tính</th>
-                                <th>Tổng thu thực tế</th>
+                                <th>Month</th>
+                                <th>Term</th>
+                                <th># of paid</th>
+                                <th># of not paid</th>
+                                <th>Expected total(VND)</th>
+                                <th>Actual total(VND)</th>
                 			</tr>
                 		</thead>
                 		<tbody>
@@ -35,8 +42,8 @@
                                         <td><?php echo $row['term_name']?></td>
                                         <td><?php echo $row['num_paid']?></td>
                                         <td><?php echo $row['num_not_paid']?></td>
-                                        <td><?php echo $row['expected_total']?></td>
-                                        <td><?php echo $row['actual_total']?></td>
+                                        <td><?php echo number_format($row['expected_total'])?></td>
+                                        <td><?php echo number_format($row['actual_total'])?></td>
                 					</tr>
                 					<?php 
                 				endforeach;

@@ -32,7 +32,7 @@
                                         <td><?php echo $row['month']?></td>
                                         <td><?php echo $row['index']?></td>
                                         <td><?php echo $row['used']?></td>
-                                        <td><?php echo $row['total_pay']?></td>
+                                        <td><?php echo number_format($row['total_pay'])?></td>
                                         <td><?php echo date('d/m/Y', $row['deadline'])?></td>
                                         <td>
                                             <?php if($row['paid'] == 0):?>
