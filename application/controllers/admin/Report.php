@@ -9,6 +9,7 @@ class Report extends CI_Controller {
 		$this->load->model('term_model');
 		$this->load->model('report_model');
 		$this->load->model('bill_model');
+		$this->load->library('phpexcel/classes/phpexcel');
 	}
 
 	//auto insert report
@@ -52,8 +53,14 @@ class Report extends CI_Controller {
 		if ($admin == null) {
 			redirect(base_url('login'));
 		}
+		$admin = $this->admin_model->getAccountByEmail($admin['email']);
 		$report = $this->report_model->getReportById($report_id);
-		$content = $this->load->view('admin/report_list', $layoutParams, true);
+		$report_detail = $this->report_model->getReportDetail($report_id);
+		$layoutParams = array(
+			'report' => $report,
+			'report_detail' => $report_detail,
+		);
+		$content = $this->load->view('admin/report_view', $layoutParams, true);
 
 		$data = array();
 		$data['customCss'] = array('assets/css/settings.css');
@@ -129,4 +136,42 @@ class Report extends CI_Controller {
 		$data['content'] = $content;
 		$this->load->view('admin_main_layout', $data);
 	}	
+
+	public function export($report_id) {
+		$report = $this->report_model->getReportById($report_id);
+		$report_details = $this->report_model->getReportDetail($report_id);
+		$excel = new PHPExcel();
+		$excel->setActiveSheetIndex(0);
+
+		$excel->getActiveSheet()->getColumnDimension('A')->setWidth(20);
+		$excel->getActiveSheet()->getColumnDimension('B')->setWidth(10);
+		$excel->getActiveSheet()->getColumnDimension('C')->setWidth(10);
+		$excel->getActiveSheet()->getColumnDimension('D')->setWidth(20);
+		$excel->getActiveSheet()->getColumnDimension('E')->setWidth(20);
+		$excel->getActiveSheet()->getColumnDimension('F')->setWidth(30);
+		$excel->getActiveSheet()->getColumnDimension('G')->setWidth(30);
+
+		$excel->getActiveSheet()->setCellValue('A1', 'BUILDING');
+		$excel->getActiveSheet()->setCellValue('B1', 'PAID');
+		$excel->getActiveSheet()->setCellValue('C1', 'NOT PAID');
+		$excel->getActiveSheet()->setCellValue('D1', 'EXPECTED TOTAL');
+		$excel->getActiveSheet()->setCellValue('E1', 'ACTUAL TOTAL');
+		$excel->getActiveSheet()->setCellValue('F1', 'CREATED AT');
+		$excel->getActiveSheet()->setCellValue('G1', 'MANAGER');
+
+		$numRow = 2;
+		foreach ($report_details as $row) {
+			$excel->getActiveSheet()->setCellValue('A' . $numRow, $row['build_name']);
+			$excel->getActiveSheet()->setCellValue('B' . $numRow, $row['num_paid']);
+			$excel->getActiveSheet()->setCellValue('C' . $numRow, $row['num_not_paid']);
+			$excel->getActiveSheet()->setCellValue('D' . $numRow, $row['expected_total']);
+			$excel->getActiveSheet()->setCellValue('E' . $numRow, $row['actual_total']);
+			$excel->getActiveSheet()->setCellValue('F' . $numRow, date('d/m/Y h:i A', $row['created_at']));
+			$excel->getActiveSheet()->setCellValue('G' . $numRow, $row['full_name']);
+			$numRow++;
+		}
+		header('Content-type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment; filename="report' . $report['term_name'].$report['month'] . '.xlsx"');
+		PHPExcel_IOFactory::createWriter($excel, 'Excel2007')->save('php://output');
+	}
 }

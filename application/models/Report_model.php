@@ -27,11 +27,11 @@ class Report_model extends CI_Model {
 	}
 
 	public function getReportById($report_id) {
-		$this->db->select('*');
+		$this->db->select('r.*, t.name as term_name');
 		$this->db->from('reports r');
-		$this->db->join('report_detail rd', 'r.report_id = rd.report_id');
+		$this->db->join('term t', 'r.term_id = t.term_id');
 		$this->db->where('r.report_id', $report_id);
-		return $this->db->get()->result_array();
+		return $this->db->get()->first_row('array');
 	}
 
 	public function getReportId($month, $term_id) {
@@ -75,5 +75,15 @@ class Report_model extends CI_Model {
 	public function updateReport($params, $report_id) {
 		$this->db->where('report_id', $report_id);
 		$this->db->update($this->table, $params);
+	}
+
+	public function getReportDetail($report_id) {
+		$this->db->select('rd.*, b.name as build_name, a.full_name');
+		$this->db->from('reports r');
+		$this->db->join('report_detail rd', 'r.report_id = rd.report_id');
+		$this->db->join('building b', 'rd.building_id = b.building_id');
+		$this->db->join('admin a', 'rd.created_by = a.admin_id');
+		$this->db->where('rd.report_id', $report_id);
+		return $this->db->get()->result_array();
 	}
 }
