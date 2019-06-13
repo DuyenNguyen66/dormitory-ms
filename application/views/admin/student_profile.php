@@ -37,7 +37,7 @@
 						
 						<tr>
 							<th>Gender</th>
-							<td><?php echo $student['gender'] == 0 ? 'Nữ' : 'Nam' ?></td>
+							<td><?php echo $student['gender'] == 1 ? 'Nữ' : 'Nam' ?></td>
 						</tr>
 						<tr>
 							<th>Nation</th>

@@ -6,6 +6,8 @@
             <th>Student code</th>
             <th>Email</th>
             <th>Phone</th>
+            <th>Gender</th>
+            <th>Birthday</th>
             <th>Status</th>
             <th>Actions</th>
         </tr>
@@ -22,6 +24,8 @@
             <td><?php echo $row['student_code']?></td>
             <td><?php echo $row['email']?></td>
             <td><?php echo $row['phone']?></td>
+            <td><?php echo $row['gender'] == 1 ? 'Nữ' : 'Nam'?></td>
+            <td><?php echo date('d/m/Y',$row['birthday'])?></td>
             <td><?php echo $row['status'] == 0 ? '<a class="btn btn-warning btn-xs">Disabled</a>' : '<a class="btn btn-success btn-xs">Enabled</a>' ?></td>
             <td>
                 <button type="button" class="btn btn-inverse btn-custom btn-xs">
