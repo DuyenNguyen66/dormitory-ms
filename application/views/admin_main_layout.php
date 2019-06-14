@@ -25,7 +25,7 @@
 		}
 	}
 	?>
-
+	<script src="https://kit.fontawesome.com/169fed9aa0.js"></script>
 </head>
 
 

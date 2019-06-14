@@ -33,8 +33,8 @@
                                             <button type="button" class="btn btn-inverse btn-custom btn-xs">
                                                 <a href="<?php echo base_url('report/view/' . $row['report_id'])?>">View Report</a>
                                             </button>
-                                            <button type="button" class="btn btn-inverse btn-custom btn-xs">
-                                                <a href="<?php echo base_url('report/export/' . $row['report_id'])?>">Export to Excel</a>
+                                            <button type="button" class="btn-inverse btn-custom">
+                                                <a href="<?php echo base_url('report/export/' . $row['report_id'])?>"><i class="fa fa-file-excel"></i></a>
                                             </button>
                 						</td>
                 					</tr>
