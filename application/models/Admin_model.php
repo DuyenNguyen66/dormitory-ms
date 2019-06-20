@@ -41,7 +41,7 @@ class Admin_model extends CI_Model {
 		$this->db->join('building b', 'as.building_id = b.building_id');
 		$this->db->join('position p', 'a.position_id = p.position_id');
 		$this->db->where('a.admin_id', $id);
-		$this->db->where('a.position <>', 1);
+		$this->db->where('a.position_id <>', 1);
 		$query = $this->db->get();
 		return $query->first_row('array');
 	}

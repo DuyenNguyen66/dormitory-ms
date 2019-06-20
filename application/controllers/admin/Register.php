@@ -14,7 +14,13 @@ class Register extends CI_Controller {
 			redirect('login');
 		}
 		$admin = $this->admin_model->getAccountByEmail($account['email']);
-		$forms = $this->registration_model->getAll();
+		$assignment = $this->admin_model->getBuildingByManager($admin['admin_id']);
+		if (!empty($assignment)) {
+			$building_id = $assignment['building_id'];
+		}else {
+			$building_id = '';
+		}
+		$forms = $this->registration_model->getAll($building_id);
 		$layoutParams = array(
 			'forms' => $forms,
 		);

@@ -10,8 +10,7 @@ class Student extends CI_Controller {
 
 	public function index() {
 		$account = $this->session->userdata('admin');
-		if($account == null)
-		{
+		if($account == null) {
 			redirect('login');
 		}
 		$admin = $this->admin_model->getAccountByEmail($account['email']);
@@ -28,11 +27,22 @@ class Student extends CI_Controller {
 	}
 
 	public function getStudentsByStatus() {
+		$account = $this->session->userdata('admin');
+		if($account == null) {
+			redirect('login');
+		}
+		$admin = $this->admin_model->getAccountByEmail($account['email']);
+		$assignment = $this->admin_model->getBuildingByManager($admin['admin_id']);
+		if (!empty($assignment)) {
+			$building_id = $assignment['building_id'];
+		}else {
+			$building_id = '';
+		}
 		$status = $this->input->get('status');
 		if ($status == 0 || $status == 1) {
-			$students = $this->student_model->getByStatus($status);
+			$students = $this->student_model->getByStatus($status, $building_id);
 		}else {
-			$students = $this->student_model->getAll();
+			$students = $this->student_model->getAll($building_id);
 		}
 		$data['students'] = $students;
 		$this->load->view('admin/student_table', $data);

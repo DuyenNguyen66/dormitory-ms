@@ -9,7 +9,7 @@ class Registration_model extends CI_Model {
 		parent::__construct();
 	}
 
-	public function getAll() {
+	public function getAll($building_id) {
 		$this->db->select('rg.*, t.name as term_name, r.name as room_name, f.name as floor_name, b.name as build_name, s.full_name, s.student_code');
 		$this->db->from('registration rg');
 		$this->db->join('term t', 'rg.term_id = t.term_id');
@@ -17,6 +17,9 @@ class Registration_model extends CI_Model {
 		$this->db->join('floor f', 'r.floor_id = f.floor_id');
 		$this->db->join('building b', 'r.building_id = b.building_id');
 		$this->db->join('student s', 'rg.student_id = s.student_id');
+		if (!empty($building_id)) {
+			$this->db->where('r.building_id', $building_id);
+		}
 		$query = $this->db->get();
 		return $query->result_array();
 	}

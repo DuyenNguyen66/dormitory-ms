@@ -25,6 +25,7 @@ $route['room-price'] = 'price/roomPrice';
 
 //Manager
 $route['dashboard-m'] = 'index/indexManager';
+$route['room-m'] = 'room/roomManager';
 $route['electricity-bill'] = 'bill/elecBill';
 $route['water-bill'] = 'bill/waterBill';
 $route['room-bill'] = 'bill/roomBill';

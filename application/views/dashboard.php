@@ -53,7 +53,7 @@
 			</div>
 			<div style="text-align:right;">
 				<a class="btn btn-success" href="<?php echo base_url('profile/' . $student['student_id'])?>">
-					<i class="fa fa-pencil"></i>
+					<i class="fa fa-pencil-alt"></i>
 				</a>
 			</div>
 		</div>

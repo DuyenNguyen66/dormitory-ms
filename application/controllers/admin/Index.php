@@ -247,8 +247,10 @@ class Index extends Base_Controller {
 		$totalForms = $this->registration_model->getTotalFormsOfBuilding($assignment['building_id']);
 		$totalFormsNotConfirm = $this->registration_model->getTotalFormsNotConfirm($assignment['building_id']);
 		$totalBillNotPaid = $this->bill_model->getTotalBillNotPaid($assignment['building_id']);
+		$building = $this->building_model->getById($assignment['building_id']); 
 		$params = array(
 			'term' => $term,
+			'building' => $building,
 			'admin' => $admin,
 			'totalStudents' => $totalStudents,
 			'totalForms' => $totalForms,
@@ -267,5 +269,5 @@ class Index extends Base_Controller {
 		$this->load->view('admin_main_layout', $data);
 	}
 
-
+	
 }

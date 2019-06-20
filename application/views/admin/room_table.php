@@ -28,6 +28,11 @@
                 <?php endif;?>
             </td>
             <td>
+                <?php if($row['total_student'] == 10 && $row['status'] == 1):?>
+                    <button type="button" class="btn btn-inverse btn-custom btn-xs">
+                        <a href="<?php echo base_url('room/disable/' . $row['room_id'])?>">Deactive</a>
+                    </button>
+                <?php endif; ?>
                 <button type="button" class="btn btn-inverse btn-custom btn-xs">
                     <a href="<?php echo base_url('room/view/' . $row['room_id'])?>">View Students</a>
                 </button>

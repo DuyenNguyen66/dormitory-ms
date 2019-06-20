@@ -9,18 +9,28 @@ class Student_model extends CI_Model {
 		parent::__construct();
 	}
 
-	public function getAll() {
+	public function getAll($building_id) {
 		$this->db->select('s.*');
 		$this->db->from('student s');
+		$this->db->join('registration rg', 's.student_id = rg.student_id');
+		$this->db->join('room r', 'rg.room_id = r.room_id');
+		if (!empty($building_id)) {
+			$this->db->where('r.building_id', $building_id);
+		}
 		$this->db->order_by('student_id', 'desc');
 		$query = $this->db->get();
 		return $query->result_array();
 	}
 
-	public function getByStatus($status = 1) {
+	public function getByStatus($status = 1, $building_id) {
 		$this->db->select('s.*');
 		$this->db->from('student s');
+		$this->db->join('registration rg', 's.student_id = rg.student_id');
+		$this->db->join('room r', 'rg.room_id = r.room_id');
 		$this->db->where('s.status', $status);
+		if (!empty($building_id)) {
+			$this->db->where('r.building_id', $building_id);
+		}
 		$this->db->order_by('student_id', 'desc');
 		$query = $this->db->get();
 		return $query->result_array();

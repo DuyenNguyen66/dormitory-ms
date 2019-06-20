@@ -18,7 +18,9 @@
                 		<thead>
                 			<tr>
                                 <th>ID</th>
-                				<th>Kỳ</th>
+                                <th>Kỳ</th>
+                                <th>Tổng sinh viên</th>
+                				<th>Tổng tiền</th>
                                 <th>Hạn thanh toán</th>
                 				<th>Ngày thanh toán</th>
                                 <th>Trạng thái</th>
@@ -33,6 +35,8 @@
                 					<tr>
                                         <td><?php echo $row['id'] ?></td>
                                         <td><?php echo $row['term_name']?></td>
+                                        <td><?php echo $row['total_student']?></td>
+                                        <td><?php echo $row['total_pay']?></td>
                                         <td><?php echo date('d/m/Y', $row['deadline'])?></td>
                                         <td>
                                             <?php if($row['paid'] == 0):?>

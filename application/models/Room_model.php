@@ -99,4 +99,14 @@ class Room_model extends CI_Model {
 		$query = $this->db->get();
 		return $query->first_row('array');
 	}
+
+	public function getAllByBuilding($building_id) {
+		$this->db->select('r.*, r.name as room_name, f.name as floor_name, count(rg.student_id) as total_student');
+		$this->db->from('room r');
+		$this->db->join('floor f', 'r.floor_id = f.floor_id');
+		$this->db->join('registration rg', 'r.room_id = rg.room_id', 'left');
+		$this->db->where('r.building_id', $building_id);
+		$this->db->group_by('r.room_id');
+		return $this->db->get()->result_array();
+	}
 } 
