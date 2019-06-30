@@ -18,12 +18,12 @@
                 		<thead>
                 			<tr>
                                 <th>ID</th>
-                                <th>Kỳ</th>
-                                <th>Tổng sinh viên</th>
-                				<th>Tổng tiền</th>
-                                <th>Hạn thanh toán</th>
-                				<th>Ngày thanh toán</th>
-                                <th>Trạng thái</th>
+                                <th>Term</th>
+                                <th># of Students</th>
+                				<th>Total</th>
+                                <th>Deadline</th>
+                				<th>Paid at</th>
+                                <th>Status</th>
                 			</tr>
                 		</thead>
                 		<tbody>
@@ -33,14 +33,14 @@
                 				foreach ($bills as $key => $row):
                 					?>
                 					<tr>
-                                        <td><?php echo $row['id'] ?></td>
+                                        <td>#<?php echo $row['id'] ?></td>
                                         <td><?php echo $row['term_name']?></td>
                                         <td><?php echo $row['total_student']?></td>
                                         <td><?php echo $row['total_pay']?></td>
                                         <td><?php echo date('d/m/Y', $row['deadline'])?></td>
                                         <td>
                                             <?php if($row['paid'] == 0):?>
-                                            <button class="btn btn-xs btn-danger">Chưa thanh toán</button>
+                                            <button class="btn btn-xs btn-danger">Not paid yet</button>
                                             <?php else: 
                                                 echo date('d/m/Y h:iA', $row['paid']);
                                             endif; ?>

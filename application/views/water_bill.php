@@ -1,7 +1,7 @@
 <div class="col-xs-12" style="margin: 20px 0">
-    <h3 class="header-title">Hóa đơn nước</h3>
-    <button class="btn btn-success" style="margin: 20px 0 20px 20px">Phòng <?php echo $room['name']?></button>
-    <button class="btn btn-success" style="margin: 20px 0 20px 20px">Kỳ <?php echo $term['name']?></button>
+    <h3 class="header-title">Water Bills</h3>
+    <button class="btn btn-success" style="margin: 20px 0 20px 20px">Room <?php echo $room['name']?></button>
+    <button class="btn btn-success" style="margin: 20px 0 20px 20px">Term <?php echo $term['name']?></button>
 </div>
 <div class="row card-box"> 
     <div class="tab-content">
@@ -12,13 +12,13 @@
                 		<thead>
                 			<tr>
                                 <th>ID</th>
-                                <th>Tháng</th>
-                				<th>Chỉ số(m<sup>3</sup>)</th>
-                                <th>Tiêu thụ(m<sup>3</sup>)</th>
-                                <th>Thành tiền(VND)</th>
-                                <th>Hạn thanh toán</th>
-                				<th>Ngày thanh toán</th>
-                                <th>Trạng thái</th>
+                                <th>Month</th>
+                				<th>Index(m<sup>3</sup>)</th>
+                                <th>Used(m<sup>3</sup>)</th>
+                                <th>Total(VND)</th>
+                                <th>Deadline</th>
+                				<th>Paid at</th>
+                                <th>Status</th>
                 			</tr>
                 		</thead>
                 		<tbody>
@@ -28,7 +28,7 @@
                 				foreach ($bills as $key => $row):
                 					?>
                 					<tr>
-                                        <td><?php echo $row['bill_id'] ?></td>
+                                        <td>#<?php echo $row['bill_id'] ?></td>
                                         <td><?php echo $row['month']?></td>
                                         <td><?php echo $row['index']?></td>
                                         <td><?php echo $row['used']?></td>
@@ -36,7 +36,7 @@
                                         <td><?php echo date('d/m/Y', $row['deadline'])?></td>
                                         <td>
                                             <?php if($row['paid'] == 0):?>
-                                            <a class="btn-xs btn-danger">Chưa thanh toán</a>
+                                            <a class="btn-xs btn-danger">Not paid yet</a>
                                             <?php else: 
                                                 echo date('d/m/Y h:iA', $row['paid']);
                                             endif; ?>

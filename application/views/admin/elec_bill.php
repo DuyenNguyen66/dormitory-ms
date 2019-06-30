@@ -21,15 +21,15 @@
                 		<thead>
                 			<tr>
                                 <th>ID</th>
-                                <th>Phòng</th>
-                                <th>Tháng</th>
-                				<th>Kỳ</th>
-                				<th>Chỉ số(kWh)</th>
-                				<th>Tiêu thụ(kWh)</th>
-                                <th>Thành tiền(VND)</th>
-                                <th>Hạn thanh toán</th>
-                				<th>Ngày thanh toán</th>
-                                <th>Trạng thái</th>
+                                <th>Room</th>
+                                <th>Month</th>
+                				<th>Term</th>
+                				<th>Index (kWh)</th>
+                				<th>Used (kWh)</th>
+                                <th>Total (VND)</th>
+                                <th>Deadline</th>
+                				<th>Paid at</th>
+                                <th>Status</th>
                 				<th>Actions</th>
                 			</tr>
                 		</thead>
@@ -50,7 +50,7 @@
                                         <td><?php echo date('d/m/Y', $row['deadline'])?></td>
                                         <td>
                                             <?php if($row['paid'] == 0):?>
-                                            <a class="btn-xs btn-danger">Chưa thanh toán</a>
+                                            <a class="btn-xs btn-danger">Not paid yet</a>
                                             <?php else: 
                                                 echo date('d/m/Y h:iA', $row['paid']);
                                             endif; ?>
@@ -59,7 +59,7 @@
                 						<td>
                                         <?php if($row['paid'] == 0): ?>
                                             <button type="button" class="btn-inverse btn-custom btn-xs">
-                                                <a href="<?php echo base_url('bill/paid/' . $row['bill_id'])?>">Đã thanh toán</a>
+                                                <a href="<?php echo base_url('bill/paid/' . $row['bill_id'])?>">Paid</a>
                                             </button>
                                         <?php elseif($row['paid'] != null && $row['status'] == 1):?>
                                             <button type="button" class="btn-inverse btn-custom btn-xs ">

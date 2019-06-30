@@ -53,7 +53,9 @@
 		<h3 class=" header-title" style="visibility: hidden;">My Profile</h3>
 		<div class="row card-box"> 
 			<button class="btn btn-success" style="margin: 20px 0 20px 20px">Kỳ học <?php echo $term['name']?></button>
+			<?php if($building['name'] != ''): ?>
 			<button class="btn btn-success" style="margin: 20px 0 20px 20px"><?php echo $building['name']?></button>
+			<?php endif; ?>
 			<div id='wrap'>
 				<div id='calendar'></div>
 				<div style='clear:both'></div>

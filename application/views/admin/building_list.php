@@ -31,7 +31,7 @@
                 					?>
                 					<tr>
                 						<td><img style="max-width: 70px;max-height:70px;border-radius:5px" src="<?= $row['image']?>"/></td>
-                                        <td><?php echo $row['building_id'] ?></td>
+                                        <td>#<?php echo $row['building_id'] ?></td>
                                         <td><?php echo $row['name']?></td>
                                         <td><?php echo $row['total_floor'] ?></td>
                 						<td><?php echo $row['total_room'] ?></td>

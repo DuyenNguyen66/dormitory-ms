@@ -37,7 +37,7 @@
                 					?>
                 					<tr>
                 						<td><img style="max-width: 70px;max-height:70px;border-radius:5px" src="<?= $row['avatar']?>"/></td>
-                						<td><?php echo $row['admin_id'] ?></td>
+                						<td>#<?php echo $row['admin_id'] ?></td>
                 						<td><?php echo $row['full_name']?></td>
                 						<td><?php echo $row['email']?></td>
                 						<td><?php echo $row['position_name'] == null ? 'N/a' : $row['position_name']?></td>

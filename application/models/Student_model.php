@@ -12,8 +12,8 @@ class Student_model extends CI_Model {
 	public function getAll($building_id) {
 		$this->db->select('s.*');
 		$this->db->from('student s');
-		$this->db->join('registration rg', 's.student_id = rg.student_id');
-		$this->db->join('room r', 'rg.room_id = r.room_id');
+		$this->db->join('registration rg', 's.student_id = rg.student_id', 'left');
+		$this->db->join('room r', 'rg.room_id = r.room_id', 'left');
 		if (!empty($building_id)) {
 			$this->db->where('r.building_id', $building_id);
 		}
@@ -25,8 +25,8 @@ class Student_model extends CI_Model {
 	public function getByStatus($status = 1, $building_id) {
 		$this->db->select('s.*');
 		$this->db->from('student s');
-		$this->db->join('registration rg', 's.student_id = rg.student_id');
-		$this->db->join('room r', 'rg.room_id = r.room_id');
+		$this->db->join('registration rg', 's.student_id = rg.student_id', 'left');
+		$this->db->join('room r', 'rg.room_id = r.room_id', 'left');
 		$this->db->where('s.status', $status);
 		if (!empty($building_id)) {
 			$this->db->where('r.building_id', $building_id);

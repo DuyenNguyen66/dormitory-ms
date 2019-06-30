@@ -1,5 +1,5 @@
 <div class="col-xs-12" style="margin: 20px 0">
-    <h3 class="header-title">Cập nhật thông tin</h3>
+    <h3 class="header-title">Edit Profile</h3>
 </div>
 <div class="row card-box"> 
     <div class="tab-content">

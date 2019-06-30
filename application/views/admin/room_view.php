@@ -27,7 +27,7 @@
 		        foreach ($students as $key => $row):
 		        ?>
 		        <tr>
-		        	<td><?php echo $row['student_id']?></td>
+		        	<td>#<?php echo $row['student_id']?></td>
 		            <td><?php echo $row['full_name'] ?></td>
 		            <td><?php echo date('d/m/Y', $row['birthday'])?></td>
 		            <td><?php echo $row['student_code']?></td>

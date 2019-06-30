@@ -16,7 +16,7 @@
         foreach ($rooms as $key => $row):
         ?>
         <tr>
-            <td><?php echo $row['room_id'] ?></td>
+            <td>#<?php echo $row['room_id'] ?></td>
             <td><?php echo $row['name']?></td>
             <td><?php echo $row['type'] == 0 ? '<i style="color: cornflowerblue;font-size: 20px;" class="fa fa-mars"></i>' : '<i style="color: pink;font-size: 20px;" class="fa fa-venus"></i>'?></td>
             <td><?php echo $row['total_student']?>/10</td>

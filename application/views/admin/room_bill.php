@@ -38,7 +38,7 @@
                 				foreach ($bills as $key => $row):
                 					?>
                 					<tr>
-                                        <td><?php echo $row['id'] ?></td>
+                                        <td>#<?php echo $row['id'] ?></td>
                                         <td><?php echo $row['term_name']?></td>
                                         <td><?php echo $row['room_name']?></td>
                                         <td><?php echo $row['total_student']?></td>

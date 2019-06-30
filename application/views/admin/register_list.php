@@ -29,7 +29,7 @@
                 				foreach ($forms as $key => $row):
                 					?>
                 					<tr>
-                                        <td><?php echo $row['id'] ?></td>
+                                        <td>#<?php echo $row['id'] ?></td>
                                         <td><?php echo $row['term_name']?></td>
                                         <td><?php echo $row['full_name']?></td>
                                         <td><?php echo $row['student_code']?></td>

@@ -43,7 +43,7 @@
                 				foreach ($histories as $key => $row):
                 					?>
                 					<tr>
-                                        <td><?php echo $row['id'] ?></td>
+                                        <td>#<?php echo $row['id'] ?></td>
                                         <td><?php echo $row['term_name']?></td>
                                         <td><?php echo $row['room_name']?></td>
                                         <td><?php echo $row['floor_name']?></td>

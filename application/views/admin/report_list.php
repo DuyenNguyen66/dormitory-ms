@@ -24,7 +24,7 @@
                 				foreach ($reports as $key => $row):
                 					?>
                 					<tr>
-                                        <td><?php echo $row['report_id'] ?></td>
+                                        <td>#<?php echo $row['report_id'] ?></td>
                                         <td><?php echo $row['month']?></td>
                                         <td><?php echo $row['term_name']?></td>
                                         <td><?php echo number_format($row['expected_total'])?></td>
